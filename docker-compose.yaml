@@ -15,7 +15,6 @@ services:
       - 8000:8000
     volumes:
       - ./green_creme:/app
-
   db:
     image: postgres:15.2-bullseye
     volumes:
@@ -27,7 +26,6 @@ services:
         POSTGRES_DB: db
     ports:
       - 15432:5432
-
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
