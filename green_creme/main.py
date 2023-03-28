@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
+from psycopg_pool import ConnectionPool
 
 app = FastAPI()
+
+pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
 app.add_middleware(
     CORSMiddleware,

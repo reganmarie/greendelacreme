@@ -37,7 +37,7 @@ about your project that you create and to put your
 project-journal entries. See the _README.md_ file in each
 directory for more info.
 
-The other directories, `ghi` and `sample_service`, are
+The other directories, `ghi` and `green_creme`, are
 sample services, that you can start building off of or use
 as a reference point.
 
@@ -45,7 +45,7 @@ Inside of `ghi` is a minimal React app that has an "under
 construction" page. It is setup similarly to all of the
 other React projects that you have worked on.
 
-Inside of `sample_service` is a minimal FastAPI application.
+Inside of `green_creme` is a minimal FastAPI application.
 "Where are all the files?" you might ask? Well, the
 `main.py` file is the whole thing, and go take look inside
 of it... There's not even much in there..., hmm? That is
@@ -53,7 +53,7 @@ FastAPI, we'll learn more about it in the coming days. Can
 you figure out what this little web-application does even
 though you haven't learned about FastAPI yet?
 
-Also in `sample_service` is a directory for your migrations.
+Also in `green_creme` is a directory for your migrations.
 If you choose to use PostgreSQL, then you'll want to use
 migrations to control your database. Unlike Django, where
 migrations were automatically created for you, you'll write
@@ -96,12 +96,12 @@ deployment, but it just consists of these steps:
 * make sure this project is in a group. If it isn't, stop
   now and move it to a GitLab group
 * remove the fork relationship: In GitLab go to:
-  
+
   Settings -> General -> Advanced -> Remove fork relationship
 
 * add these GitLab CI/CD variables:
   * PUBLIC_URL : this is your gitlab pages URL
-  * SAMPLE_SERVICE_API_HOST: enter "blank" for now
+  * GREEN_CREME_API_HOST: enter "blank" for now
 
 #### Your GitLab pages URL
 
@@ -125,7 +125,7 @@ https://GROUP_NAME.gitlab.io/PROJECT_NAME
   * Enter fields:
     * Name: name of your service
     * Root Directory: the directory of your service in your git repo.
-      For this example use "sample_service".
+      For this example use "green_creme".
     * Environment: Docker
     * Plan Type: Free
   * click the "Create Web Service" button to create it
@@ -137,7 +137,7 @@ https://GROUP_NAME.gitlab.io/PROJECT_NAME
 ### Update GitLab CI/CD variables
 
 Copy the service URL for your new render.com service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
+that into the value for the GREEN_CREME_API_HOST CI/CD variable
 in GitLab.
 
 ### Deploy it
