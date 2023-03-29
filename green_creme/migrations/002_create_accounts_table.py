@@ -3,8 +3,8 @@ steps = [
         """
         CREATE table accounts (
             id serial primary key not null,
-            username varchar(20) not null,
-            email varchar(100) not null,
+            username varchar(20) not null unique,
+            email varchar(100) not null unique,
             password varchar(100) not null,
             first varchar(100) not null,
             last varchar(100) not null,
