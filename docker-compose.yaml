@@ -1,8 +1,9 @@
 volumes:
   green-data:
     external: false
+  pg-admin:
+    external: false
 services:
-
   fastapi:
     build:
       context: green_creme
@@ -40,3 +41,13 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_GREEN_CREME_API_HOST: http://localhost:8000
+  pg-admin:
+    image: dpage/pgadmin4
+    volumes:
+     - pg-admin:/var/lib/pgadmin4
+    ports:
+     - 8082:80
+    environment:
+       PGADMIN_DEFAULT_EMAIL: adamazai0@gmail.com
+       PGADMIN_DEFAULT_PASSWORD: greendelacreme
+       PGADMIN_DISABLE_POSTFIX: 1
