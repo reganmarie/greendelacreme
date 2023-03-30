@@ -29,10 +29,9 @@ class ThreadRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    
+
         except Exception:
             return {"message": "Could not retrieve "}
-
 
 
 

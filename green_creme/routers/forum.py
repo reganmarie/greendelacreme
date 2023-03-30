@@ -19,8 +19,6 @@ def create_thread(
         return {"message": "Could not create forum"}
 
 
-
-
 @router.get("/forum", response_model=List[ThreadOut])
 def get_all_threads(
     repo: ThreadRepository = Depends(),
