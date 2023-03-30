@@ -30,6 +30,18 @@ class ThreadAccountOut(ThreadOut):
 
 
 class ThreadRepository:
+    def record_to_thread_out(self, record):
+        return ThreadAccountOut(
+            id=record[0],
+            title=record[1],
+            body=record[2],
+            image=record[3],
+            author_id=record[4],
+            created_on=record[5],
+            username=record[6],
+            avatar=record[7],
+        )
+
     def get_all(self) -> Union[Error, List[ThreadAccountOut]]:
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -80,3 +92,18 @@ class ThreadRepository:
     def forum_in_to_out(self, id: int, thread: ThreadIn):
         old_data = thread.dict()
         return ThreadOut(id=id, **old_data)
+
+    def get_one(self, forum_id: int) -> Optional[ThreadAccountOut]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    Select f.id, f.title, f.body, f.image, f.author_id, f.created_on, a.username, a.avatar
+                    from forum f
+                    inner join accounts a on f.author_id = a.id
+                    where f.id = %s;
+                    """,
+                    [forum_id],
+                )
+                record = result.fetchone()
+                return self.record_to_thread_out(record)
