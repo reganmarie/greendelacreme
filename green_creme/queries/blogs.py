@@ -91,7 +91,6 @@ class BlogQueries:
                     SET title = %s
                         , body = %s
                         , image = %s
-                        , author_id = %s
                     WHERE id = %s
                     """,
                     [
@@ -99,7 +98,25 @@ class BlogQueries:
                         blog.body,
                         blog.image,
                         blog.author_id,
-                        blog_id,
                     ],
                 )
                 return self.blog_in_to_out(blog_id, blog)
+
+    def get_one(self, blog_id: int) -> Optional[BlogOutWithAccount]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    SELECT b.id, b.title,
+                    b.body, b.image,
+                    b.created_on, b.author_id,
+                    a.username, a.avatar
+                    FROM blog AS b
+                    LEFT JOIN accounts AS a
+                    ON a.id = b.author_id
+                    WHERE b.id = %s;
+                    """,
+                    [blog_id],
+                )
+                record = result.fetchone()
+                return self.record_to_blog_out(record)
