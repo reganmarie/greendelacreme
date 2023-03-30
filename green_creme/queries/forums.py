@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List, Union
 from queries.pool import pool
 
 
@@ -24,7 +24,38 @@ class ThreadOut(BaseModel):
     created_on: datetime = datetime.now()
 
 
+class ThreadAccountOut(ThreadOut):
+    username: str
+    avatar: str
+
+
 class ThreadRepository:
+    def get_all(self) -> Union[Error, List[ThreadAccountOut]]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                        Select f.id, f.title, f.body, f.image, f.author_id, f.created_on, a.username, a.avatar
+                        from forum f
+                        inner join accounts a on f.author_id = a.id
+                        order by created_on desc;
+                        """
+                )
+                result = []
+                for record in db:
+                    thread = ThreadAccountOut(
+                        id=record[0],
+                        title=record[1],
+                        body=record[2],
+                        image=record[3],
+                        author_id=record[4],
+                        created_on=record[5],
+                        username=record[6],
+                        avatar=record[7],
+                    )
+                    result.append(thread)
+                return result
+
     def create(self, thread: ThreadIn) -> ThreadOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
