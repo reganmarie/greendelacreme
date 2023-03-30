@@ -37,7 +37,8 @@ class ThreadRepository:
                     """
                         Select f.id, f.title, f.body, f.image, f.author_id, f.created_on, a.username, a.avatar
                         from forum f
-                        left join accounts a on f.author_id = a.id;
+                        inner join accounts a on f.author_id = a.id
+                        order by created_on desc;
                         """
                 )
                 result = []

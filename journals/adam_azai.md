@@ -1,4 +1,13 @@
+## March 29, 2023
 
+Today, I worked on:
+
+* Creating the POST, GET, GET endpoints for forum table database
+* Error handling for endpoints
+
+Today we focused on getting our endpoints for our MVP done and spilt into coding pairs for the day. Me and regan worked smoothly on the endpoints but ran into some issues in validating the pydantic timestamp models and made the decision alongside with shayne and brandon to switch the created_on column from timestamp to datetime. We discovered that we can use try and except blocks in our routers for error handling instead of our queries. Got the hang of making endpoints and getting used to FastAPI day by day. The next goal is to start authorization in order to grab the id of the user who makes a thread.
+
+An aha moment today was learning how to grab our foreign key data and display the informations stored in that table. Adjusting our ThreadOut model to the columns of accounts allows us to now grab the accounts'username and any other information we may want to grab in the future.
 
 
 ## March 28, 2023

@@ -11,7 +11,7 @@ from typing import Union, List
 router = APIRouter()
 
 
-@router.post("/forum/", response_model=Union[ThreadOut, Error])
+@router.post("/forum", response_model=Union[ThreadOut, Error])
 def create_thread(
     thread: ThreadIn, response: Response, repo: ThreadRepository = Depends()
 ):
