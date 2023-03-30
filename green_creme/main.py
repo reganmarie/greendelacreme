@@ -1,12 +1,11 @@
 from fastapi import FastAPI
-from routers import forum
+from routers import forum, blogs
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from psycopg_pool import ConnectionPool
 
 app = FastAPI()
+app.include_router(blogs.router)
 app.include_router(forum.router)
-pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
 app.add_middleware(
     CORSMiddleware,
