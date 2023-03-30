@@ -5,7 +5,10 @@ import os
 
 app = FastAPI()
 app.include_router(forum.router)
-pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
+app.include_router(blogs.router)
+
+
+# pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
 app.add_middleware(
     CORSMiddleware,
