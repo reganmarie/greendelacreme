@@ -81,3 +81,25 @@ class BlogQueries:
             username=record[6],
             avatar=record[7],
         )
+
+    def update(self, blog_id: int, blog: BlogIn) -> Union[BlogOut, Error]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    UPDATE blog
+                    SET title = %s
+                        , body = %s
+                        , image = %s
+                        , author_id = %s
+                    WHERE id = %s
+                    """,
+                    [
+                        blog.title,
+                        blog.body,
+                        blog.image,
+                        blog.author_id,
+                        blog_id,
+                    ],
+                )
+                return self.blog_in_to_out(blog_id, blog)

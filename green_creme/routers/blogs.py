@@ -37,3 +37,17 @@ def get_all_blogs(
     except:
         response.status_code = 400
         return {"message": "Could not retrieve blogs"}
+
+
+@router.put("/blogs/{blog_id}", response_model=Union[BlogOut, Error])
+def update_blog(
+    blog_id: int,
+    response: Response,
+    blog: BlogIn,
+    repo: BlogQueries = Depends(),
+):
+    try:
+        return repo.update(blog_id, blog)
+    except Exception:
+        response.status_code = 400
+        return {"message": "Could not update a blog :("}
