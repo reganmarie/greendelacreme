@@ -1,6 +1,12 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union
-from queries.blogs import BlogIn, BlogOut, BlogQueries, Error
+from typing import Union, List
+from queries.blogs import (
+    BlogIn,
+    BlogOut,
+    BlogQueries,
+    Error,
+    BlogOutWithAccount,
+)
 
 router = APIRouter()
 
@@ -19,3 +25,15 @@ def create_blog(
     except Exception:
         response.status_code = 400
         return {"message": "Could not create a blog :("}
+
+
+@router.get("/blogs", response_model=Union[List[BlogOutWithAccount], Error])
+def get_all_blogs(
+    response: Response,
+    blog: BlogQueries = Depends(),
+):
+    try:
+        return blog.get_all()
+    except:
+        response.status_code = 400
+        return {"message": "Could not retrieve blogs"}

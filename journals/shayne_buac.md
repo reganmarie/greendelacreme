@@ -1,6 +1,7 @@
 ## March 29, 2023
 Today, I worked on:
-* Making the first endpoint for the blogs page with Brandon
+* Making the first endpoint for the blogs page with Brandon (POST /blogs)
+* Making the GET /blogs endpoint to get all blogs
 * Debugging code with the entire green team
 
 I pair programmed with Brandon where I was the driver and Brandon was the navigator. We finished the pydantic models for blogs and the POST /blogs endpoint to enable creation of blogs in the backend.

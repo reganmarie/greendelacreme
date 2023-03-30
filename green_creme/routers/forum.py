@@ -1,5 +1,11 @@
 from fastapi import APIRouter, Depends, Response, HTTPException
-from queries.forums import Error, ThreadIn, ThreadRepository, ThreadOut, ThreadAccountOut
+from queries.forums import (
+    Error,
+    ThreadIn,
+    ThreadRepository,
+    ThreadOut,
+    ThreadAccountOut,
+)
 from typing import Union, List
 
 router = APIRouter()
