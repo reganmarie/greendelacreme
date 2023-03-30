@@ -71,3 +71,16 @@ def update_thread(
     except:
         response.status_code = 404
         return {"message": f"Forum with id {forum_id} not found"}
+
+@router.delete("/forum/{forum_id}", response_model=bool)
+def delete_thread(
+    forum_id: int,
+    response: Response,
+    repo: ThreadRepository = Depends(),
+    ) -> bool:
+    try:
+        repo.get_one(forum_id)
+        return repo.delete(forum_id)
+    except Exception:
+        response.status_code = 404
+        return False

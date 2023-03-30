@@ -1,4 +1,18 @@
-## March 28, 2023
+## March 30, 2023
+
+Today, I worked on:
+
+* Created a DELETE API Endpoint
+* Pair Programmed with Shayne to debug PUT endpoint
+
+Today, the whole group completed all of the API endpoints! -celebrate confetti emoji-
+
+I worked with Shayne to get a 404 error on a PUT request that does not have an existing forum id and did the DELETE endpoint on my own.
+We merged with main and again, I learned about Git workflow as a some merges were made this morning and my working branch for PUT was behind.
+
+I had an aha moment for working with FastAPI as I haven't really done much with FastAPI at this point. Conceptually, I understand it, but the implementation is obviously much harder than Django because it's not quite as plug and play, so it's very interesting to figure out.
+
+## March 29, 2023
 
 Today, I worked on:
 
@@ -10,7 +24,7 @@ Then, someone who did not author the code tested and approved the merge request 
 
 We verified the table in Beekeeper as well. It was really cool to get the API endpoints up without using Django and writing so much more code with FastAPI. My biggest lesson was the corect order of id=forum_id on this line:  return ThreadOut(id=forum_id, **old_data) -upside down smiley face-.
 
-## March 29, 2023
+## March 28, 2023
 
 Today, I worked on:
 

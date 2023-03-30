@@ -128,3 +128,15 @@ class ThreadRepository:
     def forum_in_to_out(self, id: int, thread: ThreadIn):
         old_data = thread.dict()
         return ThreadOut(id=id, **old_data)
+
+    def delete(self, forum_id: int) -> bool:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    DELETE FROM forum
+                    WHERE id = %s
+                    """,
+                    [forum_id]
+                )
+                return True
