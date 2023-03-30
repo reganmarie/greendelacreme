@@ -13,7 +13,9 @@ router = APIRouter()
 
 @router.post("/forum", response_model=Union[ThreadOut, Error])
 def create_thread(
-    thread: ThreadIn, response: Response, repo: ThreadRepository = Depends()
+    thread: ThreadIn,
+    response: Response,
+    repo: ThreadRepository = Depends(),
 ):
     if thread.title == "" or thread.body == "":
         response.status_code = 400
@@ -37,3 +39,16 @@ def get_all_threads(
     except:
         response.status_code = 400
         return {"message": "Could not retrieve threads"}
+
+
+@router.get("/forum/{forum_id}", response_model=Union[Error, ThreadAccountOut])
+def get_thread_details(
+    forum_id: int,
+    response: Response,
+    repo: ThreadRepository = Depends(),
+) -> ThreadAccountOut:
+    try:
+        return repo.get_one(forum_id)
+    except:
+        response.status_code = 404
+        return {"message": "Could not receive the thread by that id"}
