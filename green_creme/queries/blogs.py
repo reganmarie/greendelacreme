@@ -120,3 +120,16 @@ class BlogQueries:
                 )
                 record = result.fetchone()
                 return self.record_to_blog_out(record)
+
+
+    def delete(self, blog_id: int) -> bool:
+        with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM blog
+                        WHERE id = %s
+                        """,
+                        [blog_id]
+                    )
+                    return True
