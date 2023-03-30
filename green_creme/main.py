@@ -5,7 +5,7 @@ import os
 from psycopg_pool import ConnectionPool
 
 app = FastAPI()
-
+app.include_router(forum.router)
 pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
 app.add_middleware(

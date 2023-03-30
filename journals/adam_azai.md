@@ -1,10 +1,3 @@
-## March 29, 2023
-
-Today, I worked on:
-
-* Installing pg-admin in our project
-* Adding unique constraint to username and email for accounts table
-* Endpoint for 
 
 
 
