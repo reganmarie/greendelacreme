@@ -9,6 +9,7 @@ services:
       context: green_creme
       dockerfile: Dockerfile.dev
     environment:
+      SIGNING_KEY: abjklddfjklsdfnwejriopwejmrflfolasdjfop
       DATABASE_URL: postgresql://example_user:secret@db/db
       WAIT_HOSTS: db:5432
       PORT: 8000
