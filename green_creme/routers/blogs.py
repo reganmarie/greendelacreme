@@ -58,7 +58,9 @@ def update_blog(
         return {"message": f"Blog with id {blog_id} not found"}
 
 
-@router.get("/blogs/{blog_id}", response_model=Union[BlogOutWithAccount, Error])
+@router.get(
+    "/blogs/{blog_id}", response_model=Union[BlogOutWithAccount, Error]
+)
 def get_blog_details(
     blog_id: int,
     response: Response,
@@ -82,4 +84,6 @@ def delete_blog(
         return repo.delete(blog_id)
     except Exception:
         response.status_code = 404
-        return {"message": "Could not delete a blog by that ID, are you sure it exists?"}
+        return {
+            "message": "Could not delete a blog by that ID, are you sure it exists?"
+        }

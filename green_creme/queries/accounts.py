@@ -25,12 +25,12 @@ class AccountOut(BaseModel):
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
-class AccountRepository:
 
+class AccountRepository:
     def get(self, email: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                db.execute (
+                db.execute(
                     """
                     select id, username, email, first, last, password
                     from accounts
@@ -46,11 +46,12 @@ class AccountRepository:
                     email=account[2],
                     first=account[3],
                     last=account[4],
-                    hashed_password=account[5]
+                    hashed_password=account[5],
                 )
 
-
-    def create(self, info:AccountIn, hashed_password:str) -> AccountOutWithPassword:
+    def create(
+        self, info: AccountIn, hashed_password: str
+    ) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
@@ -64,8 +65,8 @@ class AccountRepository:
                         info.last,
                         info.username,
                         info.email,
-                        hashed_password
-                    )
+                        hashed_password,
+                    ),
                 )
                 id = db.fetchone()[0]
                 if id is None:
@@ -76,5 +77,5 @@ class AccountRepository:
                     email=info.email,
                     hashed_password=hashed_password,
                     first=info.first,
-                    last=info.last
+                    last=info.last,
                 )
