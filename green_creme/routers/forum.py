@@ -52,3 +52,35 @@ def get_thread_details(
     except:
         response.status_code = 404
         return {"message": "Could not receive the thread by that id"}
+
+
+@router.put("/forum/{forum_id}", response_model=Union[ThreadOut, Error])
+def update_thread(
+    forum_id: int,
+    forum: ThreadIn,
+    response: Response,
+    repo: ThreadRepository = Depends(),
+) -> Union[ThreadOut, Error]:
+    try:
+        repo.get_one(forum_id)
+        try:
+            return repo.update(forum_id, forum)
+        except Exception:
+            response.status_code = 400
+            return {"message": "Could not update forum"}
+    except:
+        response.status_code = 404
+        return {"message": f"Forum with id {forum_id} not found"}
+
+@router.delete("/forum/{forum_id}", response_model=bool)
+def delete_thread(
+    forum_id: int,
+    response: Response,
+    repo: ThreadRepository = Depends(),
+    ) -> bool:
+    try:
+        repo.get_one(forum_id)
+        return repo.delete(forum_id)
+    except Exception:
+        response.status_code = 404
+        return False

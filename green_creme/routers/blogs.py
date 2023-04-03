@@ -47,7 +47,39 @@ def update_blog(
     repo: BlogQueries = Depends(),
 ):
     try:
-        return repo.update(blog_id, blog)
+        repo.get_one(blog_id)
+        try:
+            return repo.update(blog_id, blog)
+        except Exception:
+            response.status_code = 400
+            return {"message": "Unfortunate, but could not update the blog"}
+    except:
+        response.status_code = 404
+        return {"message": f"Blog with id {blog_id} not found"}
+
+
+@router.get("/blogs/{blog_id}", response_model=Union[BlogOutWithAccount, Error])
+def get_blog_details(
+    blog_id: int,
+    response: Response,
+    repo: BlogQueries = Depends(),
+) -> Union[BlogOutWithAccount, Error]:
+    try:
+        return repo.get_one(blog_id)
+    except:
+        response.status_code = 404
+        return {"message": "Blog does not exist"}
+
+
+@router.delete("/blogs/{blog_id}", response_model=Union[bool, Error])
+def delete_blog(
+    blog_id: int,
+    response: Response,
+    repo: BlogQueries = Depends(),
+) -> bool:
+    try:
+        repo.get_one(blog_id)
+        return repo.delete(blog_id)
     except Exception:
-        response.status_code = 400
-        return {"message": "Could not update a blog :("}
+        response.status_code = 404
+        return {"message": "Could not delete a blog by that ID, are you sure it exists?"}

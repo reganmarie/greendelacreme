@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional, List, Union
+from typing import Optional, Union, List
 from queries.pool import pool
 
 
@@ -89,9 +89,26 @@ class ThreadRepository:
                 id = result.fetchone()[0]
                 return self.forum_in_to_out(id, thread)
 
-    def forum_in_to_out(self, id: int, thread: ThreadIn):
-        old_data = thread.dict()
-        return ThreadOut(id=id, **old_data)
+    def update(self, forum_id: int, forum: ThreadIn) -> ThreadOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    UPDATE forum
+                    SET title = %s
+                        , body = %s
+                        , image = %s
+                    WHERE id = %s
+                    """,
+                    [
+                        forum.title,
+                        forum.body,
+                        forum.image,
+                        forum.author_id,
+                    ],
+                )
+        old_data = forum.dict()
+        return ThreadOut(id=forum_id, **old_data)
 
     def get_one(self, forum_id: int) -> Optional[ThreadAccountOut]:
         with pool.connection() as conn:
@@ -107,3 +124,19 @@ class ThreadRepository:
                 )
                 record = result.fetchone()
                 return self.record_to_thread_out(record)
+
+    def forum_in_to_out(self, id: int, thread: ThreadIn):
+        old_data = thread.dict()
+        return ThreadOut(id=id, **old_data)
+
+    def delete(self, forum_id: int) -> bool:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    DELETE FROM forum
+                    WHERE id = %s
+                    """,
+                    [forum_id]
+                )
+                return True
