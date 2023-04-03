@@ -1,3 +1,13 @@
+## March 30, 2023
+
+Today, I worked on:
+* Authentication for users
+
+Today I mainly focused on starting to implement authentication for our project while everyone else debugged the delete and put endpoints merge requests along with the error handling of them as well. I followed curtis's videos to garner a greater understanding of how and what the authentication works. I ended up finishing the login and create user endpoints for our project and had to stop to allow others in the group to complete some endpoints.
+
+An aha moment today was discovering on how we protect the password of a user from being a part of the pydantic model as we use a hashed_password variable to protect the password string from being returned. As well as learning that some of the endpoints are already coded for us in the jwtdown library provided.
+
+
 ## March 29, 2023
 
 Today, I worked on:
