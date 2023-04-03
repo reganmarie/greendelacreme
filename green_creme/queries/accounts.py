@@ -26,7 +26,6 @@ class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
 class AccountRepository:
-    pass
 
     def get(self, email: str) -> AccountOutWithPassword:
         with pool.connection() as conn:
@@ -35,9 +34,10 @@ class AccountRepository:
                     """
                     select id, username, email, first, last, password
                     from accounts
-                    where email = %s;
+                    where email = %s
+                    or username = %s;
                     """,
-                    [email],
+                    [email, email],
                 )
                 account = db.fetchone()
                 return AccountOutWithPassword(
