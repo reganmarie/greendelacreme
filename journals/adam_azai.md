@@ -1,3 +1,22 @@
+
+## April 3, 2023
+
+Today, I worked on:
+
+* Tailwind, Toastify installation
+* BrowserRouter Setup
+* Redux Toolkit for Front-End Authentication
+* Issue creation
+* Sign Up Page
+
+
+Today I worked alongside Brandon to install tailwind css and react-toastify, a message alert library, to have the ability to style our js pages. We also managed GitLab throughout the day to see what new issues and merge requests that Shayne and Regan needed to finish the backend authentication. I realized that we needed a Browser Router and Routes in our App.js to view different js pages on different urls and thus merged that feature into main. I started working on the Sign Up page but forgo my progress as we needed to focus on completing the pending merge requests. As a group we finished backend authentication, protecting endpoints, installing tailwind, and starting implement rtk for frontend authentication at the end of the day.
+
+An aha moment today was learning how amazing redux is from curtis's videos and further explaining from shayne and regan. Its functionality is amazing in how the states refresh once any data is changed throughout the site and how we do not need to fetch the urls multiple times in our js pages. And no need for useEffect in our js pages as well.
+
+
+
+
 ## March 30, 2023
 
 Today, I worked on:
