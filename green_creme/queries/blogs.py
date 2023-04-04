@@ -12,7 +12,6 @@ class BlogIn(BaseModel):
     title: str
     body: str
     image: Optional[str]
-    author_id: int
 
 
 class BlogOut(BaseModel):
@@ -47,7 +46,11 @@ class BlogQueries:
                 )
                 return [self.record_to_blog_out(record) for record in result]
 
-    def create(self, blog: BlogIn) -> Union[BlogOut, Error]:
+    def create(
+        self,
+        blog: BlogIn,
+        account_id: int,
+    ) -> Union[BlogOut, Error]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -60,15 +63,28 @@ class BlogQueries:
                         blog.title,
                         blog.body,
                         blog.image,
-                        blog.author_id,
+                        account_id,
                     ],
                 )
                 id = result.fetchone()[0]
-                return self.blog_in_to_out(id, blog)
+                return self.blog_in_to_out(
+                    id,
+                    blog,
+                    account_id,
+                )
 
-    def blog_in_to_out(self, id: int, blog: BlogIn) -> BlogOut:
+    def blog_in_to_out(
+        self,
+        id: int,
+        blog: BlogIn,
+        account_id: int,
+    ) -> BlogOut:
         old_data = blog.dict()
-        return BlogOut(id=id, **old_data)
+        return BlogOut(
+            id=id,
+            **old_data,
+            author_id=account_id,
+        )
 
     def record_to_blog_out(self, record):
         return BlogOutWithAccount(
@@ -82,7 +98,12 @@ class BlogQueries:
             avatar=record[7],
         )
 
-    def update(self, blog_id: int, blog: BlogIn) -> Union[BlogOut, Error]:
+    def update(
+        self,
+        blog_id: int,
+        blog: BlogIn,
+        author_id: int,
+    ) -> Union[BlogOut, Error]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
@@ -91,16 +112,20 @@ class BlogQueries:
                     SET title = %s
                         , body = %s
                         , image = %s
-                    WHERE id = %s
+                    WHERE id = %s;
                     """,
                     [
                         blog.title,
                         blog.body,
                         blog.image,
-                        blog.author_id,
+                        blog_id,
                     ],
                 )
-                return self.blog_in_to_out(blog_id, blog)
+                return self.blog_in_to_out(
+                    blog_id,
+                    blog,
+                    author_id,
+                )
 
     def get_one(self, blog_id: int) -> Optional[BlogOutWithAccount]:
         with pool.connection() as conn:
@@ -126,9 +151,9 @@ class BlogQueries:
             with conn.cursor() as db:
                 db.execute(
                     """
-                        DELETE FROM blog
-                        WHERE id = %s
-                        """,
+                    DELETE FROM blog
+                    WHERE id = %s;
+                    """,
                     [blog_id],
                 )
                 return True

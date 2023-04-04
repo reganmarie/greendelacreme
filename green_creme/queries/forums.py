@@ -12,7 +12,6 @@ class ThreadIn(BaseModel):
     title: str
     body: str
     image: Optional[str]
-    author_id: int
 
 
 class ThreadOut(BaseModel):
@@ -47,11 +46,11 @@ class ThreadRepository:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                        Select f.id, f.title, f.body, f.image, f.author_id, f.created_on, a.username, a.avatar
-                        from forum f
-                        inner join accounts a on f.author_id = a.id
-                        order by created_on desc;
-                        """
+                    Select f.id, f.title, f.body, f.image, f.author_id, f.created_on, a.username, a.avatar
+                    from forum f
+                    inner join accounts a on f.author_id = a.id
+                    order by created_on desc;
+                    """
                 )
                 result = []
                 for record in db:
@@ -68,7 +67,11 @@ class ThreadRepository:
                     result.append(thread)
                 return result
 
-    def create(self, thread: ThreadIn) -> ThreadOut:
+    def create(
+        self,
+        thread: ThreadIn,
+        account_id: int,
+    ) -> ThreadOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -83,13 +86,22 @@ class ThreadRepository:
                         thread.title,
                         thread.body,
                         thread.image,
-                        thread.author_id,
+                        account_id,
                     ],
                 )
                 id = result.fetchone()[0]
-                return self.forum_in_to_out(id, thread)
+                return self.forum_in_to_out(
+                    id,
+                    thread,
+                    account_id,
+                )
 
-    def update(self, forum_id: int, forum: ThreadIn) -> ThreadOut:
+    def update(
+        self,
+        forum_id: int,
+        forum: ThreadIn,
+        author_id: int,
+    ) -> ThreadOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -98,17 +110,20 @@ class ThreadRepository:
                     SET title = %s
                         , body = %s
                         , image = %s
-                    WHERE id = %s
+                    WHERE id = %s;
                     """,
                     [
                         forum.title,
                         forum.body,
                         forum.image,
-                        forum.author_id,
+                        forum_id,
                     ],
                 )
-        old_data = forum.dict()
-        return ThreadOut(id=forum_id, **old_data)
+        return self.forum_in_to_out(
+            forum_id,
+            forum,
+            author_id,
+        )
 
     def get_one(self, forum_id: int) -> Optional[ThreadAccountOut]:
         with pool.connection() as conn:
@@ -125,9 +140,18 @@ class ThreadRepository:
                 record = result.fetchone()
                 return self.record_to_thread_out(record)
 
-    def forum_in_to_out(self, id: int, thread: ThreadIn):
+    def forum_in_to_out(
+        self,
+        id: int,
+        thread: ThreadIn,
+        account_id: int,
+    ):
         old_data = thread.dict()
-        return ThreadOut(id=id, **old_data)
+        return ThreadOut(
+            id=id,
+            **old_data,
+            author_id=account_id,
+        )
 
     def delete(self, forum_id: int) -> bool:
         with pool.connection() as conn:
@@ -135,7 +159,7 @@ class ThreadRepository:
                 db.execute(
                     """
                     DELETE FROM forum
-                    WHERE id = %s
+                    WHERE id = %s;
                     """,
                     [forum_id],
                 )

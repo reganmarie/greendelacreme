@@ -1,3 +1,41 @@
+## April 3, 2023
+Today, I worked on:
+* Adding protection to all the endpoints
+* Changing the create and update endpoints so that you no longer need to put the author_id into the request body
+
+I pair programmed with Regan today where I was the main coder and she was my navigator. We were able to get the create endpoints to work so that the author_id of the newly created blogs and forum threads are automatically link to the logged in user's id.
+
+We came across a blocker for the PUT endpoint where we kept getting a 400 bad request but no other context. We tried putting print statements and realized it was not printing the db or result after the SQL statement, so we thought the problem was with the SQL statement and it turned out it was. After trying many things, Adam came in to help and pointed out that we were missing the blog_id in the list to correspond to `WHERE id = %s`. Now, I'll make sure to keep in mind that every time we put `%s`, there has to be a corresponding value in the list!
+
+## April 2, 2023
+Today, I tried to understand auth by doing it myself in my name branch. I got everything to work in the back-end, including sign up, login, logout, get token, protect an endpoint (create blog), and make it so that users can login with either their email or username.
+
+## March 31, 2023
+Today, I worked on:
+* Organizing GitLab
+
+With the consent of my team, I created three milestones:
+* Migration Tables
+* Forum API Endpoints
+* Blog API Endpoints
+
+## March 30, 2023
+Today, I worked on:
+* Reviewing 6 merge requests
+* Debugging my team's code
+
+I reviewed 6 merge requests for the following:
+* GET all threads endpoint
+* GET a single forum thread's details endpoint
+* PUT blog endpoint
+* PUT thread endpoint
+* GET a blog's details endpoint
+* DELETE blog endpoint
+
+I primarily reviewed merge requests by myself and occasionally asked questions to the assignee if I had any issues. Additionally, I assisted Imron with debugging his auth code.
+
+Brandon and I came across a blocker for his PUT blog endpoint merge request where the PUT requests were returning a status 200 when I tried updating an id that did not exist. We came to the solution to use another try-except block that utilized the `get_one` method to check if the object exists first before updating it. Regan was then able to incorporate that into the other PUT endpoint for the forum threads, and we did similar logic for the delete endpoints as they were initially returning true for every request!
+
 ## March 29, 2023
 Today, I worked on:
 * Making the first endpoint for the blogs page with Brandon (POST /blogs)

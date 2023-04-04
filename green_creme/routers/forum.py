@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, Response
+from authenticator import authenticator
 from queries.forums import (
     Error,
     ThreadIn,
@@ -16,12 +17,13 @@ def create_thread(
     thread: ThreadIn,
     response: Response,
     repo: ThreadRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     if thread.title == "" or thread.body == "":
         response.status_code = 400
         return {"message": "Could not create forum"}
     try:
-        return repo.create(thread)
+        return repo.create(thread, account_data["id"])
     except:
         response.status_code = 400
         return {"message": "Could not create forum"}
@@ -31,6 +33,7 @@ def create_thread(
 def get_all_threads(
     response: Response,
     repo: ThreadRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     if len(repo.get_all()) == 0:
         return {"message": "No threads exist"}
@@ -46,6 +49,7 @@ def get_thread_details(
     forum_id: int,
     response: Response,
     repo: ThreadRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> ThreadAccountOut:
     try:
         return repo.get_one(forum_id)
@@ -60,28 +64,42 @@ def update_thread(
     forum: ThreadIn,
     response: Response,
     repo: ThreadRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[ThreadOut, Error]:
     try:
-        repo.get_one(forum_id)
-        try:
-            return repo.update(forum_id, forum)
-        except Exception:
-            response.status_code = 400
-            return {"message": "Could not update forum"}
+        result = repo.get_one(forum_id)
+        if account_data["id"] == result.author_id:
+            try:
+                return repo.update(forum_id, forum, result.author_id)
+            except Exception:
+                response.status_code = 400
+                return {"message": "Could not update forum"}
+        else:
+            response.status_code = 401
+            return {
+                "message": "You are not authorized to update this forum thread"
+            }
     except:
         response.status_code = 404
         return {"message": f"Forum with id {forum_id} not found"}
 
 
-@router.delete("/forum/{forum_id}", response_model=bool)
+@router.delete("/forum/{forum_id}", response_model=Union[bool, Error])
 def delete_thread(
     forum_id: int,
     response: Response,
     repo: ThreadRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     try:
-        repo.get_one(forum_id)
-        return repo.delete(forum_id)
+        result = repo.get_one(forum_id)
+        if account_data["id"] == result.author_id:
+            return repo.delete(forum_id)
+        else:
+            response.status_code = 401
+            return {
+                "message": "You are not authorized to delete this forum thread"
+            }
     except Exception:
         response.status_code = 404
         return False
