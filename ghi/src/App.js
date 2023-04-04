@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Construct from './Construct.js'
 import ErrorNotification from './ErrorNotification';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -28,10 +29,14 @@ function App() {
 
 
   return (
+    <BrowserRouter>
     <div>
+      <Routes>
+        <Route path='new' element={<Construct info={launch_info} />} />
+      </Routes>
       <ErrorNotification error={error} />
-      <Construct info={launch_info} />
     </div>
+    </BrowserRouter>
   );
 }
 

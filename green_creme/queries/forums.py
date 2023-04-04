@@ -137,6 +137,6 @@ class ThreadRepository:
                     DELETE FROM forum
                     WHERE id = %s
                     """,
-                    [forum_id]
+                    [forum_id],
                 )
                 return True
