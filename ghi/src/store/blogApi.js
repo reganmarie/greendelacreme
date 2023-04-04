@@ -4,19 +4,28 @@ export const blogApi = createApi({
     reducerPath: 'blog',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
+        prepareHeaders: async (headers, { getState }) => {
+        const token = await getState().auth.token;
+        console.log(token)
+        if (token) {
+            headers.set('authorization', `Bearer ${token}`)
+        }
+
+        return headers
+        },
     }),
     tagTypes: ['BlogList'],
     endpoints: builder => ({
         getBlogs: builder.query({
-            query: () => '/blog',
+            query: () => '/blogs',
             providesTags: ['BlogList'],
         }),
         getBlog: builder.query({
-            query: id => '/blog/' + id,
+            query: id => '/blogs/' + id,
         }),
         createBlog: builder.mutation({
             query: data => ({
-                url: '/blog',
+                url: '/blogs',
                 body: data,
                 method: 'post',
             }),
@@ -24,14 +33,14 @@ export const blogApi = createApi({
         }),
         deleteOwner: builder.mutation({
             query: id => ({
-                url: '/blog/' + id,
+                url: '/blogs/' + id,
                 method: 'delete',
             }),
             invalidatesTags: ['BlogList'],
         }),
         updateBlog: builder.mutation({
             query: (id, data) => ({
-                url: '/blog/' + id,
+                url: '/blogs/' + id,
                 body: data,
                 method: 'put',
             }),
