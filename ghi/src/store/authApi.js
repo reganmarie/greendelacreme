@@ -5,10 +5,9 @@ export const authApi = createApi({
   tagTypes: ['Token'],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token
+    prepareHeaders: (headers, { getToken }) => {
+      const token = getToken().access_token
 
-      // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
         headers.set('authorization', `Bearer ${token}`)
       }
