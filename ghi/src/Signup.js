@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Signup() {
   return (
-    <section class="bg-gray-50 dark:bg-gray-900">
+    <section class="bg-primary-50 dark:bg-gray-900">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a
           href="#"
-          class="flex items-center mb-6 text-2xl text-gradient-to-r from-emerald-500 to-emerald-900 font-semibold text-gray-900 dark:text-white"
+          class="flex items-center mb-6 text-2xl text-gradient-to-r from-emerald-500 to-emerald-900 font-semibold text-black dark:text-white"
         >
           <img
             class="w-14 h-14 mr-2"
@@ -14,12 +15,60 @@ function Signup() {
           />
           Green de la Creme
         </a>
-        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full text-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-white dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an account
             </h1>
             <form class="space-y-4 md:space-y-6" action="#">
+              <div>
+                <label
+                  for="first-name"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  First Name
+                </label>
+                <input
+                  type="first-name"
+                  name="first-name"
+                  id="first-name"
+                  placeholder="Bob"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  for="last-name"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Last Name
+                </label>
+                <input
+                  type="last-name"
+                  name="last-name"
+                  id="last-name"
+                  placeholder="Smith"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  for="username"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Username
+                </label>
+                <input
+                  type="username"
+                  name="username"
+                  id="username"
+                  placeholder="iLuvDirt"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required=""
+                />
+              </div>
               <div>
                 <label
                   for="email"
@@ -48,22 +97,6 @@ function Signup() {
                   name="password"
                   id="password"
                   placeholder="••••••••"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
-                />
-              </div>
-              <div>
-                <label
-                  for="confirm-password"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Name
-                </label>
-                <input
-                  type="name"
-                  name="name"
-                  id="name"
-                  placeholder="Bob Smith"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
                 />
@@ -104,8 +137,10 @@ function Signup() {
                 <a>
                   <Link
                     to="/"
-                    class="font-medium text-pink-200 hover:underline dark:text-pink"
+                    class="font-medium text-pink-200 hover:underline
+                    dark:text-pink"
                   >
+                    {" "}
                     Login here
                   </Link>
                 </a>

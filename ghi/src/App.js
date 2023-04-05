@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import LoginForm from "./LoginForm.js";
+import Signup from "./Signup.js";
 import BlogList from "./BlogList.js";
 import { useGetTokenQuery } from "./store/authApi";
 import { ToastContainer } from "react-toastify";
@@ -17,7 +18,7 @@ function App() {
       ) : (
         <Routes>
           <Route path="/" element={<LoginForm />} />
-          <Route path="/signup" element={<Form />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       )}
       <ToastContainer />
