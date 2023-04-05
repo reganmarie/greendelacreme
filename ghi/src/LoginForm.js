@@ -24,9 +24,18 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="bg-gradient-to-tr from-primary-50 dark:bg-gray-900">
+    <div className="bg-gradient-to-tr from-primary-100 dark:bg-gray-900">
         <div className="px-6 py-8 flex flex-col items-center justify-center mx-auto md:h-screen lg:py-0">
-            <h1 className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">Green de la Creme</h1>
+                    <a
+          href="#"
+          class="flex items-center mb-6 text-2xl text-gradient-to-r from-emerald-500 to-emerald-900 font-semibold text-black dark:text-white"
+        >
+          <img
+            class="w-14 h-14 mr-2"
+            src="planticon.png"
+          />
+          Green de la Creme
+        </a>
             <div className="bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 dark:border dark:bg-gray-800 dark:border-gray-700 w-full">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Login</h1>
