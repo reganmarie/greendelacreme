@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 import LoginForm from './LoginForm.js';
 import BlogList from './BlogList.js';
 import { useGetTokenQuery } from './store/authApi';
-import { setUser } from './store/user';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
