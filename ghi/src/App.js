@@ -10,13 +10,15 @@ function App() {
 
   return (
     <>
-      <Routes>
       { data ?
+      <Routes>
         <Route path='/blogs' element={<BlogList />} />
-      :
-        <Route path='/' element={<LoginForm />} />
-      }
       </Routes>
+      :
+      <Routes>
+        <Route path='/' element={<LoginForm />} />
+      </Routes>
+      }
       <ToastContainer />
     </>
   );
