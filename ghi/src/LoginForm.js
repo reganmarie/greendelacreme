@@ -24,8 +24,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="bg-gradient-to-tr from-emerald-100 via-lime-100 to-yellow-100 dark:bg-darkgreen">
-    {/* <div className="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-yellow-100 via-lime-100 to-emerald-100 dark:bg-darkgreen"> */}
+    <div className="bg-gradient-to-br from-emerald-100 via-lime-100 to-yellow-100 dark:bg-darkgreen">
         <div className='bg-[url("leaf-login.png")] dark:bg-[url("leaf-dark.png")] b-clip-content bg-center object-cover bg-contain bg-no-repeat p-12 drop-shadow-lg'>
         <div className="px-6 py-8 flex flex-col items-center justify-center mx-auto md:h-screen lg:py-0">
             <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Green de la Creme</h1>
