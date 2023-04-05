@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useLoginMutation } from './store/authApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login, result] = useLoginMutation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({'email': username, 'password': password}));
+    login({'email': username, 'password': password});
     e.target.reset();
   };
 
   if (result.isSuccess) {
-    navigate('/new');
+    navigate('/blogs');
+    toast(`Welcome back ${username}!`);
   } else if (result.isError) {
     console.error(result.error);
   }
@@ -31,7 +32,7 @@ const LoginForm = () => {
                     <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Login</h1>
                     <form className="space-y-4 md:space-y-6" onSubmit={(e) => handleSubmit(e)}>
                     <div>
-                        <label for="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username or email</label>
+                        <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username or email</label>
                         <input
                         name="username"
                         type="text"
@@ -42,7 +43,7 @@ const LoginForm = () => {
                         />
                     </div>
                     <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                         <input
                         name="password"
                         type="password"
@@ -56,8 +57,8 @@ const LoginForm = () => {
                         <button className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit" value="Login">Login</button>
                     </div>
                     </form>
-                    <p class="text-sm text-center font-light text-gray-500 dark:text-gray-400">
-                      Don't have an account yet? <Link to="/signup" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
+                    <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
+                      Don't have an account yet? <Link to="/signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
                   </p>
                 </div>
             </div>

@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import LoginForm from './LoginForm.js';
 import BlogList from './BlogList.js';
+import { useGetTokenQuery } from './store/authApi';
+import { setUser } from './store/user';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
-
+  const { data } = useGetTokenQuery();
 
   return (
-    <BrowserRouter>
-    <div>
+    <>
       <Routes>
-        <Route path='new' element={<Construct info={launch_info} />} />
-        <Route path='login' element={<LoginForm />} />
-        <Route path='blogs' element={<BlogList />} />
+      { data ?
+        <Route path='/blogs' element={<BlogList />} />
+      :
+        <Route path='/' element={<LoginForm />} />
+      }
       </Routes>
-      <ErrorNotification error={error} />
-    </div>
-    </BrowserRouter>
+      <ToastContainer />
+    </>
   );
 }
 
