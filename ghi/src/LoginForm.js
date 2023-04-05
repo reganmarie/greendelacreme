@@ -24,10 +24,12 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="bg-gradient-to-tr from-primary-50 dark:bg-gray-900">
+    <div className="bg-gradient-to-tr from-emerald-100 via-lime-100 to-yellow-100 dark:bg-darkgreen">
+    {/* <div className="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-yellow-100 via-lime-100 to-emerald-100 dark:bg-darkgreen"> */}
+        <div className='bg-[url("leaf-login.png")] dark:bg-[url("leaf-dark.png")] b-clip-content bg-center object-cover bg-contain bg-no-repeat p-12 drop-shadow-lg'>
         <div className="px-6 py-8 flex flex-col items-center justify-center mx-auto md:h-screen lg:py-0">
-            <h1 className="mb-6 text-2xl font-semibold text-gray-900 dark:text-white">Green de la Creme</h1>
-            <div className="bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 dark:border dark:bg-gray-800 dark:border-gray-700 w-full">
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Green de la Creme</h1>
+              <div className='md:mt-0 sm:max-w-md xl:p-0 md:w-full h-80'>
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Login</h1>
                     <form className="space-y-4 md:space-y-6" onSubmit={(e) => handleSubmit(e)}>
@@ -54,13 +56,14 @@ const LoginForm = () => {
                         />
                     </div>
                     <div>
-                        <button className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit" value="Login">Login</button>
+                        <button className="w-full text-white bg-primary-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gradient-to-r dark:from-emerald-200 dark:via-lime-200 dark:to-yellow-200 dark:hover:from-yellow-200 dark:hover:to-emerald-200 dark:focus:ring-primary-800 dark:text-darkgreen" type="submit" value="Login">Login</button>
                     </div>
                     </form>
                     <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
-                      Don't have an account yet? <Link to="/signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
+                      Don't have an account yet? <Link to="/signup" className="font-medium text-primary-600 hover:underline dark:text-secondary">Sign up</Link>
                   </p>
                 </div>
+              </div>
             </div>
         </div>
     </div>
