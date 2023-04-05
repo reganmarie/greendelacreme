@@ -97,9 +97,7 @@ def delete_blog(
             return repo.delete(blog_id)
         else:
             response.status_code = 401
-            return {
-                "message": "You are not authorized to delete this blog"
-            }
+            return {"message": "You are not authorized to delete this blog"}
     except Exception:
         response.status_code = 404
         return {
