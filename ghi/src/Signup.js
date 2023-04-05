@@ -101,11 +101,13 @@ function Signup() {
               </button>
               <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
-                <a
-                  href="#"
-                  class="font-medium text-pink-200 hover:underline dark:text-pink"
-                >
-                  Login here
+                <a>
+                  <Link
+                    to="/"
+                    class="font-medium text-pink-200 hover:underline dark:text-pink"
+                  >
+                    Login here
+                  </Link>
                 </a>
               </p>
             </form>

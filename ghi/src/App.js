@@ -1,43 +1,27 @@
-import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
-import "./App.css";
-import Form from "./Signup.js";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import LoginForm from "./LoginForm.js";
+import BlogList from "./BlogList.js";
+import { useGetTokenQuery } from "./store/authApi";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function getData() {
-      let url = `${process.env.REACT_APP_GREEN_CREME_API_HOST}/api/launch-details`;
-      console.log("fastapi url: ", url);
-      let response = await fetch(url);
-      console.log("------- hello? -------");
-      let data = await response.json();
-
-      if (response.ok) {
-        console.log("got launch data!");
-        setLaunchInfo(data.launch_details);
-      } else {
-        console.log("drat! something happened");
-        setError(data.message);
-      }
-    }
-    getData();
-  }, []);
+  const { data } = useGetTokenQuery();
 
   return (
-    <BrowserRouter>
-      <div>
+    <>
+      {data ? (
         <Routes>
-          <Route path="new" element={<Construct info={launch_info} />} />
-          <Route path="signup" element={<Form />} />
+          <Route path="/blogs" element={<BlogList />} />
         </Routes>
-        <ErrorNotification error={error} />
-      </div>
-    </BrowserRouter>
+      ) : (
+        <Routes>
+          <Route path="/" element={<LoginForm />} />
+          <Route path="/signup" element={<Form />} />
+        </Routes>
+      )}
+      <ToastContainer />
+    </>
   );
 }
 
