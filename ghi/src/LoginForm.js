@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useLoginMutation } from './store/authApi';
+import { useDispatch, useSelector } from 'react-redux';
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login, result] = useLoginMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({'email': username, 'password': password});
+    dispatch(login({'email': username, 'password': password}));
     e.target.reset();
   };
 

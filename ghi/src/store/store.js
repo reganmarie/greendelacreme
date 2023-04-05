@@ -8,10 +8,10 @@ import { userSlice } from "./user";
 
 export const store = configureStore({
     reducer: {
+        auth: userSlice.reducer,
         [authApi.reducerPath]: authApi.reducer,
         [forumApi.reducerPath]: forumApi.reducer,
         [blogApi.reducerPath]: blogApi.reducer,
-        auth: userSlice.reducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware()

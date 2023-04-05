@@ -1,18 +1,21 @@
 import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { useGetTokenQuery } from './authApi';
+import { selectCurrentToken } from './user'
 
 export const blogApi = createApi({
     reducerPath: 'blog',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
-        prepareHeaders: async (headers, { getState }) => {
-        const token = await getState().auth.token;
-        console.log(token)
-        if (token) {
-            headers.set('authorization', `Bearer ${token}`)
-        }
+        // prepareHeaders: async (headers, { getState }) => {
+        // const token = await getState().auth.token;
 
-        return headers
-        },
+        // if (token) {
+        //     headers.set('authorization', `Bearer ${token.access_token}`)
+        // }
+
+        // return headers
+        // },
+        credentials: 'include',
     }),
     tagTypes: ['BlogList'],
     endpoints: builder => ({
@@ -28,6 +31,7 @@ export const blogApi = createApi({
                 url: '/blogs',
                 body: data,
                 method: 'post',
+
             }),
             invalidatesTag: ['BlogList'],
         }),
@@ -35,6 +39,7 @@ export const blogApi = createApi({
             query: id => ({
                 url: '/blogs/' + id,
                 method: 'delete',
+
             }),
             invalidatesTags: ['BlogList'],
         }),
@@ -43,6 +48,7 @@ export const blogApi = createApi({
                 url: '/blogs/' + id,
                 body: data,
                 method: 'put',
+
             }),
             invalidatesTag: ['BlogList'],
         }),

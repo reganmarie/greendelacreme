@@ -6,6 +6,15 @@ export const authApi = createApi({
   tagTypes: ['Token'],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
+    prepareHeaders: async (headers, { getState }) => {
+      const token = await getState().auth.token;
+
+      if (token) {
+          headers.set('authorization', `Bearer ${token}`)
+      }
+
+      return headers
+      },
   }),
   endpoints: builder => ({
     login: builder.mutation({

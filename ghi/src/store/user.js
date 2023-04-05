@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 
 export const userSlice = createSlice({
@@ -9,7 +9,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     setUser: (state, {payload}) => {
-      state.token = payload
+      state.token = payload.access_token
       state.user = payload.account
     },
   },
