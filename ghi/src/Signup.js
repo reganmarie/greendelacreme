@@ -1,7 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useSignupMutation } from "./store/authApi";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Signup() {
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [signup, result] = useSignupMutation();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    signup({first, last, username, email, password});
+    e.target.reset();
+  }
+
+  if (result.isSuccess) {
+    navigate("/blogs");
+    toast(`Welcome to Green de la Creme, ${username}!`);
+  } else if (result.isError) {
+    toast(`${result.error.error}`);
+  }
+
   return (
     <section className="bg-gradient-to-tr from-primary-100 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -17,7 +42,7 @@ function Signup() {
             <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
               <div>
                 <label
                   htmlFor="first"
@@ -26,6 +51,8 @@ function Signup() {
                   First Name
                 </label>
                 <input
+                  value={first}
+                  onChange={(e) => setFirst(e.target.value)}
                   type="text"
                   name="first"
                   id="first"
@@ -43,6 +70,8 @@ function Signup() {
                   Last Name
                 </label>
                 <input
+                  value={last}
+                  onChange={(e) => setLast(e.target.value)}
                   type="text"
                   name="last"
                   id="last"
@@ -60,6 +89,8 @@ function Signup() {
                   Username
                 </label>
                 <input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   type="text"
                   name="username"
                   id="username"
@@ -77,6 +108,8 @@ function Signup() {
                   Email
                 </label>
                 <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   name="email"
                   id="email"
@@ -94,6 +127,8 @@ function Signup() {
                   Password
                 </label>
                 <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   name="password"
                   id="password"

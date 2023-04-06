@@ -28,10 +28,10 @@ const LoginForm = () => {
         <div className="px-6 py-8 flex flex-col items-center justify-center mx-auto md:h-screen lg:py-0">
                     <a
           href="#"
-          class="flex items-center mb-6 text-2xl text-gradient-to-r from-emerald-500 to-emerald-900 font-semibold text-black dark:text-white"
+          className="flex items-center mb-6 text-2xl text-gradient-to-r from-emerald-500 to-emerald-900 font-semibold text-black dark:text-white"
         >
           <img
-            class="w-14 h-14 mr-2"
+            className="w-14 h-14 mr-2"
             src="planticon.png"
           />
           Green de la Creme
