@@ -161,12 +161,12 @@ function Signup({token}) {
                     className="font-light text-gray-500 dark:text-gray-300"
                   >
                     I accept the{" "}
-                    <a
+                    <Link
                       className="font-medium text-gradient-to-r from-slate-300 to-slate-500 hover:underline"
-                      href="#"
+                      to="#"
                     >
                       Terms and Conditions
-                    </a>
+                    </Link>
                   </label>
                 </div>
               </div>
