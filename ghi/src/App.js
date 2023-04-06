@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import LoginForm from "./LoginForm.js";
 import Signup from "./Signup.js";
 import BlogList from "./BlogList.js";
@@ -7,17 +7,18 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const token = useGetTokenQuery();
-  const navigate = useNavigate();
+   const {data} = useGetTokenQuery();
+
+   console.log(data)
 
   return (
     <>
       <Routes>
+        <Route path="/" element={<LoginForm />} />
         <Route
           path="/blogs"
-          element={token ? <BlogList /> : navigate("/")}
+          element={  data ? <BlogList/> :  <Navigate to="/" replace /> }
         />
-        <Route path="/" element={<LoginForm />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
       <ToastContainer />
