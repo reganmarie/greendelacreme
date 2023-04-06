@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSignupMutation } from "./store/authApi";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function Signup() {
+function Signup({token}) {
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [username, setUsername] = useState("");
@@ -16,16 +16,23 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    signup({first, last, username, email, password});
+    await signup({first, last, username, email, password});
     e.target.reset();
-  }
+  };
 
   if (result.isSuccess) {
     navigate("/blogs");
-    toast(`Welcome to Green de la Creme, ${username}!`);
+    toast(`Welcome to Green de la Creme, ${username}!`, {toastId: 'signupSuccess'});
   } else if (result.isError) {
-    toast(`${result.error.error}`);
+    toast(`${result.error.error}`, {toastId: 'signupError'});
+    result.reset();
   }
+
+  useEffect(() => {
+    if (token) {
+      navigate('/blogs');
+    }
+  }, [token])
 
   return (
     <section className="bg-gradient-to-tr from-primary-100 dark:bg-gray-900">
@@ -34,7 +41,7 @@ function Signup() {
           to="#"
           className="flex items-center mb-6 text-2xl text-gradient-to-r from-emerald-500 to-emerald-900 font-semibold text-black dark:text-white"
         >
-          <img className="w-14 h-14 mr-2" src="planticon.png" />
+          <img className="w-14 h-14 mr-2" src="/images/planticon.png" />
           Green de la Creme
         </Link>
         <div className="w-full text-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-white dark:border-gray-700">
@@ -154,12 +161,12 @@ function Signup() {
                     className="font-light text-gray-500 dark:text-gray-300"
                   >
                     I accept the{" "}
-                    <a
+                    <Link
                       className="font-medium text-gradient-to-r from-slate-300 to-slate-500 hover:underline"
-                      href="#"
+                      to="#"
                     >
                       Terms and Conditions
-                    </a>
+                    </Link>
                   </label>
                 </div>
               </div>
