@@ -27,8 +27,6 @@ function App() {
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/forum" element={<ForumList />} />
         </Route>
-        {/* <Route path="/" element={data === null ? <LoginForm /> : <Navigate to="/blogs" replace />} />
-        <Route path="/signup" element={data === null ? <Signup /> : <Navigate to="/blogs" replace />} /> */}
         <Route path="/" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />
       </Routes>
