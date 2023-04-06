@@ -22,8 +22,10 @@ function App() {
           <Route path="/home" element={<MainPage />} />
           <Route path="/blogs" element={<BlogList />} />
         </Route>
-        <Route path="/" element={data === null ? <LoginForm /> : <Navigate to="/blogs" replace />} />
-        <Route path="/signup" element={data === null ? <Signup /> : <Navigate to="/blogs" replace />} />
+        {/* <Route path="/" element={data === null ? <LoginForm /> : <Navigate to="/blogs" replace />} />
+        <Route path="/signup" element={data === null ? <Signup /> : <Navigate to="/blogs" replace />} /> */}
+        <Route path="/" element={<LoginForm token={data} />} />
+        <Route path="/signup" element={<Signup token={data} />} />
       </Routes>
       <ToastContainer />
     </>

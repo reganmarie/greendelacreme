@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function Signup() {
+function Signup({token}) {
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [username, setUsername] = useState("");
@@ -13,6 +13,10 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [signup, result] = useSignupMutation();
   const navigate = useNavigate();
+
+  if (token) {
+    navigate('/blogs');
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

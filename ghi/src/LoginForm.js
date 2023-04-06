@@ -4,11 +4,15 @@ import { useLoginMutation } from './store/authApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const LoginForm = () => {
+const LoginForm = ({ token }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login] = useLoginMutation();
   const navigate = useNavigate();
+
+  if (token) {
+    navigate('/blogs');
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
