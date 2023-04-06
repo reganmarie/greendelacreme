@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate} from "react-router-dom";
 import LoginForm from "./LoginForm.js";
+import ForumList from "./Forum.js";
 import Signup from "./Signup.js";
 import BlogList from "./BlogList.js";
 import { useGetTokenQuery } from "./store/authApi";
