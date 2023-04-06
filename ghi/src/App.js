@@ -1,26 +1,28 @@
-import { Routes, Route } from "react-router-dom";
-import LoginForm from "./LoginForm.js";
-import Signup from "./Signup.js";
-import BlogList from "./BlogList.js";
-import { useGetTokenQuery } from "./store/authApi";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import LoginForm from './LoginForm.js';
+import BlogList from './BlogList.js';
+import Nav from './NavigationBar.js';
+import MainPage from './MainPage.js';
+import Protected from './utils/Protected.js';
+import { Routes, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { useGetTokenQuery } from './store/authApi';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   const { data } = useGetTokenQuery();
 
   return (
     <>
-      {data ? (
-        <Routes>
+      <Nav isLoggedIn={data} />
+      <Routes>
+        <Route element={<Protected token={data} />}>
+          <Route path="/home" element={<MainPage />} />
           <Route path="/blogs" element={<BlogList />} />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/" element={<LoginForm />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      )}
+        </Route>
+        <Route path="/" element={data === null ? <LoginForm /> : <Navigate to="/blogs" replace />} />
+      </Routes>
       <ToastContainer />
     </>
   );

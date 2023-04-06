@@ -1,21 +1,23 @@
-import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setUser } from './user';
+
 
 export const authApi = createApi({
   reducerPath: 'authentication',
-  tagTypes: ['Token'],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
     prepareHeaders: async (headers, { getState }) => {
       const token = await getState().auth.token;
 
       if (token) {
-          headers.set('authorization', `Bearer ${token}`)
+        headers.set('authorization', `Bearer ${token}`);
       }
 
-      return headers
-      },
+      return headers;
+    },
+    credentials: 'include',
   }),
+  tagTypes: ['Token'],
   endpoints: builder => ({
     login: builder.mutation({
       query: info => {
@@ -31,12 +33,8 @@ export const authApi = createApi({
           url: '/token',
           method: 'post',
           body: formData,
-          credentials: 'include',
         };
       },
-      // invalidatesTags: result => {
-      //   return (result && ['Account']) || [];
-      // },
       invalidatesTags: ['Token'],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
@@ -50,7 +48,6 @@ export const authApi = createApi({
     getToken: builder.query({
       query: () => ({
         url: '/token',
-        credentials: 'include',
       }),
       providesTags: ['Token'],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
@@ -62,10 +59,18 @@ export const authApi = createApi({
         }
       }
     }),
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: '/token',
+        method: 'delete',
+      }),
+      invalidatesTags: ['Token'],
+    }),
   }),
 });
 
 export const {
-    useLoginMutation,
-    useGetTokenQuery,
+  useLoginMutation,
+  useGetTokenQuery,
+  useLogoutUserMutation,
 } = authApi;
