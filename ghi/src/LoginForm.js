@@ -32,7 +32,7 @@ const LoginForm = ({ token }) => {
 
   return (
     <div className="bg-gradient-to-br from-emerald-100 via-lime-100 to-yellow-100 dark:bg-darkgreen">
-      <div className='bg-[url("leaf-login.png")] dark:bg-[url("leaf-dark.png")] b-clip-content bg-center object-cover bg-contain bg-no-repeat p-12 drop-shadow-lg'>
+      <div className='bg-[url("./assets/images/leaf-login.png")] dark:bg-[url("./assets/images/leaf-dark.png")] b-clip-content bg-center object-cover bg-contain bg-no-repeat p-12 drop-shadow-lg'>
         <div className="px-6 py-8 flex flex-col items-center justify-center mx-auto md:h-screen lg:py-0">
           <Link
             to="#"
@@ -40,7 +40,8 @@ const LoginForm = ({ token }) => {
           >
             <img
               className="w-14 h-14 mr-2"
-              src="planticon.png"
+              src="/images/planticon.png"
+              alt="Plant icon"
             />
             Green de la Creme
           </Link>
