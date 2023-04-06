@@ -1,3 +1,15 @@
+## April 4, 2023
+
+Today, I worked on:
+
+* Implementing FE auth for Forum.js
+* Protecting and redirecting routes
+
+Today's goal was to finish front end authorization by adding the credentials include to forumApi and making a forum.js file to view wheter we could grab our thread data. We were successful in that endeavor but ran into a blocker regarding protecting the actual url routes for certain js files. We tried multiple navigation react route functionals, conditionals, ternaries and nested routes to solve the issue but kept running into different issues once one side was protected.
+
+An aha moment today was ..........
+
+
 
 ## April 3, 2023
 
@@ -22,7 +34,7 @@ An aha moment today was learning how amazing redux is from curtis's videos and f
 Today, I worked on:
 * Authentication for users
 
-Today I mainly focused on starting to implement authentication for our project while everyone else debugged the delete and put endpoints merge requests along with the error handling of them as well. I followed curtis's videos to garner a greater understanding of how  the authentication works. I ended up finishing the login and create user endpoints for our project and had to stop to allow others in the group to complete some endpoints. Now we need to discuss on spilting in pairs to finish authenication/change endpoints and start working on the frontend portion of our MVP.
+Today I mainly focused on starting to implement authentication for our project while everyone else debugged the delete and put endpoints merge requests along with the error handling of them as well. I followed curtis's videos to garner a greater understanding of how  the authentication works. I ended up finishing the login and create user endpoints for our project and had to stop to allow others in the group to complete some endpoints. Now we need to discuss on spliting in pairs to finish authenication/change endpoints and start working on the frontend portion of our MVP.
 
 An aha moment today was discovering on how we protect the password of a user from being a part of the pydantic model as we use a hashed_password variable to protect the password string from being returned. As well as learning that some of the endpoints are already coded for us in the jwtdown library provided.
 
