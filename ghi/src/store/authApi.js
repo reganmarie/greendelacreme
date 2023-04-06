@@ -72,8 +72,17 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Token"],
     }),
+    logoutUser: builder.mutation({
+      query: () => ({
+          url: '/token',
+          method: 'delete',
+          credentials: 'include',
+      }),
+      invalidatesTags: ['Token'],
+    }),
   }),
 });
 
-export const { useLoginMutation, useGetTokenQuery, useSignupMutation } =
+export const { useLoginMutation, useGetTokenQuery, useSignupMutation, useLogoutUserMutation,
+} =
   authApi;

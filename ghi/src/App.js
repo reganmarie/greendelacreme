@@ -1,11 +1,13 @@
-import { Routes, Route } from "react-router-dom";
+import {  Routes, Route } from "react-router-dom";
 import LoginForm from "./LoginForm.js";
 import ForumList from "./Forum.js";
 import Signup from "./Signup.js";
 import BlogList from "./BlogList.js";
+import Nav from './NavigationBar.js';
 import { useGetTokenQuery } from "./store/authApi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const { data } = useGetTokenQuery();
@@ -13,11 +15,14 @@ function App() {
   return (
     <>
       {data ? (
+        <>
+        <Nav />
         <Routes>
           <Route path="/blogs" element={<BlogList />} />
           <Route path='/forum' element={<ForumList/> } />
 
         </Routes>
+        </>
       ) : (
         <Routes>
           <Route path="/" element={<LoginForm />} />
@@ -27,6 +32,9 @@ function App() {
       <ToastContainer />
     </>
   );
+
 }
+
+
 
 export default App;
