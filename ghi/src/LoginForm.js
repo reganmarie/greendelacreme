@@ -17,7 +17,6 @@ const LoginForm = ({ token }) => {
   };
 
   if (result.isSuccess) {
-    navigate("/blogs");
     toast(`Welcome back, ${username}!`, {toastId: 'loginSuccess'});
   } else if (result.isError) {
     toast.error(`${result.error.data.detail}`, {toastId: 'loginError'});

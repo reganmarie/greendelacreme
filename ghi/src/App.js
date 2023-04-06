@@ -14,6 +14,10 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const { data } = useGetTokenQuery();
 
+  if (data === undefined) {
+    return null;
+  }
+
   return (
     <>
       <Nav isLoggedIn={data} />
