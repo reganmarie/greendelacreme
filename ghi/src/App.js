@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { data } = useGetTokenQuery();
+  console.log(data)
 
   return (
     <>

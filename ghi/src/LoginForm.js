@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useLoginMutation } from './store/authApi';
 import { toast } from 'react-toastify';
@@ -7,21 +7,28 @@ import 'react-toastify/dist/ReactToastify.css';
 const LoginForm = ({ token }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [login] = useLoginMutation();
+  const [login, result] = useLoginMutation();
   const navigate = useNavigate();
-
-  if (token) {
-    navigate('/blogs');
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login({ 'email': username, 'password': password }).then(() => {
-      e.target.reset();
-      navigate('/blogs');
-      toast(`Welcome back ${username}!`);
-    });
+    await login({ 'email': username, 'password': password });
+    e.target.reset();
   };
+
+  if (result.isSuccess) {
+    navigate("/blogs");
+    toast(`Welcome back, ${username}!`, {toastId: 'loginSuccess'});
+  } else if (result.isError) {
+    toast.error(`${result.error.data.detail}`, {toastId: 'loginError'});
+    result.reset();
+  }
+
+  useEffect(() => {
+    if (token) {
+      navigate('/blogs');
+    }
+  }, [token])
 
   return (
     <div className="bg-gradient-to-br from-emerald-100 via-lime-100 to-yellow-100 dark:bg-darkgreen">

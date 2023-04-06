@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSignupMutation } from "./store/authApi";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -14,22 +14,25 @@ function Signup({token}) {
   const [signup, result] = useSignupMutation();
   const navigate = useNavigate();
 
-  if (token) {
-    navigate('/blogs');
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    signup({first, last, username, email, password});
+    await signup({first, last, username, email, password});
     e.target.reset();
-  }
+  };
 
   if (result.isSuccess) {
     navigate("/blogs");
-    toast(`Welcome to Green de la Creme, ${username}!`);
+    toast(`Welcome to Green de la Creme, ${username}!`, {toastId: 'signupSuccess'});
   } else if (result.isError) {
-    toast(`${result.error.error}`);
+    toast(`${result.error.error}`, {toastId: 'signupError'});
+    result.reset();
   }
+
+  useEffect(() => {
+    if (token) {
+      navigate('/blogs');
+    }
+  }, [token])
 
   return (
     <section className="bg-gradient-to-tr from-primary-100 dark:bg-gray-900">
