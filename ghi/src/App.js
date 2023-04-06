@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import LoginForm from "./LoginForm.js";
+import ForumList from "./Forum.js";
 import Signup from "./Signup.js";
 import BlogList from "./BlogList.js";
 import { useGetTokenQuery } from "./store/authApi";
@@ -14,6 +15,8 @@ function App() {
       {data ? (
         <Routes>
           <Route path="/blogs" element={<BlogList />} />
+          <Route path='/forum' element={<ForumList/> } />
+
         </Routes>
       ) : (
         <Routes>
