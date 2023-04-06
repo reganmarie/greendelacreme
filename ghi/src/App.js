@@ -1,5 +1,5 @@
 import LoginForm from './LoginForm.js';
-import BlogList from './BlogList.js';
+import BlogList from './blogs/components/BlogList.js';
 import ForumList from './Forum.js';
 import Nav from './NavigationBar.js';
 import MainPage from './MainPage.js';
