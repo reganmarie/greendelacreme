@@ -2,6 +2,7 @@ import LoginForm from './LoginForm.js';
 import BlogList from './BlogList.js';
 import Nav from './NavigationBar.js';
 import MainPage from './MainPage.js';
+import Signup from './Signup.js';
 import Protected from './utils/Protected.js';
 import { Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
@@ -22,6 +23,7 @@ function App() {
           <Route path="/blogs" element={<BlogList />} />
         </Route>
         <Route path="/" element={data === null ? <LoginForm /> : <Navigate to="/blogs" replace />} />
+        <Route path="/signup" element={data === null ? <LoginForm /> : <Navigate to="/blogs" replace />} />
       </Routes>
       <ToastContainer />
     </>
