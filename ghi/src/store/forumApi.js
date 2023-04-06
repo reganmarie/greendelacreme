@@ -4,6 +4,7 @@ export const forumApi = createApi({
     reducerPath: 'forum',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
+        credentials: 'include',
     }),
     tagTypes: ['ForumList'],
     endpoints: builder => ({

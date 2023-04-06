@@ -7,6 +7,7 @@ export const authApi = createApi({
   tagTypes: ["Token"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
+     credentials: 'include',
     prepareHeaders: async (headers, { getState }) => {
       const token = await getState().auth.token;
 
