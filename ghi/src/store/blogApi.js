@@ -1,6 +1,5 @@
 import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { useGetTokenQuery } from './authApi';
-import { selectCurrentToken } from './user'
+
 
 export const blogApi = createApi({
     reducerPath: 'blog',

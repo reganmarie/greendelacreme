@@ -1,17 +1,18 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setUser } from "./user";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { setUser } from './user';
+
 
 export const authApi = createApi({
   reducerPath: "authentication",
   tagTypes: ["Token"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
-     credentials: 'include',
+    credentials: 'include',
     prepareHeaders: async (headers, { getState }) => {
       const token = await getState().auth.token;
 
       if (token) {
-        headers.set("authorization", `Bearer ${token}`);
+        headers.set('authorization', `Bearer ${token}`);
       }
 
       return headers;
@@ -32,13 +33,9 @@ export const authApi = createApi({
           url: "/token",
           method: "post",
           body: formData,
-          credentials: "include",
         };
       },
-      // invalidatesTags: result => {
-      //   return (result && ['Account']) || [];
-      // },
-      invalidatesTags: ["Token"],
+      invalidatesTags: ['Token'],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
@@ -50,8 +47,7 @@ export const authApi = createApi({
     }),
     getToken: builder.query({
       query: () => ({
-        url: "/token",
-        credentials: "include",
+        url: '/token',
       }),
       providesTags: ["Token"],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
@@ -74,15 +70,18 @@ export const authApi = createApi({
     }),
     logoutUser: builder.mutation({
       query: () => ({
-          url: '/token',
-          method: 'delete',
-          credentials: 'include',
+        url: '/token',
+        method: 'delete',
       }),
       invalidatesTags: ['Token'],
     }),
   }),
 });
 
-export const { useLoginMutation, useGetTokenQuery, useSignupMutation, useLogoutUserMutation,
+export const {
+  useLoginMutation,
+  useGetTokenQuery,
+  useSignupMutation,
+  useLogoutUserMutation,
 } =
   authApi;

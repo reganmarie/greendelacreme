@@ -1,3 +1,14 @@
+## April 4, 2023
+Today, I worked on:
+* Creating a login form
+* Adding functionality to the login form (so making sure signed up users can actually login)
+* Frontend auth for blogApi
+* Styling the login page
+
+I pair programmed with Adam where I was the driver and he was the navigator. I already had the login form and its functionality made beforehand, so we focused on making sure that logged in users can see a protected endpoint. I made a BlogList component to test that and we came across a blocker with this as we were struggling to understand Redux frontend auth. James came to help and all we needed to add was `credentials: 'include'` to the `fetchBaseQuery` in `blogApi` and that allowed logged in users to see the blog list whereas logged out users saw an empty page.
+
+Furthermore, after class, I worked on styling the login page to get familiar with Tailwind.
+
 ## April 3, 2023
 Today, I worked on:
 * Adding protection to all the endpoints
