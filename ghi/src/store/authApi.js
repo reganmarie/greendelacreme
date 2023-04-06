@@ -7,7 +7,7 @@ export const authApi = createApi({
   tagTypes: ["Token"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
-     credentials: 'include',
+    credentials: 'include',
     prepareHeaders: async (headers, { getState }) => {
       const token = await getState().auth.token;
 
@@ -17,9 +17,8 @@ export const authApi = createApi({
 
       return headers;
     },
-    credentials: 'include',
   }),
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     login: builder.mutation({
       query: (info) => {
         let formData = null;
