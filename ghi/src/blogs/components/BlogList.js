@@ -18,7 +18,9 @@ export default function BlogList() {
 
           return (
             <BlogPost
+            key={blog.id}
             username={blog.username}
+            name={`${blog.first} ${blog.last}`}
             createdOnDate={new Date(blog.created_on).toLocaleDateString("en-US", options)}
             createOnTime={new Date(blog.created_on).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
             title={blog.title}
