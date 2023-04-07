@@ -1,3 +1,21 @@
+## April 6, 2023
+
+Today, I worked on:
+
+* Styling the Forum page
+* Debugging protected Routes
+
+We were able to solve the issue with route redirection if user is authorized to view a page or not. A single if conditional statement was needed before our return to actually return null for token if it was null. I paired with regan for the day and we collaborated on styling and formatting the forum page of our project. We ended up making the threads look very similar to our wireframe, and only requires minimal work beyond it. There needs to be a bit more content on the fourm page as it looks bad with all the empty white space currently.
+
+An aha moment today was learning about tailwind stling in detail and how simple statements as space between sets our tags exactly in the way we want it. As well as learning about accordions with tailwind.
+
+
+
+
+
+
+
+
 ## April 4, 2023
 
 Today, I worked on:
@@ -7,7 +25,7 @@ Today, I worked on:
 
 Today's goal was to finish front end authorization by adding the credentials include to forumApi and making a forum.js file to view wheter we could grab our thread data. We were successful in that endeavor but ran into a blocker regarding protecting the actual url routes for certain js files. We tried multiple navigation react route functionals, conditionals, ternaries and nested routes to solve the issue but kept running into different issues once one side was protected.
 
-An aha moment today was ..........
+An aha moment was learning about navigate and useNavigate as well as learning a bit about Typescript through the time I spent reading the Redux documentation.
 
 
 
