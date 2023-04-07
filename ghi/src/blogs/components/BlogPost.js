@@ -1,15 +1,10 @@
 
 import React from 'react';
-<<<<<<< HEAD
-
-export default function BlogPost({ username, name, avatar, createdOnDate, createOnTime, title, body }) {
-=======
 import Dropdown from './Dropdown';
 import { useSelector } from 'react-redux';
 
 export default function BlogPost({ username, name, avatar, createdOnDate, createOnTime, title, body }) {
   const user = useSelector(state => state.auth.user.username);
->>>>>>> main
 
   return (
     <div className="flex max-w-2xl 1080:max-w-3xl 1440:max-w-5xl items-center justify-center mx-auto">
@@ -21,11 +16,7 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                 <img src={avatar} alt="avatar" className="h-10 w-10 rounded-full bg-lime-400" />
                 <div className="flex flex-col">
                   <div className="text-md font-bold text-slate-700"> {name}</div>
-<<<<<<< HEAD
-                  <div className="text-xs font-semibold text-slate-700">@{username}</div>
-=======
                   <div className="text-xs font-semibold text-secondary-200">@{username}</div>
->>>>>>> main
                 </div>
               </div>
               <div className="flex space-x-2">
@@ -33,23 +24,7 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                   <div className="text-xs">{createdOnDate}</div>
                   <div className="text-xs">{createOnTime}</div>
                 </div>
-<<<<<<< HEAD
-                <div className="dropdown">
-                  <button tabIndex={0} className="inline-block text-secondary-200 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-                    <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
-                  </button>
-                  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <li className="hover-bordered">
-                      <a>Edit</a>
-                    </li>
-                    <li className="hover-bordered">
-                      <a>Delete</a>
-                    </li>
-                  </ul>
-                </div>
-=======
                 {username === user ? <Dropdown /> : null}
->>>>>>> main
               </div>
             </div>
             <div className="flex flex-col flex-grow overflow-auto mt-4 mb-6">

@@ -1,5 +1,10 @@
 from pydantic import BaseModel
 from .pool import pool
+from typing import Union
+
+
+class Error(BaseModel):
+    message: str
 
 
 class DuplicateAccountError(ValueError):
@@ -27,27 +32,30 @@ class AccountOutWithPassword(AccountOut):
 
 
 class AccountRepository:
-    def get(self, email: str) -> AccountOutWithPassword:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                db.execute(
-                    """
-                    select id, username, email, first, last, password
-                    from accounts
-                    where email = %s
-                    or username = %s;
-                    """,
-                    [email, email],
-                )
-                account = db.fetchone()
-                return AccountOutWithPassword(
-                    id=account[0],
-                    username=account[1],
-                    email=account[2],
-                    first=account[3],
-                    last=account[4],
-                    hashed_password=account[5],
-                )
+    def get(self, email: str) -> Union[AccountOutWithPassword, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        select id, username, email, first, last, password
+                        from accounts
+                        where email = %s
+                        or username = %s;
+                        """,
+                        [email, email],
+                    )
+                    account = db.fetchone()
+                    return AccountOutWithPassword(
+                        id=account[0],
+                        username=account[1],
+                        email=account[2],
+                        first=account[3],
+                        last=account[4],
+                        hashed_password=account[5],
+                    )
+        except:
+            return {"message": "Could not get that account"}
 
     def create(
         self, info: AccountIn, hashed_password: str
