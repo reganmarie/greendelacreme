@@ -31,7 +31,7 @@ function Signup({token}) {
     if (token) {
       navigate('/blogs');
     }
-  }, [token])
+  }, [token, navigate])
 
   return (
     <section className="bg-gradient-to-tr from-primary-100 dark:bg-gray-900">

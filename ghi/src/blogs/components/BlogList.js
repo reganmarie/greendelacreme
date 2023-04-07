@@ -8,16 +8,16 @@ export default function BlogList() {
   const { data: blogData } = useGetBlogsQuery();
 
   return (
-      <div className="feed bg-gradient-to-br from-emerald-100 via-lime-100 to-yellow-100 dark:bg-darkgreen">
-        {blogData && blogData.map(blog => {
-          const options = {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          }
+    <div className="feed bg-gradient-to-br from-[#F9FEFD] via-[#FBFEF3] to-[#FEFDF3] dark:bg-darkgreen">
+      {blogData && blogData.map(blog => {
+        const options = {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        };
 
-          return (
-            <BlogPost
+        return (
+          <BlogPost
             key={blog.id}
             username={blog.username}
             name={`${blog.first} ${blog.last}`}
@@ -26,9 +26,9 @@ export default function BlogList() {
             title={blog.title}
             body={blog.body}
             avatar={blog.avatar}
-            />
-          )
-        })}
-      </div>
+          />
+        );
+      })}
+    </div>
   );
 }

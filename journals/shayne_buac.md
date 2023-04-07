@@ -1,3 +1,17 @@
+## April 6, 2023
+Today, I:
+* Reviewed Imron's merge request for the forum frontend auth
+* Finished reformatting the routes and adding protection and redirection to the appropriate pages and made the merge request for it
+* Started working on the blog list frontend view for the feed with Brandon (I was the driver and he was the navigator)
+* Learned more about Tailwind :)
+
+## April 5, 2023
+Today, I worked on:
+* Adding functionality to the sign-up form with Brandon (he was the driver and I was the navigator)
+* Helping Regan with her logout button functionality
+* Making routes and adding protection to them in App.js
+* Fixing the duplicate toasts
+
 ## April 4, 2023
 Today, I worked on:
 * Creating a login form
