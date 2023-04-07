@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  plugins: [require("daisyui")],
   darkMode: 'class',
   theme: {
     screens: {
@@ -14,9 +15,11 @@ module.exports = {
         lemon: "#ffdfac",
         tertiary: "#e1e5e8",
         darkgreen: "#2f4034",
-
       },
     },
-  plugins: [],
+  },
+  daisyui: {
+    logs: false,
+    themes: ["emerald"],
   }
 };
