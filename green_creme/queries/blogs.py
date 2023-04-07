@@ -26,6 +26,8 @@ class BlogOut(BaseModel):
 class BlogOutWithAccount(BlogOut):
     username: str
     avatar: str
+    first: str
+    last: str
 
 
 class BlogQueries:
@@ -37,7 +39,8 @@ class BlogQueries:
                     SELECT b.id, b.title,
                     b.body, b.image,
                     b.created_on, b.author_id,
-                    a.username, a.avatar
+                    a.username, a.avatar,
+                    a.first, a.last
                     FROM blog AS b
                     LEFT JOIN accounts AS a
                     ON a.id = b.author_id
@@ -96,6 +99,8 @@ class BlogQueries:
             author_id=record[5],
             username=record[6],
             avatar=record[7],
+            first=record[8],
+            last=record[9],
         )
 
     def update(
@@ -135,7 +140,8 @@ class BlogQueries:
                     SELECT b.id, b.title,
                     b.body, b.image,
                     b.created_on, b.author_id,
-                    a.username, a.avatar
+                    a.username, a.avatar,
+                    a.first, a.last
                     FROM blog AS b
                     LEFT JOIN accounts AS a
                     ON a.id = b.author_id

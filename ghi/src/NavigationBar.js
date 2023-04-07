@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import { useLogoutUserMutation } from './store/authApi';
 import { useNavigate } from 'react-router-dom';
 
