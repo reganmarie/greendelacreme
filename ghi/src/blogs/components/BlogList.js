@@ -36,6 +36,7 @@ export default function BlogList() {
               createOnTime={new Date(blog.created_on).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               title={blog.title}
               body={blog.body}
+              image={blog.image}
               avatar={blog.avatar}
             />
           );

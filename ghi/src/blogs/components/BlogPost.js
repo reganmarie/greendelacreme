@@ -3,7 +3,7 @@ import React from 'react';
 import Dropdown from './Dropdown';
 import { useSelector } from 'react-redux';
 
-export default function BlogPost({ id, username, name, avatar, createdOnDate, createOnTime, title, body }) {
+export default function BlogPost({ id, username, name, avatar, createdOnDate, createOnTime, title, body, image }) {
   const user = useSelector(state => state.auth.user.username);
 
   return (
@@ -28,12 +28,15 @@ export default function BlogPost({ id, username, name, avatar, createdOnDate, cr
               </div>
             </div>
             <div className="flex flex-col flex-grow overflow-auto mt-4 mb-6">
-              <div className="mb-3 text-xl font-bold">{title}</div>
+              <div className="text-xl mb-3 font-bold">{title}</div>
               <div className="text-sm text-neutral-600">
                 <p>
                   {body}
                 </p>
               </div>
+              <img src={image}
+                className={image && "rounded-xl mt-3"}
+                alt="" />
             </div>
             <div>
               <div className="flex items-center space-x-5 text-secondary-200">
