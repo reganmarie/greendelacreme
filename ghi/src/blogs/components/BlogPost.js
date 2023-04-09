@@ -9,7 +9,7 @@ export default function BlogPost({ id, username, name, avatar, createdOnDate, cr
   return (
     <div key={id} className="flex max-w-2xl 1080:max-w-3xl 1440:max-w-5xl items-center justify-center mx-auto">
       <div className="flex flex-col items-center w-[100%]">
-        <div className="flex items-center justify-center py-3 w-[100%]">
+        <div className="flex items-center justify-center py-2 w-[100%]">
           <div className="rounded-xl border p-5 shadow-md w-full bg-white">
             <div className="flex w-full items-center justify-between border-b pb-3">
               <div className="flex items-center space-x-3">

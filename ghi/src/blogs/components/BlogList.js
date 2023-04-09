@@ -15,8 +15,8 @@ export default function BlogList() {
   return (
     <>
     <div className="feed bg-gradient-to-br from-[#F9FEFD] via-[#FBFEF3] to-[#FEFDF3] dark:bg-darkgreen min-h-screen">
-    <iframe src="https://embed.lottiefiles.com/animation/106709" className="absolute"></iframe>
-    <div className="flex mx-auto justify-center max-w-2xl 1080:max-w-3xl 1440:max-w-5xl pt-10 py-3">
+    <iframe src="https://embed.lottiefiles.com/animation/106709" className="absolute top-10 left-0"></iframe>
+    <div className="relative flex mx-auto justify-center max-w-2xl 1080:max-w-3xl 1440:max-w-5xl pb-2">
     <BlogForm />
     </div>
         {blogData && blogData.map(blog => {

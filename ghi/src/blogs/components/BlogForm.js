@@ -35,7 +35,7 @@ const BlogForm = () => {
 
 
   return (
-    <section className="bg-[#ffffff] shadow-md rounded-lg p-5 w-full">
+    <section className="bg-[#ffffff] shadow-md rounded-lg p-5 w-full border">
       <h2 className="flex justify-center text-xl font-bold py-2 mb-2">Create a Post</h2>
       <form onSubmit={handlePost}>
         <input
@@ -92,7 +92,7 @@ const BlogForm = () => {
               </span>
             </div>
           )}
-          <button type="submit" className="flex items-center h-9 py-2 px-4 rounded-lg text-sm bg-secondary-200 text-white shadow-lg hover:bg-darkgreen font-semibold">Post
+          <button type="submit" className="flex items-center h-9 py-2 px-4 rounded-lg text-sm bg-secondary-200 text-white shadow-md hover:bg-darkgreen font-semibold">Post
             <svg className="ml-1" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
         </footer>
