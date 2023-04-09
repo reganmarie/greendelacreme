@@ -32,7 +32,7 @@ export const blogApi = createApi({
                 method: 'post',
 
             }),
-            invalidatesTag: ['BlogList'],
+            invalidatesTags: ['BlogList'],
         }),
         deleteOwner: builder.mutation({
             query: id => ({
@@ -49,7 +49,7 @@ export const blogApi = createApi({
                 method: 'put',
 
             }),
-            invalidatesTag: ['BlogList'],
+            invalidatesTags: ['BlogList'],
         }),
     })
 })
