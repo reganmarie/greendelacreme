@@ -13,6 +13,7 @@ function Signup({token}) {
   const [password, setPassword] = useState("");
   const [signup, result] = useSignupMutation();
   const navigate = useNavigate();
+  const [theme, setTheme] = useState("light")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +22,6 @@ function Signup({token}) {
   };
 
   if (result.isSuccess) {
-    navigate("/blogs");
     toast(`Welcome to Green de la Creme, ${username}!`, {toastId: 'signupSuccess'});
   } else if (result.isError) {
     toast(`${result.error.error}`, {toastId: 'signupError'});
@@ -32,19 +32,37 @@ function Signup({token}) {
     if (token) {
       navigate('/blogs');
     }
-  }, [token])
+  }, [token, navigate])
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const handleThemeSwitch = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
 
   return (
-    <section className="bg-gradient-to-tr from-primary-100 dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <section className="bg-gradient-to-tr from-primary-100 dark:bg-gray-900 h-screen overflow-hidden">
+      <div className="justify-center">
+        <button className="bg-green-200 rounded-3xl font-bold" onClick={handleThemeSwitch}>
+        {theme === "dark" ? "Light Mode" : "Dark Mode"}
+        </button>
+      </div>
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  h-screen max-w-xl lg:py-0">
         <Link
           to="#"
           className="flex items-center mb-6 text-2xl text-gradient-to-r from-emerald-500 to-emerald-900 font-semibold text-black dark:text-white"
         >
-          <img className="w-14 h-14 mr-2" src="/images/planticon.png" />
+          <img className="w-14 h-14 mr-2" src="/images/planticon.png" alt="Plant icon" />
           Green de la Creme
         </Link>
-        <div className="w-full text-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-white dark:border-gray-700">
+        <div className="w-full text-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-white dark:border-gray-700 dark:bg-gray-800">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an account

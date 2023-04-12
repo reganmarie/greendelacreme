@@ -1,3 +1,42 @@
+## April 5, 20203
+
+Today, I worked on:
+
+* Pair programmed with Imron to create a nav bar functionality for a logout button
+* Pair programmed with Imron to create a forum view for the front end using RTK QUery.
+
+I pair programmed with Imron to get the forum component up and running using RTK toolkit. Then, I pair programmed with Shayne to get the logout button and navbar component working.
+
+Brandon made a really nice navbar, so we'll use his design to make it look way better!
+
+I had a huge aha moment when I realized that my redirect was not working because I did not await logout before redirecting!
+
+
+## April 4, 20203
+
+Today, I worked on:
+
+* Pair programmed with Brandon to create a React Component for the sign up form
+* Group programmed and researched to write front-end auth for RTK
+
+Brandon is a wizard at front-end and made a great form after I suggested a geek for geeks form and CSS sheet that was Not Great.
+
+We did some hard work researching front-end auth since we're using RTK. We used HMU since it became a blocker and James helped us out by telling us to use credentials:include in our fetchBaseQuery and it worked!
+
+## April 3, 20203
+
+Today, I worked on:
+
+* Create Logout endpoint
+* Pair programmed with Shayne to protect our endpoints
+* Group programmed to install RTK and create store
+
+Today, the whole group finished backend authentication, installed Tailwind, and installed RTK Query so we can use RTK to control our state for the entire front end. This will be super useful as we create a front end that automatically updates the home feed when a new blog or forum thread is created!
+
+I learned a lot about auth, how to use the information from the JWT token to automatically create the Author in a post request, and protect some endpoints so only the users who created the blog or forum can update or delete it. Shayne is super smart and great with this kind of coding so it was great to watch her code for this!
+
+I personally had some computer issues and am haivng major node_module issues with my GHI so i'm going to get into that today.
+
 ## March 30, 2023
 
 Today, I worked on:

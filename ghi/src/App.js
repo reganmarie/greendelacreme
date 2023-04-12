@@ -1,5 +1,5 @@
 import LoginForm from './LoginForm.js';
-import BlogList from './BlogList.js';
+import BlogList from './blogs/components/BlogList.js';
 import ForumList from './Forum.js';
 import Nav from './NavigationBar.js';
 import MainPage from './MainPage.js';
@@ -16,6 +16,10 @@ function App() {
 
    console.log(data)
 
+  if (data === undefined) {
+    return null;
+  }
+
   return (
     <>
       <Nav isLoggedIn={data} />
@@ -25,8 +29,6 @@ function App() {
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/forum" element={<ForumList />} />
         </Route>
-        {/* <Route path="/" element={data === null ? <LoginForm /> : <Navigate to="/blogs" replace />} />
-        <Route path="/signup" element={data === null ? <Signup /> : <Navigate to="/blogs" replace />} /> */}
         <Route path="/" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />
       </Routes>
