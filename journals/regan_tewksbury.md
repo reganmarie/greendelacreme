@@ -1,3 +1,33 @@
+## April 17, 2023
+
+Today, I worked on:
+
+* Pair programmed with Imron and Brandon to create a the functionality and design for create a forum question.
+
+I completed my forum detail after debugging the dropdown with Imron and wrote a merge request.
+
+Then, I pair programmed with Imron and Brandon to get the create forum question component up and running using RTK toolkit.
+
+## April 7, 2023
+
+Today, I worked on:
+
+* Pair programmed with Imron to create a the functionality and design for the forum detail. I coded!
+
+I pair programmed with Imron to get the forum detail component up and running using RTK toolkit. It took us a while to figure out how to pull the ID from the URL and show that particular forum question we wanted.
+
+I had a huge aha moment when we asked Shayne what she did for blog detail and we realized that we needed to use $ and `` in two places we didn't before around id.
+
+## April 6, 2023
+
+Today, I worked on:
+
+* Pair programmed with Imron to create a the functionality and design for the forum list. He coded!
+
+I pair programmed with Imron to get the forum component up and running using RTK toolkit. It's fully functional, so we focused a lot on using Tailwind to design the page.
+
+I had a huge aha moment when I started reading the docs for Tailwind and realized how easy it was to use! It'll be really easy to design our front-end using it.
+
 ## April 5, 20203
 
 Today, I worked on:

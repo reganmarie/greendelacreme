@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetThreadsQuery } from "./store/forumApi";
+import { useGetThreadsQuery } from "../store/forumApi";
 
 
 export default function ForumList() {
