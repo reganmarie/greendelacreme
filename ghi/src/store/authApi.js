@@ -1,42 +1,40 @@
-import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setUser } from './user';
 
+
 export const authApi = createApi({
-  reducerPath: 'authentication',
-  tagTypes: ['Token'],
+  reducerPath: "authentication",
+  tagTypes: ["Token"],
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
+    credentials: 'include',
     prepareHeaders: async (headers, { getState }) => {
       const token = await getState().auth.token;
 
       if (token) {
-          headers.set('authorization', `Bearer ${token}`)
+        headers.set('authorization', `Bearer ${token}`);
       }
 
-      return headers
-      },
+      return headers;
+    },
   }),
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     login: builder.mutation({
-      query: info => {
+      query: (info) => {
         let formData = null;
         if (info instanceof HTMLElement) {
           formData = new FormData(info);
         } else {
           formData = new FormData();
-          formData.append('username', info.email);
-          formData.append('password', info.password);
+          formData.append("username", info.email);
+          formData.append("password", info.password);
         }
         return {
-          url: '/token',
-          method: 'post',
+          url: "/token",
+          method: "post",
           body: formData,
-          credentials: 'include',
         };
       },
-      // invalidatesTags: result => {
-      //   return (result && ['Account']) || [];
-      // },
       invalidatesTags: ['Token'],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
@@ -45,14 +43,13 @@ export const authApi = createApi({
         } catch (e) {
           console.error(e);
         }
-      }
+      },
     }),
     getToken: builder.query({
       query: () => ({
         url: '/token',
-        credentials: 'include',
       }),
-      providesTags: ['Token'],
+      providesTags: ["Token"],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -60,12 +57,31 @@ export const authApi = createApi({
         } catch (e) {
           console.error(e);
         }
-      }
+      },
+    }),
+    signup: builder.mutation({
+      query: (data) => ({
+        url: "/api/accounts",
+        body: data,
+        method: "post",
+        credentials: "include",
+      }),
+      invalidatesTags: ["Token"],
+    }),
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: '/token',
+        method: 'delete',
+      }),
+      invalidatesTags: ['Token'],
     }),
   }),
 });
 
 export const {
-    useLoginMutation,
-    useGetTokenQuery,
-} = authApi;
+  useLoginMutation,
+  useGetTokenQuery,
+  useSignupMutation,
+  useLogoutUserMutation,
+} =
+  authApi;

@@ -4,6 +4,7 @@ export const forumApi = createApi({
     reducerPath: 'forum',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
+        credentials: 'include',
     }),
     tagTypes: ['ForumList'],
     endpoints: builder => ({
@@ -12,7 +13,7 @@ export const forumApi = createApi({
             providesTags: ['ForumList'],
         }),
         getThread: builder.query({
-            query: id => '/forum/' + id,
+            query: id => `/forum/${id}`,
         }),
         createThread: builder.mutation({
             query: data => ({
@@ -20,7 +21,7 @@ export const forumApi = createApi({
                 body: data,
                 method: 'post',
             }),
-            invalidatesTag: ['ForumList'],
+            invalidatesTags: ['ForumList'],
         }),
         deleteOwner: builder.mutation({
             query: id => ({
@@ -35,7 +36,7 @@ export const forumApi = createApi({
                 body: data,
                 method: 'put',
             }),
-            invalidatesTag: ['ForumList'],
+            invalidatesTags: ['ForumList'],
         }),
     })
 })
