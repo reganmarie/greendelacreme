@@ -1,3 +1,12 @@
+## April 12, 2023
+Today, I finished the edit blog frontend view and decorated the feed with more hanging plants! I ended up using Gimp to make the backgrounds transparent.
+
+## April 11, 2023
+Today, I created the edit blog frontend view using DaisyUI's modal.
+
+## April 7, 2023
+Today, I finished the blog list frontend view.
+
 ## April 6, 2023
 Today, I:
 * Reviewed Imron's merge request for the forum frontend auth
