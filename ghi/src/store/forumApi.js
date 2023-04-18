@@ -13,7 +13,7 @@ export const forumApi = createApi({
             providesTags: ['ForumList'],
         }),
         getThread: builder.query({
-            query: id => '/forum/' + id,
+            query: id => `/forum/${id}`,
         }),
         createThread: builder.mutation({
             query: data => ({

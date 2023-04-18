@@ -46,7 +46,6 @@ function Signup({token}) {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-
   return (
     <section className="bg-gradient-to-tr from-primary-100 dark:bg-gray-900 h-screen overflow-hidden">
       <div className="justify-center">
