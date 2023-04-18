@@ -31,7 +31,7 @@ export default function ForumDetail() {
                             <div className="mx-4">
                                 <h1 className="text-sm text-gray-700 dark:text-gray-200">{data.username}</h1>
                             </div>
-                                {data.username === user ? <ForumDropdown /> : null }
+                                {data.username === user ? <ForumDropdown id={data.id} /> : null }
                             </div>
                         </div>
                     </div>

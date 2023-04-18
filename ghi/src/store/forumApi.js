@@ -21,7 +21,7 @@ export const forumApi = createApi({
                 body: data,
                 method: 'post',
             }),
-            invalidatesTag: ['ForumList'],
+            invalidatesTags: ['ForumList'],
         }),
         deleteOwner: builder.mutation({
             query: id => ({
@@ -36,7 +36,7 @@ export const forumApi = createApi({
                 body: data,
                 method: 'put',
             }),
-            invalidatesTag: ['ForumList'],
+            invalidatesTags: ['ForumList'],
         }),
     })
 })
@@ -46,6 +46,6 @@ export const {
     useGetThreadsQuery,
     useGetThreadQuery,
     useCreateThreadMutation,
-    useDeleteThreadMutation,
+    useDeleteOwnerMutation,
     useUpdateThreadMutation,
 } = forumApi;

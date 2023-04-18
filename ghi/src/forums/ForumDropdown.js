@@ -1,7 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDeleteOwnerMutation } from '../store/forumApi';
 
-export default function ForumDropdown() {
+
+export default function ForumDropdown({ id }) {
+  const [deleteForum, result] = useDeleteOwnerMutation(id);
+  const navigate = useNavigate();
+  const handleDelete = (id) => {
+    deleteForum(id);
+    navigate("/forum");
+  }
+
   return(
     <div className="dropdown dropdown-bottom">
       <label tabIndex={0} className="btn m-1">Update</label>
@@ -12,9 +21,12 @@ export default function ForumDropdown() {
             </Link>
         </li>
         <li>
-            <Link to="#">
-            <p>Delete</p>
-            </Link>
+            <button
+            className="btn btn-error"
+            onClick={() => handleDelete(id)}
+            >
+              Delete
+            </button>
         </li>
       </ul>
     </div>
