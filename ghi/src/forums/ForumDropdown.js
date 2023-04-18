@@ -8,12 +8,12 @@ export default function ForumDropdown() {
       <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
         <li>
             <Link to="#">
-            <a>Edit</a>
+            <p>Edit</p>
             </Link>
         </li>
         <li>
             <Link to="#">
-            <a>Delete</a>
+            <p>Delete</p>
             </Link>
         </li>
       </ul>

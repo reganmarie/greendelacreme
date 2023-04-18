@@ -10,7 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useGetTokenQuery } from './store/authApi';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import PageNotFound from './PageNotFound.js';
 
 function App() {
   const { data } = useGetTokenQuery();
@@ -23,11 +23,12 @@ function App() {
     <>
       <Nav isLoggedIn={data} />
       <Routes>
+        <Route path='*' element={<PageNotFound/>} />
         <Route element={<Protected token={data} />}>
           <Route path="/home" element={<MainPage />} />
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/forum" element={<ForumList />} />
-          <Route path="/forum/:id" element={<ForumDetail />} />
+          <Route path="/forum/:id" element={<ForumDetail />}  />
         </Route>
         <Route path="/" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />
