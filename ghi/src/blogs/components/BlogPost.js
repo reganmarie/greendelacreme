@@ -76,5 +76,6 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
         </div>
       </div>
     </div>
+
   );
 }

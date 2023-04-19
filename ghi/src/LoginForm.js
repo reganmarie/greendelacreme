@@ -17,7 +17,8 @@ const LoginForm = ({ token }) => {
   };
 
   if (result.isSuccess) {
-    toast(`Welcome back, ${username}!`, {toastId: 'loginSuccess'});
+    toast(`Welcome back, ${username}!`, {toastId: 'loginSuccess',
+  position: toast.POSITION.BOTTOM_RIGHT,});
   } else if (result.isError) {
     toast.error(`${result.error.data.detail}`, {toastId: 'loginError'});
     result.reset();

@@ -1,0 +1,36 @@
+.HeaderOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: grey;
+  cursor: pointer;
+}
+
+.HeaderOption__icon {
+  object-fit: contain;
+  height: 25px !important;
+  width: 25px !important;
+}
+
+.HeaderOption:hover {
+  color: #b5c1ad;
+}
+
+.HeaderOption__title {
+  font-size: 12px;
+  font-weight: 400;
+
+}
+
+.HeaderOption1 {
+  justify-content: left;
+  flex: 0.5;
+}
+
+@media (max-width: 1049px) {
+    .HeaderOption__title {
+        display: none;
+    }
+}
