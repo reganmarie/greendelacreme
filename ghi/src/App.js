@@ -33,7 +33,7 @@ function App() {
         <Route path="/" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />
       </Routes>
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </>
   );
 }

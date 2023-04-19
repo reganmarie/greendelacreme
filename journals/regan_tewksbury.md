@@ -1,3 +1,28 @@
+## April 19, 2023
+
+Today, I worked on:
+
+* Writing a unit test
+* Deployment
+
+I GOT MY GET ONE UNIT TEST TO PASS. My aha moment was the piece of code that came to me in a dream to get the ID into the GET request.
+
+There wasn't really a piece of code I could find in a tutorial for someone who does it similarly to the way we did with the repository as a dependency injection, so it was really up to us and our brains.
+
+Luckily, my brain came through last night. We're going to work on deployment today and styling.
+
+I did the first few steps of deployment, and was very, very careful about the whole thing so the instructors wouldn't have to re-build our virtual environment.
+
+## April 18, 2023
+
+Today, I worked on:
+
+* Writing a unit test
+
+Today we programmed as a group to install unit tests and then write our own individually.
+
+I got very stuck on giving an id to a unit test to GET or PUT and did not have an aha moment, but I'm really hoping a piece of miracle code comes to me in a dream.
+
 ## April 17, 2023
 
 Today, I worked on:
@@ -6,7 +31,11 @@ Today, I worked on:
 
 I completed my forum detail after debugging the dropdown with Imron and wrote a merge request.
 
-Then, I pair programmed with Imron and Brandon to get the create forum question component up and running using RTK toolkit.
+Then, I pair programmed with Imron to get the create forum question component up and running using RTK toolkit.
+
+He coded for that, and I coded for the Delete button. I had a breakthrough moment when I realized that the name of the function was exported differently than it was named, so I finally got it to work after that!
+
+We also created a 404 page for error handling, and tried to apply it to forum/id that did not exist, but we got bogged down in that for a few hours and were unsuccessful, so we moved on to front-end CRUD functions to get closer to completing our MVP.
 
 ## April 7, 2023
 

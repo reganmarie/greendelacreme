@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./blogs/static/Header.css";
 import HeaderOption from "./HeaderOption";
 import HomeIcon from "@mui/icons-material/Home";
@@ -10,17 +10,21 @@ import plant from "./assets/images/plant.json";
 import { useLogoutUserMutation } from './store/authApi';
 import { useNavigate, Link} from 'react-router-dom';
 
-function Header() {
+function Header({token}) {
 
   const navigate = useNavigate();
   const [logout] = useLogoutUserMutation();
 
   async function handleClick(e) {
     e.preventDefault();
-    await logout().then(() => {
-      navigate("/");
-    });
+    await logout();
   }
+
+  useEffect(() => {
+    if (token === null) {
+      navigate('/');
+    }
+  }, [token, navigate])
 
   return (
     <div className="bg-[#f8f8f6] border-b-[0.1px] border-b-[lightgray] sticky">

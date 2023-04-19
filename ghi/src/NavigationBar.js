@@ -5,7 +5,7 @@ function Nav({ isLoggedIn }) {
 
   return (
     <nav>
-      {isLoggedIn && <Header />}
+      {isLoggedIn && <Header token={isLoggedIn} />}
     </nav>
   );
 }

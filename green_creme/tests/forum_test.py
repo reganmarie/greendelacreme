@@ -12,9 +12,7 @@ class EmptyThreadQuery:
 
 
 def override_auth():
-    return {
-        "id": 1,
-    }
+    return {'id': 1, 'first': 'Regan', 'last': 'Tewksbury', 'username': 'regan', 'email': 'regan@email.com',}
 
 
 def test_get_all_threads():
@@ -56,3 +54,38 @@ def test_create_thread():
     app.dependency_overrides = {}
     assert response.status_code == 200
     assert response.json() == expected
+
+class GetThreadQuery:
+    def get_one(self, forum_id: 4):
+        result = {
+            "id": 4,
+            "title": "plants",
+            "body": "I love plants",
+            "image": "happyplant",
+            "author_id": 1,
+            "created_on": "2023-04-18T19:09:04.973180",
+            "username": "regan",
+            "avatar": "happyplantimg",
+        }
+        return result
+
+def test_get_thread():
+    app.dependency_overrides[ThreadRepository] = GetThreadQuery
+    app.dependency_overrides[authenticator.get_current_account_data] = override_auth
+
+    response = client.get("/forum/4")
+
+    app.dependency_overrides = {}
+
+    assert response.status_code == 200
+
+    assert response.json() == {
+            "id": 4,
+            "title": "plants",
+            "body": "I love plants",
+            "image": "happyplant",
+            "author_id": 1,
+            "created_on": "2023-04-18T19:09:04.973180",
+            "username": "regan",
+            "avatar": "happyplantimg",
+        }
