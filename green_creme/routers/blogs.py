@@ -100,6 +100,4 @@ def delete_blog(
             return {"message": "You are not authorized to delete this blog"}
     except Exception:
         response.status_code = 404
-        return {
-            "message": "Could not delete a blog by that ID."
-        }
+        return {"message": "Could not delete a blog by that ID."}
