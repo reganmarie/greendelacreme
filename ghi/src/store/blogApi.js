@@ -16,14 +16,14 @@ export const blogApi = createApi({
         // },
         credentials: 'include',
     }),
-    tagTypes: ['BlogList', 'BlogForm'],
+    tagTypes: ['BlogList'],
     endpoints: builder => ({
         getBlogs: builder.query({
             query: () => '/blogs',
-            providesTags: ['BlogList', 'BlogForm'],
+            providesTags: ['BlogList'],
         }),
         getBlog: builder.query({
-            query: id => '/blogs/' + id,
+            query: id => `/blogs/${id}`,
         }),
         createBlog: builder.mutation({
             query: data => ({
@@ -32,19 +32,19 @@ export const blogApi = createApi({
                 method: 'post',
 
             }),
-            invalidatesTags: ['BlogList', 'BlogForm'],
+            invalidatesTags: ['BlogList'],
         }),
         deleteOwner: builder.mutation({
             query: id => ({
-                url: '/blogs/' + id,
+                url: `/blogs/${id}`,
                 method: 'delete',
 
             }),
             invalidatesTags: ['BlogList'],
         }),
         updateBlog: builder.mutation({
-            query: (id, data) => ({
-                url: '/blogs/' + id,
+            query: ({id, data}) => ({
+                url: `/blogs/${id}`,
                 body: data,
                 method: 'put',
 

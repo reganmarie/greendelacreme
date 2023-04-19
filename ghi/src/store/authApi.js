@@ -41,7 +41,7 @@ export const authApi = createApi({
           await queryFulfilled;
           await dispatch(authApi.endpoints.getToken.initiate());
         } catch (e) {
-          console.error(e);
+          return
         }
       },
     }),
@@ -55,7 +55,7 @@ export const authApi = createApi({
           const { data } = await queryFulfilled;
           dispatch(setUser(data));
         } catch (e) {
-          console.error(e);
+          return
         }
       },
     }),

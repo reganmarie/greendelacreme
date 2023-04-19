@@ -35,20 +35,24 @@ const BlogForm = () => {
 
 
   return (
-    <div className="bg-gradient-to-br  from-[#F9FEFD] via-[#FBFEF3] to-[#FEFDF3] dark:bg-darkgreen flex max-w-2xl 1080:max-w-3xl 1440:max-w-5xl items-center justify-center mx-auto bg-black !important">
-    <section className="bg-[#ffffff] grid mx-auto place-items-center shadow-md rounded-lg p-5 w-full border">
+    <div className="flex max-w-2xl 1080:max-w-3xl 1440:max-w-5xl items-center justify-center mx-auto pb-2">
+    <section className="bg-[#ffffff] shadow-md rounded-lg p-5 w-full border">
       <h2 className="flex justify-center text-xl font-bold py-2 mb-2">Create a Post</h2>
       <form onSubmit={handlePost}>
+        <div className="relative">
+        <label htmlFor="postTitle" className="text-gray-400 text-xs absolute end-[8px] top-[10px]">{title.length} / 150</label>
         <input
           required
-          className=" w-full rounded-lg text-sm p-2 bg-gray-100 mb-3 focus:outline-secondary-200"
+          className="w-full rounded-lg text-sm py-2 pl-2 pr-16 bg-gray-100 mb-3 focus:outline-secondary-200"
           type="text"
           id="postTitle"
           name="postTitle"
           placeholder="Title"
           value={title}
           onChange={e => setTitle(e.target.value)}
+          maxLength="150"
         />
+        </div>
         <textarea
           required
           id="postBody"
@@ -58,17 +62,21 @@ const BlogForm = () => {
           placeholder="Type something..."
           className="w-full rounded-lg p-2 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:outline-secondary-200"
         />
-        <footer className="flex justify-end mt-1">
+        <footer className="flex justify-end mt-1 relative">
           {showImage ? (
-            <input
-              className="w-full rounded-lg text-sm p-2 bg-gray-100 mb-3 mr-2 focus:outline-secondary-200"
-              type="text"
-              id="postImage"
-              name="postImage"
-              placeholder="Image URL here"
-              value={image}
-              onChange={e => setImage(e.target.value)}
-            />
+            <>
+              <label htmlFor="postImage" className="text-gray-400 text-xs absolute end-[98px] bottom-[22px]">{image.length} / 400</label>
+              <input
+                className="w-full rounded-lg text-sm py-2 pl-2 pr-[70px] bg-gray-100 mb-3 mr-2 focus:outline-secondary-200"
+                type="text"
+                id="postImage"
+                name="postImage"
+                placeholder="Image URL here"
+                value={image}
+                onChange={e => setImage(e.target.value)}
+                maxLength="400"
+              />
+            </>
           ) : (
             <div className="flex gap-2">
               <span

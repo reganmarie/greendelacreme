@@ -38,7 +38,8 @@ class BlogQueries:
                     """
                     SELECT b.id, b.title,
                     b.body, b.image,
-                    b.created_on, b.author_id,
+                    b.created_on AT TIME ZONE 'UTC' AT TIME ZONE 'US/Pacific',
+                    b.author_id,
                     a.username, a.avatar,
                     a.first, a.last
                     FROM blog AS b
@@ -139,7 +140,8 @@ class BlogQueries:
                     """
                     SELECT b.id, b.title,
                     b.body, b.image,
-                    b.created_on, b.author_id,
+                    b.created_on AT TIME ZONE 'UTC' AT TIME ZONE 'US/Pacific',
+                    b.author_id,
                     a.username, a.avatar,
                     a.first, a.last
                     FROM blog AS b

@@ -14,7 +14,7 @@ function Nav({ isLoggedIn }) {
   }
 
   return (
-    <nav className="bg-blue-400">
+    <nav>
       {isLoggedIn &&
         <ul>
           <li>
