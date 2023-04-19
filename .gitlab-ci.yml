@@ -11,6 +11,7 @@ lint-test-job:
     - pip install flake8
     - flake8 green_creme
 
+
 api-unit-test-job:
   image: python:3-bullseye
   stage: test
@@ -20,7 +21,6 @@ api-unit-test-job:
     - cd green_creme
     - pip install -r requirements.txt
     - python -m pytest
-
 
 build-front-end-job:
   stage: build
