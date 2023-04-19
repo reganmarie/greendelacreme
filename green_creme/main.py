@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI
 from routers import forum, blogs, accounts
 from fastapi.middleware.cors import CORSMiddleware
 import os

@@ -54,7 +54,7 @@ class AccountRepository:
                         last=account[4],
                         hashed_password=account[5],
                     )
-        except:
+        except Exception:
             return
 
     def create(
@@ -64,7 +64,8 @@ class AccountRepository:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    insert into accounts (first, last, username, email, password)
+                    insert into accounts (first, last, username,
+                    email, password)
                     values (%s, %s, %s, %s, %s)
                     returning id;
                     """,

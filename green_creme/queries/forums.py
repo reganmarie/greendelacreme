@@ -46,7 +46,9 @@ class ThreadRepository:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    Select f.id, f.title, f.body, f.image, f.author_id, f.created_on AT TIME ZONE 'UTC' AT TIME ZONE 'US/Pacific', a.username, a.avatar
+                    Select f.id, f.title, f.body, f.image, f.author_id,
+                    f.created_on AT TIME ZONE 'UTC' AT TIME ZONE 'US/Pacific',
+                    a.username, a.avatar
                     from forum f
                     inner join accounts a on f.author_id = a.id
                     order by created_on desc;
@@ -104,7 +106,7 @@ class ThreadRepository:
     ) -> ThreadOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                result = db.execute(
+                db.execute(
                     """
                     UPDATE forum
                     SET title = %s
@@ -130,7 +132,10 @@ class ThreadRepository:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    Select f.id, f.title, f.body, f.image, f.author_id, f.created_on AT TIME ZONE 'UTC' AT TIME ZONE 'US/Pacific', a.username, a.avatar
+                    Select f.id, f.title, f.body, f.image, f.author_id,
+                    f.created_on
+                    AT TIME ZONE 'UTC' AT TIME ZONE 'US/Pacific',
+                    a.username, a.avatar
                     from forum f
                     inner join accounts a on f.author_id = a.id
                     where f.id = %s;

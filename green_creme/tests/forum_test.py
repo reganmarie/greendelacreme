@@ -11,14 +11,15 @@ class EmptyThreadQuery:
         return []
 
 
-def override_auth():
-    return {'id': 1, 'first': 'Regan', 'last': 'Tewksbury', 'username': 'regan', 'email': 'regan@email.com',}
+def over():
+    return {'id': 1, 'first': 'Regan', 'last': 'Tewksbury',
+            'username': 'regan', 'email': 'regan@email.com'}
 
 
 def test_get_all_threads():
     app.dependency_overrides[
         authenticator.get_current_account_data
-    ] = override_auth
+    ] = over
     app.dependency_overrides[ThreadRepository] = EmptyThreadQuery
     response = client.get("/forum")
     assert response.status_code == 200
@@ -40,7 +41,7 @@ def test_create_thread():
     app.dependency_overrides[ThreadRepository] = CreateThreadQuery
     app.dependency_overrides[
         authenticator.get_current_account_data
-    ] = override_auth
+    ] = over
     json = {"title": "string", "body": "string", "image": "string"}
     expected = {
         "id": 1,
@@ -54,6 +55,7 @@ def test_create_thread():
     app.dependency_overrides = {}
     assert response.status_code == 200
     assert response.json() == expected
+
 
 class GetThreadQuery:
     def get_one(self, forum_id: 4):
@@ -69,9 +71,10 @@ class GetThreadQuery:
         }
         return result
 
+
 def test_get_thread():
     app.dependency_overrides[ThreadRepository] = GetThreadQuery
-    app.dependency_overrides[authenticator.get_current_account_data] = override_auth
+    app.dependency_overrides[authenticator.get_current_account_data] = over
 
     response = client.get("/forum/4")
 
