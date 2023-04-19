@@ -6,7 +6,7 @@ import MainPage from './MainPage.js';
 import Signup from './Signup.js';
 import Protected from './utils/Protected.js';
 import ForumDetail from './forums/ForumDetail.js';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useGetTokenQuery } from './store/authApi';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,14 +16,14 @@ function App() {
   const { data } = useGetTokenQuery();
 
   const domain = /https:\/\/[^/]+/;
-  const basename = proces.env.PUBLIC_URL.replace(domain, '');
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
 
   if (data === undefined) {
     return null;
   }
 
   return (
-    <>
+    <BrowserRouter basename={basename}>
       <Nav isLoggedIn={data} />
       <Routes>
         <Route path='*' element={<PageNotFound/>} />
@@ -37,7 +37,7 @@ function App() {
         <Route path="/signup" element={<Signup token={data} />} />
       </Routes>
       <ToastContainer position="bottom-right" />
-    </>
+    </BrowserRouter>
   );
 }
 
