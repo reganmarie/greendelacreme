@@ -29,10 +29,10 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                 {username === user ? <Dropdown key={`${id} - dropdown`} id={id} /> : null}
               </div>
             </div>
-            <div className="flex flex-col flex-grow overflow-auto mt-4 mb-6">
+            <div className="flex flex-col flex-grow mt-4 mb-6">
               <div className="mb-3 text-xl font-bold">{title}</div>
               <div className="text-sm text-neutral-600 whitespace-pre-wrap">
-                <p>
+                <p className="break-words">
                   {body}
                 </p>
               </div>
