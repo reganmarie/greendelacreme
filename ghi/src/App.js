@@ -15,6 +15,9 @@ import PageNotFound from './PageNotFound.js';
 function App() {
   const { data } = useGetTokenQuery();
 
+  const domain = /https:\/\/[^/]+/;
+  const basename = proces.env.PUBLIC_URL.replace(domain, '');
+
   if (data === undefined) {
     return null;
   }
