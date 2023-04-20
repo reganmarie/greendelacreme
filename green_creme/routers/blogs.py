@@ -37,7 +37,7 @@ def get_all_blogs(
 ):
     try:
         return blog.get_all()
-    except:
+    except Exception:
         response.status_code = 400
         return {"message": "Could not retrieve blogs"}
 
@@ -63,7 +63,7 @@ def update_blog(
         else:
             response.status_code = 401
             return {"message": "You are not authorized to update this blog"}
-    except:
+    except Exception:
         response.status_code = 404
         return {"message": f"Blog with id {blog_id} not found"}
 
@@ -79,7 +79,7 @@ def get_blog_details(
 ) -> Union[BlogOutWithAccount, Error]:
     try:
         return repo.get_one(blog_id)
-    except:
+    except Exception:
         response.status_code = 404
         return {"message": "Blog does not exist"}
 
@@ -100,6 +100,4 @@ def delete_blog(
             return {"message": "You are not authorized to delete this blog"}
     except Exception:
         response.status_code = 404
-        return {
-            "message": "Could not delete a blog by that ID, are you sure it exists?"
-        }
+        return {"message": "Could not delete a blog by that ID."}

@@ -25,7 +25,7 @@ def create_thread(
         return {"message": "Could not create forum"}
     try:
         return repo.create(thread, account_data["id"])
-    except:
+    except Exception:
         response.status_code = 400
         return {"message": "Could not create forum"}
 
@@ -40,7 +40,7 @@ def get_all_threads(
         return {"message": "No threads exist"}
     try:
         return repo.get_all()
-    except:
+    except Exception:
         response.status_code = 400
         return {"message": "Could not retrieve threads"}
 
@@ -54,7 +54,7 @@ def get_thread_details(
 ) -> ThreadAccountOut:
     try:
         return repo.get_one(forum_id)
-    except:
+    except Exception:
         response.status_code = 404
         return {"message": "Could not receive the thread by that id"}
 
@@ -80,7 +80,7 @@ def update_thread(
             return {
                 "message": "You are not authorized to update this forum thread"
             }
-    except:
+    except Exception:
         response.status_code = 404
         return {"message": f"Forum with id {forum_id} not found"}
 

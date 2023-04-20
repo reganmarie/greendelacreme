@@ -11,7 +11,7 @@ lint-test-job:
     - pip install flake8
     - flake8 green_creme
 
-Run the unit tests
+
 api-unit-test-job:
   image: python:3-bullseye
   stage: test
@@ -22,7 +22,6 @@ api-unit-test-job:
     - pip install -r requirements.txt
     - python -m pytest
 
-Build the React/JavaScript front-end
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
@@ -71,7 +70,7 @@ build-green-creme-service:
     - export COMMIT_HASH=$CI_COMMIT_SHA # Your current commit sha
     - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE # Your repository prefixed with GitLab Registry URL
     - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL # Instructs GitLab to login to its registry
-
+    - export DATABASE_URL=os.environ["DATABASE_URL"]
   script:
     - cd green-creme
     - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
