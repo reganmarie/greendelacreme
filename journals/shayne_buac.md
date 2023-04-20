@@ -1,3 +1,20 @@
+## April 19, 2023
+Today, I:
+* Finished reviewing Brandon's merge request for the navbar
+* Helped Regan and Imron with deployment (had a blocker with the database url and signing key but I think I got it to work)
+* Created a migration table for blog comments
+* Created endpoints for GET comments for one blog and POST a blog comment
+* Created a RTK API slice for comments GET and POST endpoints and installed it in the store
+* Finished most of the frontend for comments including the list view on a specific blog and the create comment form
+* Installed an emoji picker dependency in the frontend
+
+## April 18, 2023
+Today, I:
+* Created unit tests for get all blogs and create a blog
+* Reviewed Imron's unit tests for get all forum threads and create a forum thread
+* Finished the edit blog frontend view and created a merge request for it combined with the issue for login page error handling and adding images to the blog posts in the frontend
+* Started reviewing Brandon's merge request for the navbar
+
 ## April 12, 2023
 Today, I finished the edit blog frontend view and decorated the feed with more hanging plants! I ended up using Gimp to make the backgrounds transparent.
 

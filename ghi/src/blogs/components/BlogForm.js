@@ -60,7 +60,7 @@ const BlogForm = () => {
           value={body}
           onChange={e => setBody(e.target.value)}
           placeholder="Type something..."
-          className="w-full rounded-lg p-2 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:outline-secondary-200"
+          className="w-full rounded-lg p-2 text-sm bg-gray-100 border border-transparent appearance-none placeholder-gray-400 focus:outline-secondary-200"
         />
         <footer className="flex justify-end mt-1 relative">
           {showImage ? (
