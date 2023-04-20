@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useCreateThreadMutation, useGetThreadsQuery } from "../store/forumApi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,7 +11,6 @@ export default function ForumList() {
     const [body, setBody] = useState("");
     const [image, setImage] = useState("");
     const [post, submit] = useCreateThreadMutation();
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
       e.preventDefault();

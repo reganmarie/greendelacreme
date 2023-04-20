@@ -6,7 +6,7 @@ export const forumApi = createApi({
         baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
         credentials: 'include',
     }),
-    tagTypes: ['ForumList'],
+    tagTypes: ['ForumList','ForumDetail'],
     endpoints: builder => ({
         getThreads: builder.query({
             query: () => '/forum',
@@ -14,6 +14,7 @@ export const forumApi = createApi({
         }),
         getThread: builder.query({
             query: id => `/forum/${id}`,
+            providesTags: ['ForumDetail'],
         }),
         createThread: builder.mutation({
             query: data => ({
@@ -31,12 +32,12 @@ export const forumApi = createApi({
             invalidatesTags: ['ForumList'],
         }),
         updateThread: builder.mutation({
-            query: (id, data) => ({
+            query: ({id, data})=> ({
                 url: '/forum/' + id,
                 body: data,
                 method: 'put',
             }),
-            invalidatesTags: ['ForumList'],
+            invalidatesTags: ['ForumList','ForumDetail'],
         }),
     })
 })
