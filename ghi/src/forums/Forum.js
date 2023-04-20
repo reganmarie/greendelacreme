@@ -23,7 +23,7 @@ export default function ForumList() {
         <div className="font-bold max-w-100 pt-3 ">{thread.title}</div>
                   <div className=" space-x-2">
                   <p className="text-xs">{new Date(thread.created_on).toLocaleDateString("en-US", options)} {new Date(thread.created_on).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
-                  <p className="flex justify-end  ">{thread.username}<img src={thread.avatar} className="w-8" />  </p>
+                  <p className="flex justify-end  ">{thread.username}<img alt="" src={thread.avatar} className="w-8" />  </p>
                   </div>
           </div>
            </div>

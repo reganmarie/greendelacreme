@@ -4,7 +4,7 @@ import { useDeleteOwnerMutation } from '../store/forumApi';
 
 
 export default function ForumDropdown({ id }) {
-  const [deleteForum, result] = useDeleteOwnerMutation(id);
+  const [deleteForum] = useDeleteOwnerMutation(id);
   const navigate = useNavigate();
   const handleDelete = (id) => {
     deleteForum(id);
