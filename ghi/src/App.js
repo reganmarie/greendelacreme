@@ -28,13 +28,13 @@ function App() {
       <Routes>
         <Route path='*' element={<PageNotFound/>} />
         <Route element={<Protected token={data} />}>
-          <Route path="/home" element={<MainPage />} />
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/forum" element={<ForumList />} />
           <Route path="/forum/:id" element={<ForumDetail />}  />
         </Route>
         <Route path="/" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />
+        <Route path="/home" element={<MainPage />} />
       </Routes>
       <ToastContainer position="bottom-right" />
     </BrowserRouter>

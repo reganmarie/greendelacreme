@@ -34,7 +34,7 @@ const LoginForm = ({ token }) => {
       <div className='bg-[url("./assets/images/leaf-login.png")] dark:bg-[url("./assets/images/leaf-dark.png")] b-clip-content bg-center object-cover bg-contain bg-no-repeat p-12 drop-shadow-lg min-h-screen'>
         <div className="px-6 py-8 flex flex-col items-center justify-center mx-auto lg:py-0 min-h-screen">
           <Link
-            to="#"
+            to="/home"
             className="flex items-center text-2xl font-semibold text-black dark:text-white"
           >
             <img
