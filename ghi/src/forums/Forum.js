@@ -39,6 +39,7 @@ export default function ForumList() {
 
     return (
       <>
+      <div className="bg-color6 bg-opacity-30 min-h-screen ">
       <div className="container align-items-center">
         <label htmlFor="my-modal-5" className="btn">Create a Thread</label>
           <input type="checkbox" id="my-modal-5" className="modal-toggle" />
@@ -85,7 +86,7 @@ export default function ForumList() {
           return(
             <>
         <Link to={`${thread.id}`}>
-        <div className="m-2 p-4 short max-h-50 rounded-3xl shadow-lg ml-90 bg-red-300">
+        <div className="m-2 p-4 short max-h-50 rounded-3xl shadow-lg ml-90 bg-color7">
         <div className="flex place-content-between">
         <div className="font-bold max-w-100 pt-3 ">{thread.title}</div>
                   <div className=" space-x-2">
@@ -98,6 +99,7 @@ export default function ForumList() {
           </>
           )
         })}
+        </div>
         </div>
         </div>
 
