@@ -1,3 +1,19 @@
+
+
+## April 18, 2023
+
+
+## April 17, 2023
+
+Today, I worked on:
+
+* Creating a Thread FrontEnd
+* Error page for invalid routes
+
+After the long break I was able to get into the groove of coding quite fast and had a productive day. Initially started the day with debugging with Regan for the dropdown feature of editing a thread, a return statement was needed to actually show the dropdown items. Brandon brought up a good issue with inputting an nonexisting id in the url path for a specific form only shows a blank page. From that statement I decided to add a 404 page to any url that does not exist in our routing. I was able to make a modal instead of a new page to allow logged in users to create a post that instantly adds the new thread without refreshing the page, bless redux. Spent the rest of the day styling the modal to look clean and add closing buttons to exit the modal.
+
+An aha moment was fixing the syntax error in the dropdown component as I noticed there was no return statement for the function.
+
 ## April 6, 2023
 
 Today, I worked on:
@@ -8,11 +24,6 @@ Today, I worked on:
 We were able to solve the issue with route redirection if user is authorized to view a page or not. A single if conditional statement was needed before our return to actually return null for token if it was null. I paired with regan for the day and we collaborated on styling and formatting the forum page of our project. We ended up making the threads look very similar to our wireframe, and only requires minimal work beyond it. There needs to be a bit more content on the fourm page as it looks bad with all the empty white space currently.
 
 An aha moment today was learning about tailwind stling in detail and how simple statements as space between sets our tags exactly in the way we want it. As well as learning about accordions with tailwind.
-
-
-
-
-
 
 
 
