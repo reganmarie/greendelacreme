@@ -21,6 +21,8 @@ api-unit-test-job:
     - cd green_creme
     - pip install -r requirements.txt
     - python -m pytest
+  before_script:
+    - export DATABASE_URL=os.environ["DATABASE_URL"]
 
 build-front-end-job:
   stage: build
