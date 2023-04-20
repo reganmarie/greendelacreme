@@ -7,7 +7,7 @@ steps = [
             forum_id int not null references forum (id),
             answer text not null,
             image varchar(400),
-            rating smallint not null default 0 ,
+            rating smallint not null default 0,
             created_on timestamp not null default current_timestamp,
             constraint reply_author_fk
                 foreign key (author_id) references accounts (id)
@@ -19,6 +19,8 @@ steps = [
         );
         """,
         """
+        DROP CONSTRAINT forum_author_fk,
+        DROP CONSTRAINT reply_forum_fk,
         DROP table reply;
         """,
     ]
