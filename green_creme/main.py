@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import forum, blogs, accounts
+from routers import forum, blogs, accounts, comments
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from authenticator import authenticator
@@ -9,6 +9,7 @@ app.include_router(authenticator.router)
 app.include_router(blogs.router)
 app.include_router(forum.router)
 app.include_router(accounts.router)
+app.include_router(comments.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,9 +18,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-#  adding a cookie from the request response
-# @app.post("/cookie-and-object/")
-# def create_cookie(response: Response):
-#     response.set_cookie(key="fakesession", value="fake-cookie-session-value")
-#     return {"message": "Come to the dark side, we have cookies"}

@@ -11,7 +11,7 @@ export default function BlogList() {
   const { data: blogData } = useGetBlogsQuery();
 
   return (
-    <div className="feed bg-gradient-to-br from-[#F9FEFD] via-[#FBFEF3] to-[#FEFDF3] dark:bg-darkgreen">
+    <div className="feed bg-gradient-to-br from-[#F9FEFD] via-[#FBFEF3] to-[#FEFDF3] dark:bg-darkgreen min-h-screen">
       <BlogForm />
       <img key="hanging-plant-1" className="h-48 absolute top-20 left-4 swinging-image swinging-image-outside" src="../images/hanging-plant-1.png" alt="Hanging plant" />
       <img key="hanging-plant-2" className="h-48 absolute top-20 left-36 swinging-image swinging-image-inside" src="../images/hanging-plant-2.png" alt="Hanging plant" />
