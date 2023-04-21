@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useEffect, useState} from 'react';
 import { useGetThreadQuery } from '../store/forumApi';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector} from 'react-redux';
@@ -18,6 +18,13 @@ export default function ForumDetail() {
     const [body, setBody] = useState("");
     const [image, setImage] = useState("");
 
+    useEffect(() => {
+      if (data) {
+        setTitle(data.title);
+        setBody(data.body);
+        setImage(data.image);
+      }
+    }, [data]);
     const handleSubmit = async (e) => {
       e.preventDefault();
       await update( {id: id, data:{title,body, image} });
