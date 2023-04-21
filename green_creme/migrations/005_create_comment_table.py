@@ -17,8 +17,6 @@ steps = [
         );
         """,
         """
-        DROP CONSTRAINT comment_blog_fk
-        DROP CONSTRAINT comment_author_fk
         DROP table comment;
         """,
     ]

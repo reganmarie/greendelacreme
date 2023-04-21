@@ -113,3 +113,15 @@ class CommentQueries:
                 return [
                     self.record_to_comment_out(record) for record in result
                 ]
+
+    def delete(self, comment_id: int) -> bool:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    DELETE FROM comment
+                    WHERE id = %s;
+                    """,
+                    [comment_id],
+                )
+                return True
