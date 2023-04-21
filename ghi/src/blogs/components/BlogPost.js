@@ -51,9 +51,9 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                 >
                   {
                     !showLikeHover ?
-                      <img src="../images/hand-holding-up-a-flower.png" className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
+                      <img src={`${process.env.PUBLIC_URL}/images/hand-holding-up-a-flower.png`} className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
                       :
-                      <img src="../images/hand-holding-up-a-flower-hover.png" className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
+                      <img src={`${process.env.PUBLIC_URL}/images/hand-holding-up-a-flower-hover.png`} className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
                   }
                   <span className="font-semibold">Like</span>
                 </div>

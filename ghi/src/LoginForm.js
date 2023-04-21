@@ -39,7 +39,7 @@ const LoginForm = ({ token }) => {
           >
             <img
               className="w-14 h-14 mr-2"
-              src="/images/planticon.png"
+              src={`${process.env.PUBLIC_URL}/images/planticon.png`}
               alt="Plant icon"
             />
             Green de la Creme
