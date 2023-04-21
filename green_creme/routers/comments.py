@@ -56,3 +56,12 @@ def get_comments_for_one_blog(
             status_code=404,
             detail="Blog does not exist",
         )
+
+
+@router.delete("/comments/{comment_id}", response_model=Union[bool, Error])
+def delete_comment(
+    comment_id: int,
+    comment: CommentQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> bool:
+    return comment.delete(comment_id)
