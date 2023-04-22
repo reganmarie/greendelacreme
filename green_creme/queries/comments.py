@@ -71,7 +71,8 @@ class CommentQueries:
                         author_id,
                         blog_id,
                         response,
-                        image
+                        image,
+                        rating
                     )
                     VALUES (%s, %s, %s, %s)
                     RETURNING id, created_on;
