@@ -15,7 +15,6 @@ steps = [
             constraint reply_forum_fk
                 foreign key (forum_id) references forum (id)
                 on delete cascade
-
         );
         """,
         """
