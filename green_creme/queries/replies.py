@@ -7,7 +7,7 @@ class ReplyIn(BaseModel):
     forum_id: int
     answer: str
     image: Optional[str]
-    rating: Optional[int]
+    rating: int
 
 
 class ReplyOut(BaseModel):
@@ -51,7 +51,6 @@ class ReplyRepository:
           ) -> Union[ReplyOut, Error]:
             with pool.connection() as conn:
               with conn.cursor() as db:
-                try:
                   result = db.execute(
                     """
                     insert into reply
@@ -73,6 +72,4 @@ class ReplyRepository:
                               reply,
                               account_id,
                   )
-                except Exception as e:
-                      logging.error(f"Error creating reply: {e}")
-                      return Error(message="Could not create reply")
+
