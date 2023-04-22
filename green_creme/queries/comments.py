@@ -71,8 +71,7 @@ class CommentQueries:
                         author_id,
                         blog_id,
                         response,
-                        image,
-                        rating
+                        image
                     )
                     VALUES (%s, %s, %s, %s)
                     RETURNING id, created_on;
@@ -107,7 +106,7 @@ class CommentQueries:
                     FROM comment AS c
                     LEFT JOIN accounts AS a
                     ON a.id = c.author_id
-                    WHERE c.blog_id = %s;
+                    WHERE c.blog_id = (%s);
                     """,
                     [blog_id],
                 )
