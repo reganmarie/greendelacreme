@@ -10,7 +10,6 @@ class ReplyIn(BaseModel):
     image: Optional[str]
     rating: int
 
-
 class ReplyOut(BaseModel):
     id: int
     author_id: int
@@ -48,6 +47,7 @@ class ReplyRepository:
     ) -> ReplyOut:
         old_data = reply.dict()
         return ReplyOut(id=id, **old_data, author_id=account_id)
+
 
     def create(
         self,
@@ -93,6 +93,30 @@ class ReplyRepository:
             last=record[10],
         )
 
+    def get_one(self, reply_id: int) -> ReplyOutUser:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                      select z.id, z.author_id,
+                      z.forum_id, z.answer,
+                      z.image, z.created_on AT TIME ZONE 'UTC'
+                      AT TIME ZONE 'US/Pacific',
+                      z.rating, a.username,
+                      a.avatar, a.first, a.last
+                      from reply as z
+                      left join accounts as a
+                      on a.id= z.author_id
+                      where z.id = %s
+                      order by created_on desc;
+                    """,
+                    [reply_id ],
+                )
+                record = result.fetchone()
+                return self.record_to_reply_out(record)
+
+
+
     def get_replies(self, forum_id: int) -> List[ReplyOutUser]:
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -113,6 +137,24 @@ class ReplyRepository:
                     [forum_id],
                 )
                 return [self.record_to_reply_out(record) for record in result]
+
+    def update(self, reply_id: int, reply: ReplyIn, author_id: int) -> ReplyOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                      update reply
+                      set answer = %s
+                        , image = %s
+                      where id = %s;
+                    """,
+                    [reply.answer, reply.image, reply_id],
+                )
+        return self.reply_in_to_out(
+                    reply_id,
+                    reply,
+                    author_id
+                )
 
     def delete(self, reply_id: int) -> bool:
         with pool.connection() as conn:
