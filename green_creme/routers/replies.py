@@ -1,28 +1,31 @@
 from fastapi import APIRouter, Depends, Response
 from authenticator import authenticator
 from typing import Union, List
-from queries.forums import ( ThreadRepository)
+from queries.forums import ThreadRepository
 from queries.replies import (
     ReplyIn,
     ReplyRepository,
     ReplyOut,
     ReplyOutUser,
-    Error)
+    Error,
+)
 
 router = APIRouter()
+
 
 @router.post("/replies", response_model=Union[ReplyOut, Error])
 def create_reply(
     reply: ReplyIn,
-    response:Response,
+    response: Response,
     repo: ReplyRepository = Depends(),
-    account_data : dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     try:
         return repo.create(reply, account_data["id"])
-    except:
+    except Exception:
         response.status_code = 400
         return {"message": "Could not create reply"}
+
 
 @router.get("/replies", response_model=Union[List[ReplyOutUser], Error])
 def get_thread_replies(
@@ -40,7 +43,7 @@ def get_thread_replies(
             return reply_repo.get_replies(forum_id)
         except Exception:
             response.status_code = 400
-            return {"message": "Could not retrieve the replies for this thread"}
+            return {"message": "Could not retrieve the replies for thread"}
     except Exception:
         response.status_code = 404
         return {"message": "Could not receive any forum by that id"}
