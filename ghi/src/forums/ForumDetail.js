@@ -5,7 +5,7 @@ import { useSelector} from 'react-redux';
 import { useDeleteOwnerMutation, useUpdateThreadMutation } from '../store/forumApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Replies from './Replies';
 
 export default function ForumDetail() {
     const { id } = useParams();
@@ -50,6 +50,7 @@ export default function ForumDetail() {
         }
 
     return(
+    <div >
     <section className="bg-white dark:bg-gray-900">
       <div className="container px-6 py-10 mx-auto">
         {data &&
@@ -129,5 +130,7 @@ export default function ForumDetail() {
         }
         </div>
     </section>
+    <Replies id={id} />
+    </div>
     )
 };
