@@ -113,3 +113,15 @@ class ReplyRepository:
                     [forum_id],
                 )
                 return [self.record_to_reply_out(record) for record in result]
+
+    def delete(self, reply_id: int) -> bool:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                      delete from reply
+                      where id = %s;
+                    """,
+                    [reply_id],
+                )
+                return True

@@ -47,3 +47,17 @@ def get_thread_replies(
     except Exception:
         response.status_code = 404
         return {"message": "Could not receive any forum by that id"}
+
+
+@router.delete("/replies/{reply_id}", response_model=Union[bool, Error])
+def delete_reply(
+    reply_id: int,
+    response: Response,
+    reply_repo: ReplyRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    try:
+        return reply_repo.delete(reply_id)
+    except Exception:
+        response.status_code = 404
+        return {"message": "Could not find nor delete reply with that id"}
