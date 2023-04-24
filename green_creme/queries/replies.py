@@ -107,7 +107,8 @@ class ReplyRepository:
                       from reply as z
                       left join accounts as a
                       on a.id= z.author_id
-                      where z.forum_id = %s;
+                      where z.forum_id = %s
+                      order by created_on desc;
                     """,
                     [forum_id],
                 )
