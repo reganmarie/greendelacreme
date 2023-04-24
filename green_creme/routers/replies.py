@@ -7,8 +7,9 @@ from queries.replies import (
     ReplyRepository,
     ReplyOut,
     ReplyOutUser,
-    Error
+    Error,
 )
+
 
 router = APIRouter()
 
@@ -26,12 +27,13 @@ def create_reply(
         response.status_code = 400
         return {"message": "Could not create reply"}
 
+
 @router.get("/replies/{reply_id}", response_model=Union[ReplyOutUser, Error])
 def get_a_reply(
     reply_id: int,
     response: Response,
     reply_repo: ReplyRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data)
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     try:
         return reply_repo.get_one(reply_id)
@@ -61,27 +63,25 @@ def get_thread_replies(
         response.status_code = 404
         return {"message": "Could not receive any forum by that id"}
 
+
 @router.put("/replies/{reply_id}", response_model=Union[ReplyOut, Error])
 def update_reply(
     reply_id: int,
     reply: ReplyIn,
     response: Response,
     reply_repo: ReplyRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data)
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     try:
         result = reply_repo.get_one(reply_id)
-        if (account_data["id"] == result.author_id):
+        if account_data["id"] == result.author_id:
             try:
-               print(reply)
-               return reply_repo.update(reply_id, reply, result.author_id )
+                return reply_repo.update(reply_id, reply, result.author_id)
             except Exception:
                 return {"message": "Could not update reply"}
         else:
             response.status_code = 401
-            return {
-                "message": "Your are not authorized to update this reply"
-            }
+            return {"message": "Your are not authorized to update this reply"}
     except Exception:
         response.status_code = 404
         return {"message": f"Reply with that id {reply_id} not found"}

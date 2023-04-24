@@ -10,6 +10,7 @@ class ReplyIn(BaseModel):
     image: Optional[str]
     rating: int
 
+
 class ReplyOut(BaseModel):
     id: int
     author_id: int
@@ -47,7 +48,6 @@ class ReplyRepository:
     ) -> ReplyOut:
         old_data = reply.dict()
         return ReplyOut(id=id, **old_data, author_id=account_id)
-
 
     def create(
         self,
@@ -110,12 +110,10 @@ class ReplyRepository:
                       where z.id = %s
                       order by created_on desc;
                     """,
-                    [reply_id ],
+                    [reply_id],
                 )
                 record = result.fetchone()
                 return self.record_to_reply_out(record)
-
-
 
     def get_replies(self, forum_id: int) -> List[ReplyOutUser]:
         with pool.connection() as conn:
@@ -138,7 +136,9 @@ class ReplyRepository:
                 )
                 return [self.record_to_reply_out(record) for record in result]
 
-    def update(self, reply_id: int, reply: ReplyIn, author_id: int) -> ReplyOut:
+    def update(
+        self, reply_id: int, reply: ReplyIn, author_id: int
+    ) -> ReplyOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
@@ -150,11 +150,7 @@ class ReplyRepository:
                     """,
                     [reply.answer, reply.image, reply_id],
                 )
-        return self.reply_in_to_out(
-                    reply_id,
-                    reply,
-                    author_id
-                )
+        return self.reply_in_to_out(reply_id, reply, author_id)
 
     def delete(self, reply_id: int) -> bool:
         with pool.connection() as conn:
