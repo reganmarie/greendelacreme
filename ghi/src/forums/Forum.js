@@ -39,8 +39,7 @@ export default function ForumList() {
     return (
       <>
       <div className="bg-color3 bg-opacity-30 min-h-screen " >
-      <div className="container align-items-center">
-        <label htmlFor="my-modal-5" className="btn">Create a Thread</label>
+        <label htmlFor="my-modal-5" className=" flex btn btn-success ">Create a Thread</label>
           <input type="checkbox" id="my-modal-5" className="modal-toggle" />
           <div className="modal" id="defaultModal">
             <div className="modal-box w-11/12 max-w-3xl">
@@ -70,10 +69,6 @@ export default function ForumList() {
               </form>
             </div>
           </div>
-
-
-
-      </div>
       <div className="godown" >
         <div  >
         {Array.isArray(threadData) && threadData.map(thread => {
@@ -85,7 +80,7 @@ export default function ForumList() {
           return(
             <div key={thread.id}>
         <Link to={`${thread.id}`}>
-        <div className="m-2 p-4 short max-h-50 rounded-3xl shadow-lg ml-90 bg-color4" key={thread.id}>
+        <div className="m-2 p-4 short max-h-50 rounded-3xl ml-90 bg-color4 shadow-md" key={thread.id}>
         <div className="flex place-content-between" >
         <div className="font-bold max-w-100 pt-3 ">{thread.title}</div>
                   <div className="space-x-2" >

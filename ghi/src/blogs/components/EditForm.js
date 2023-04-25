@@ -9,7 +9,7 @@ export default function EditForm({ blogId, blogTitle, blogBody, blogImage }) {
   const [image, setImage] = useState(blogImage);
   const [showImageInput, setShowImageInput] = useState(false);
   const [editBlog, result] = useUpdateBlogMutation();
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     await editBlog({ id: blogId, data: { title, body, image } });
