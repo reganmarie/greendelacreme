@@ -16,7 +16,6 @@
 }
 
 
-
 .swinging-image {
     -webkit-transform-origin: 50% 0;
     transform-origin: 50% 0;
@@ -51,27 +50,43 @@
 }
 .palm{
     position: fixed;
-    top: 19%;
-    left: 65%;
-    width: 40%;
-    height: 80%;
+    margin-top: 3vh;
+    margin-left: 48vw;
+    min-width: 25vw;
+    max-width: 25vw;
+    max-height: 70vh
+
 }
 
-@-webkit-keyframes shake {
-    0%{-webkit-transform: rotate(-5deg);}
-    50%{-webkit-transform: rotate(5deg)}
-    100%{-webkit-transform: rotate(-5deg);}
+
+
+@-webkit-keyframes shaking {
+    0%{-webkit-transform: rotate(1deg);}
+    40%{-webkit-transform: rotate(-1deg)}
+    100%{-webkit-transform: rotate(1deg);}
 }
 
-@keyframes shake {
-    0%{transform: rotate(5deg);}
-    50%{transform: rotate(-5deg)}
-    100%{transform: rotate(5deg);}
+@keyframes shaking {
+    0%{transform: rotate(1deg);}
+    40%{transform: rotate(-1deg)}
+    100%{transform: rotate(1deg);}
 }
 
 .shaking-image {
-    -webkit-transform-origin: 50% 0;
-    transform-origin: 50% 0;
-    -webkit-animation: swinging 4s ease-in-out forwards infinite;
-    animation: swinging 4s ease-in-out forwards infinite;
+    -webkit-transform-origin: bottom center;
+    transform-origin: bottom center;
+    -webkit-animation: shaking 4s ease-in-out forwards infinite;
+    animation: shaking 4s ease-in-out forwards infinite;
+}
+
+@media (max-width: 1800px) {
+    .shaking-image-outside {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .shaking-image-inside {
+        display: none;
+    }
 }

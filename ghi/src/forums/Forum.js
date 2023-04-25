@@ -40,10 +40,8 @@ export default function ForumList() {
 
     return (
       <>
-      <img key="hanging-plant-1" className="h-48 absolute top-20 left-4 swinging-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-1.png`} alt="Hanging plant" />
-      <img key="Palm_tree" className=" absolute palm left-96 top-96 left-4 shaking-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/Palm-tree.png`} alt="Hanging plant" />
-      <div className="bg-color3 bg-opacity-30 min-h-screen " >
-        <label htmlFor="my-modal-5" className=" flex btn btn-success ">Create a Thread</label>
+      <div className="bg-color3 bg-opacity-30 min-h-screen" >
+        <label htmlFor="my-modal-5" className="font-semibold flex justify-center text-white hover:bg-color7 py-4 rounded-none bg-color5 ">Create a Thread</label>
           <input type="checkbox" id="my-modal-5" className="modal-toggle" />
           <div className="modal" id="defaultModal">
             <div className="modal-box w-11/12 max-w-3xl">
@@ -74,7 +72,8 @@ export default function ForumList() {
             </div>
           </div>
       <div className="godown" >
-        <div  >
+        <div>
+          <img key="Palm_tree" className="palm shaking-image shaking-image-outside shaking-image-inside" src={`${process.env.PUBLIC_URL}/images/Palm-tree.png`} alt="Hanging plant" />
         {Array.isArray(threadData) && threadData.map(thread => {
         const options = {
           month: "long",
@@ -84,12 +83,12 @@ export default function ForumList() {
           return(
             <div key={thread.id}>
         <Link to={`${thread.id}`}>
-        <div className="m-2 p-4 short max-h-50 rounded-3xl ml-90 bg-color4 shadow-md" key={thread.id}>
+        <div className="m-2 p-4 short max-h-50 rounded-3xl ml-90 bg-color4 shadow-md hover:bg-color7 hover:bg-opacity-90" key={thread.id}>
         <div className="flex place-content-between" >
         <div className="font-bold max-w-100 pt-3 ">{thread.title}</div>
                   <div className="space-x-2" >
-                  <p className="text-xs">{new Date(thread.created_on).toLocaleDateString("en-US", options)} {new Date(thread.created_on).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
-                  <p className="flex justify-end  ">{thread.username}<img alt="" src={thread.avatar} className="w-8" />  </p>
+                  <p className="flex justify-end text-sm font-semibold">{thread.username}<img alt="" src={thread.avatar} className="w-6 h-5 ml-1 rounded-full" /></p>
+                  <p className="text-xs pt-4 ">{new Date(thread.created_on).toLocaleDateString("en-US", options)} {new Date(thread.created_on).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
                   </div>
           </div>
           </div>
