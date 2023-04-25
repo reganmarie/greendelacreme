@@ -1,13 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import CreateForm from './CreateForm';
 import EditForm from './EditForm';
 
 
-export default function Comment({ id, comments, username }) {
+export default function Comment({ id, comments, username, loggedInUser }) {
   const [limit, setLimit] = useState(3);
-  const user = useSelector(state => state.auth.user.username);
   const showCommentRef = useRef(null);
 
   const showMoreComments = () => {
@@ -43,7 +41,7 @@ export default function Comment({ id, comments, username }) {
                 </div>
               </div>
               <div className="pb-3">
-                {user === comment.username && <EditForm id={comment.id} initResponse={comment.response} key={`${comment.id} - edit comment`} />}
+                {loggedInUser.account.username === comment.username && <EditForm id={comment.id} initResponse={comment.response} key={`${comment.id} - edit comment`} />}
               </div>
             </>
           );

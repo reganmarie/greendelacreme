@@ -1,16 +1,16 @@
 
 import React, { useState } from 'react';
 import Dropdown from './Dropdown';
-import { useSelector } from 'react-redux';
 import Comment from '../../comments/Comment';
 import { useGetCommentsQuery } from '../../store/commentApi';
+import { useGetTokenQuery } from '../../store/authApi';
 
 export default function BlogPost({ username, name, avatar, createdOnDate, createOnTime, id, title, body, image }) {
   const [showLikeHover, setShowLikeHover] = useState(false);
   const [showChatHover, setShowChatHover] = useState(false);
   const [showComments, setShowComments] = useState(false);
-  const user = useSelector(state => state.auth.user.username);
   const { data: comments } = useGetCommentsQuery(id);
+  const { data: user } = useGetTokenQuery();
 
   return (
     <div key={id} className="flex max-w-2xl 1080:max-w-3xl 1440:max-w-5xl items-center justify-center mx-auto">
@@ -30,7 +30,7 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                   <div className="text-xs">{createdOnDate}</div>
                   <div className="text-xs">{createOnTime}</div>
                 </div>
-                {username === user ? <Dropdown key={`${id} - dropdown`} id={id} /> : null}
+                {username === user.account.username ? <Dropdown key={`${id} - dropdown`} id={id} /> : null}
               </div>
             </div>
             <div className="flex flex-col flex-grow mt-4 mb-5">
@@ -91,7 +91,7 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                 </div>
               </div>
             </div>
-            {showComments && <Comment id={id} username={username} comments={comments} />}
+            {showComments && <Comment id={id} username={username} comments={comments} loggedInUser={user} />}
           </div>
         </div>
       </div>
