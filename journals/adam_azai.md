@@ -1,6 +1,23 @@
+## April 19, 2023:
+Today, I worked on:
+
+* Forum Editing
+* Delete Forum Modal
+* Deployment
+
+Today I worked on finishing the functionalities of forum, mainly the feature of users being able to update their forum and delete it as well. I ended up making a modal for both update and delete as well as including a confirmation for deleting a thread. Fixed issue of toast alerts appearing twice and fixing error when updating the thread with no changes does not make the original thread blank.
+
+An aha moment today was realizing that my OnChange = target.value would not pick up the original values of a forum when editing thus the states of the hooks were blank if a user decided to update their post. This would lead to an empty thread as the title, body and image would turn blank. I fixed the issue by setting a value inside each of the inputs and using useEffect to ensure that the values actually exist and are not undefined before inserting them into the input boxes for editing a thread.
 
 
 ## April 18, 2023
+Today, I worked on:
+
+* Unit Tests
+
+Today we focused on writing our unit tests in order to get full points in that category. I wrote two unit tests, one for testing a empty list and the other for creating a mock thread. It took awhile to figure it out but we ended up passing our tests at the end of the day.
+
+An aha moment was figuring out that we had to override our own authentication for these unit tests as we have no account associated with these unit tests.
 
 
 ## April 17, 2023
@@ -14,6 +31,7 @@ After the long break I was able to get into the groove of coding quite fast and 
 
 An aha moment was fixing the syntax error in the dropdown component as I noticed there was no return statement for the function.
 
+
 ## April 6, 2023
 
 Today, I worked on:
@@ -24,7 +42,6 @@ Today, I worked on:
 We were able to solve the issue with route redirection if user is authorized to view a page or not. A single if conditional statement was needed before our return to actually return null for token if it was null. I paired with regan for the day and we collaborated on styling and formatting the forum page of our project. We ended up making the threads look very similar to our wireframe, and only requires minimal work beyond it. There needs to be a bit more content on the fourm page as it looks bad with all the empty white space currently.
 
 An aha moment today was learning about tailwind stling in detail and how simple statements as space between sets our tags exactly in the way we want it. As well as learning about accordions with tailwind.
-
 
 
 ## April 4, 2023
@@ -39,7 +56,6 @@ Today's goal was to finish front end authorization by adding the credentials inc
 An aha moment was learning about navigate and useNavigate as well as learning a bit about Typescript through the time I spent reading the Redux documentation.
 
 
-
 ## April 3, 2023
 
 Today, I worked on:
@@ -50,12 +66,9 @@ Today, I worked on:
 * Issue creation
 * Sign Up Page
 
-
 Today I worked alongside Brandon to install tailwind css and react-toastify, a message alert library, to have the ability to style our js pages. We also managed GitLab throughout the day to see what new issues and merge requests that Shayne and Regan needed to finish the backend authentication. I realized that we needed a Browser Router and Routes in our App.js to view different js pages on different urls and thus merged that feature into main. I started working on the Sign Up page but forgo my progress as we needed to focus on completing the pending merge requests. As a group we finished backend authentication, protecting endpoints, installing tailwind, and starting implement rtk for frontend authentication at the end of the day.
 
 An aha moment today was learning how amazing redux is from curtis's videos and further explaining from shayne and regan. Its functionality is amazing in how the states refresh once any data is changed throughout the site and how we do not need to fetch the urls multiple times in our js pages. And no need for useEffect in our js pages as well.
-
-
 
 
 ## March 30, 2023
