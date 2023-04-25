@@ -9,7 +9,7 @@ export const replyApi = createApi({
     tagTypes: ["ReplyList"],
     endpoints: builder => ({
       getReplies: builder.query({
-          query: id  => `/replies/${id}`,
+          query: id  => `/replies?forum_id=${id}`,
           providesTags: ['ReplyList'],
       }),
       getReply: builder.query({

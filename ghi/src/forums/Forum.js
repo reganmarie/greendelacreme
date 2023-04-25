@@ -38,7 +38,7 @@ export default function ForumList() {
 
     return (
       <>
-      <div className="bg-color3 bg-opacity-30 min-h-screen ">
+      <div className="bg-color3 bg-opacity-30 min-h-screen " >
       <div className="container align-items-center">
         <label htmlFor="my-modal-5" className="btn">Create a Thread</label>
           <input type="checkbox" id="my-modal-5" className="modal-toggle" />
@@ -75,7 +75,7 @@ export default function ForumList() {
 
       </div>
       <div className="godown" >
-        <div >
+        <div  >
         {Array.isArray(threadData) && threadData.map(thread => {
         const options = {
           month: "long",
@@ -83,19 +83,19 @@ export default function ForumList() {
           year: "numeric",
         };
           return(
-            <>
+            <div key={thread.id}>
         <Link to={`${thread.id}`}>
-        <div className="m-2 p-4 short max-h-50 rounded-3xl shadow-lg ml-90 bg-color4">
-        <div className="flex place-content-between">
+        <div className="m-2 p-4 short max-h-50 rounded-3xl shadow-lg ml-90 bg-color4" key={thread.id}>
+        <div className="flex place-content-between" >
         <div className="font-bold max-w-100 pt-3 ">{thread.title}</div>
-                  <div className=" space-x-2">
+                  <div className="space-x-2" >
                   <p className="text-xs">{new Date(thread.created_on).toLocaleDateString("en-US", options)} {new Date(thread.created_on).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
                   <p className="flex justify-end  ">{thread.username}<img alt="" src={thread.avatar} className="w-8" />  </p>
                   </div>
           </div>
           </div>
           </Link>
-          </>
+          </div>
           )
         })}
         </div>

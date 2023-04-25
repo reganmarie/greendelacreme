@@ -24,3 +24,8 @@ code {
 .short{
   width: 56rem;
 }
+#reply {
+  margin-left: 60rem;
+  margin-right: 10rem;
+  width: 90rem;
+}

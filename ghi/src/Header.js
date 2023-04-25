@@ -9,9 +9,9 @@ import Lottie from "lottie-react";
 import plant from "./assets/images/plant.json";
 import { useLogoutUserMutation } from './store/authApi';
 import { useNavigate, Link} from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 function Header({token}) {
-
   const navigate = useNavigate();
   const [logout] = useLogoutUserMutation();
 
