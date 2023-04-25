@@ -16,6 +16,7 @@ export default function BlogList() {
       <img key="hanging-plant-2" className="h-48 absolute top-20 left-36 swinging-image swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-2.png`} alt="Hanging plant" />
       <img key="hanging-plant-3" className="h-48 absolute top-20 right-0 swinging-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-3.png`} alt="Hanging plant" />
       <img key="hanging-plant-4" className="h-48 absolute top-20 right-36 swinging-image swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-4.png`} alt="Hanging plant" />
+      <img key="snake-plant" className="h-48 fixed bottom-0 right-5 swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/snake-plant.png`} alt="Snake plant" />
       {blogData && blogData.map(blog => {
         const options = {
           month: "long",

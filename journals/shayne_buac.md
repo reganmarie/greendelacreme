@@ -1,3 +1,17 @@
+## April 24, 2023
+Today, I:
+* Started and finished most of the edit and delete comment frontend components
+* Made a new migration file to fix the foreign keys for the comment table
+* Limited initial view of the comments list for a blog to 3 and incorporated a "Show more comments" that allows users to see 3 more comments whenever they click on it
+* Figured out how to use useRef and scrollIntoView and incoporated it into my create comment component so that it scrolls to the bottom of the list whenever a new comment is created
+
+
+## April 20, 2023
+Today, I:
+* Finished the frontend for list comments on a blog and create comment form where I added a scrollbar to the comments
+* Helped Regan and Imron with deployment and we were able to deploy successfully!
+* Completed the DELETE and PUT endpoints for the blog comments and also created a get_one mainly to use for error handling and didn't really make an API endpoint for it since it's not really needed
+
 ## April 19, 2023
 Today, I:
 * Finished reviewing Brandon's merge request for the navbar
