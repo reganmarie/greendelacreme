@@ -21,6 +21,8 @@ export default function ForumList() {
       e.target.reset()
 
     };
+
+
     if (submit.isSuccess){
         submit.reset()
         toast.success('🌱 Your thread has been seeded!', {
@@ -38,6 +40,8 @@ export default function ForumList() {
 
     return (
       <>
+      <img key="hanging-plant-1" className="h-48 absolute top-20 left-4 swinging-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-1.png`} alt="Hanging plant" />
+      <img key="Palm_tree" className=" absolute palm left-96 top-96 left-4 shaking-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/Palm-tree.png`} alt="Hanging plant" />
       <div className="bg-color3 bg-opacity-30 min-h-screen " >
         <label htmlFor="my-modal-5" className=" flex btn btn-success ">Create a Thread</label>
           <input type="checkbox" id="my-modal-5" className="modal-toggle" />

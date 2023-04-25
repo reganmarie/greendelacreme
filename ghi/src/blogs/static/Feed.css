@@ -15,6 +15,8 @@
     100%{transform: rotate(5deg);}
 }
 
+
+
 .swinging-image {
     -webkit-transform-origin: 50% 0;
     transform-origin: 50% 0;
@@ -46,4 +48,30 @@
 
 .submit-modal-form > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
+}
+.palm{
+    position: fixed;
+    top: 19%;
+    left: 65%;
+    width: 40%;
+    height: 80%;
+}
+
+@-webkit-keyframes shake {
+    0%{-webkit-transform: rotate(-5deg);}
+    50%{-webkit-transform: rotate(5deg)}
+    100%{-webkit-transform: rotate(-5deg);}
+}
+
+@keyframes shake {
+    0%{transform: rotate(5deg);}
+    50%{transform: rotate(-5deg)}
+    100%{transform: rotate(5deg);}
+}
+
+.shaking-image {
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-animation: swinging 4s ease-in-out forwards infinite;
+    animation: swinging 4s ease-in-out forwards infinite;
 }

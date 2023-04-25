@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useCreateReplyMutation, useGetRepliesQuery, useUpdateReplyMutation } from '../store/replyApi';
+import React, { useState, useEffect } from 'react';
+import { useCreateReplyMutation, useGetRepliesQuery, useGetReplyQuery, useUpdateReplyMutation } from '../store/replyApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
-import EditReply from './ReplyEdit';
+
 
 export default function Replies({id}){
   const { data: replyData } = useGetRepliesQuery(`${id}`);
@@ -11,9 +11,8 @@ export default function Replies({id}){
   const [ update, edited] = useUpdateReplyMutation()
   const [answer, setAnswer] = useState('');
   const [image, setImage] = useState('');
-  const [editedAnswer, setEditAnswer] = useState(answer)
-  const [editedImage, setEditImage] = useState(image)
-
+  const [editedAnswer, setEditAnswer] = useState('')
+  const [editedImage, setEditImage] = useState('')
   const user = useSelector(state => state.auth.user.username);
 
   const handleSubmit = async (e) => {
@@ -23,12 +22,6 @@ export default function Replies({id}){
     setImage('');
     e.target.reset()
   };
-
-  const handleEdit = async (e) => {
-    e.preventDefault();
-    await update( {id:id, data:{answer, image}});
-  }
-
   if (replied.isSuccess){
         replied.reset()
         toast.success('📝 Your reply was posted!', {
@@ -86,6 +79,7 @@ export default function Replies({id}){
                 day: "numeric",
                 year: "numeric",
             };
+        const replyId = reply.id
             return(
                 <>
     <article key={reply.id} id="reply" className="shadow-lg overflow-visible selection:max-w-6xl min-w-5xl p-6 mb-6 static break-words text-base bg-color6 rounded-lg dark:bg-gray-900">
@@ -97,31 +91,7 @@ export default function Replies({id}){
                         alt="Avatar" />User: {reply.username}</p>
             </div>
         {/* Modal for editing reply */}
-        <input type="checkbox" id="my-modal" className="modal-toggle" />
-       <div className="modal" >
-         <div className="modal-box w-11/12 max-w-3xl">
-           <form onSubmit={(e) => handleEdit(e)} >
-             <div className=" bg-white rounded-md px-6 py-10 max-w-2xl mx-auto">
-               <h1 className="text-center text-2xl font-bold text-black-500 mb-10">Edit Reply</h1>
-               <div className="space-y-4">
-                 <label htmlFor="my-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                 <div>
-                  <label htmlFor="answer" className="text-xl font-bold ">Answer</label>
-                  <textarea type="text" maxLength="150" required value={reply.answer} id="title" className="w-full outline-none py-1 px-2 text-md border-2 rounded-md" onChange={(e) => setEditAnswer(e.target.value)}/>
-                 </div>
-                 <div>
-                  <label htmlFor="name" className="text-lx font-serif">Image URL</label>
-                  <input type="text" value={reply.image} id="name" className="w-full ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" onChange={(e) => setEditImage(e.target.value)} />
-                 </div>
-                </div>
-                <div className="modal-action flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-3 dark:border-opacity-50">
-                  <label htmlFor="my-modal" className="hover:bg-red-800 px-6 py-2  block rounded-md text-lg font-semibold text-gray-100 bg-red-600 ">Exit</label>
-                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit">Update</button>
-                </div>
-            </div>
-           </form>
-         </div>
-       </div>
+
         {reply.username === user ?
             <>
             <div className="dropdown" >
@@ -134,7 +104,7 @@ export default function Replies({id}){
                     </svg>
                 </label>
                 <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><label htmlFor="my-modal" className="btn">open modal</label></li>
+                    <li><label htmlFor={`${reply.id}`} className="btn">open modal</label></li>
                     <li><a>Item 2</a></li>
                 </ul>
              </div>
@@ -150,6 +120,34 @@ export default function Replies({id}){
                 {new Date(reply.created_on).toLocaleDateString("en-US", options)} {new Date(reply.created_on).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
             </p>
         </div>
+    {/* Modal for editing a Reply */}
+    <input type="checkbox" id={`${reply.id}`}  className="modal-toggle" />
+       <div className="modal" >
+         <div className="modal-box w-11/12 max-w-3xl">
+           <form onSubmit={ async(e) => {e.preventDefault(); await update( {id: `${replyId}`, data:{'answer':editedAnswer,'rating': 0, 'image': editedImage, 'forum_id': id}}) }}>
+             <div className=" bg-white rounded-md px-6 py-10 max-w-2xl mx-auto">
+               <h1 className="text-center text-2xl font-bold text-black-500 mb-10">Edit Reply</h1>
+               <div className="space-y-4">
+                 <label htmlFor={`${reply.id}`} className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                 <div>
+                  <label htmlFor="answer" className="text-xl font-bold ">Answer</label>
+                  <textarea type="text"  required defaultValue={reply.answer} id="answer" className="w-full outline-none py-1 px-2 text-md border-2 rounded-md" onChange={(e) => setEditAnswer(e.target.value)}/>
+                 </div>
+                 <div>
+                  <label htmlFor="name" className="text-lx font-serif">Image URL</label>
+                  <input type="text" defaultValue={reply.image} id="image" className="w-full ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" onChange={(e) => setEditImage(e.target.value)} />
+                 </div>
+                </div>
+                <div className="modal-action flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-3 dark:border-opacity-50">
+                  <label htmlFor={`${reply.id}`} className="hover:bg-red-800 px-6 py-2  block rounded-md text-lg font-semibold text-gray-100 bg-red-600 ">Exit</label>
+                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit">Update</button>
+                </div>
+            </div>
+           </form>
+         </div>
+       </div>
+    {/* Modal for deleting a reply */}
+
     </article>
     </>
     )
