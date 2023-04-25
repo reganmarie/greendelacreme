@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useCreateReplyMutation, useGetRepliesQuery, useGetReplyQuery, useUpdateReplyMutation } from '../store/replyApi';
+import { useCreateReplyMutation, useDeleteReplyMutation, useGetRepliesQuery, useGetReplyQuery, useUpdateReplyMutation } from '../store/replyApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 
 
+
 export default function Replies({id}){
   const { data: replyData } = useGetRepliesQuery(`${id}`);
   const [ post, replied ] = useCreateReplyMutation();
-  const [ update, edited] = useUpdateReplyMutation()
+  const [ update, edited] = useUpdateReplyMutation();
+  const [deleteReply] = useDeleteReplyMutation();
   const [answer, setAnswer] = useState('');
   const [image, setImage] = useState('');
   const [editedAnswer, setEditAnswer] = useState('')
@@ -51,7 +53,7 @@ export default function Replies({id}){
    }
 
     return(
-  <section className=" dark:bg-gray-900 py-8 lg:py-16">
+  <section className=" dark:bg-gray-900 py-8 lg:py-16" >
     <form className=" bg-color5 bg-opacity-70 mb-6 max-w-5xl ml-12 p-5 rounded-2xl shadow-xl" onSubmit={(e) => handleSubmit(e)}>
         <h2 className="text-lg lg:text-2xl font-bold p-2 mb-5 text-gray-900 dark:text-white">Reply</h2>
         <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -103,9 +105,9 @@ export default function Replies({id}){
                     </path>
                     </svg>
                 </label>
-                <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><label htmlFor={`${reply.id}`} className="btn">open modal</label></li>
-                    <li><a>Item 2</a></li>
+                <ul tabIndex={0} className="dropdown-content menu shadow bg-base-100 rounded-box w-52">
+                    <li><label htmlFor={`${reply.id}`} className="bg-color4/60 hover:bg-color4 flex  hover:bg font-bold justify-center">Edit Reply</label></li>
+                    <li><label htmlFor='delete' className="bg-red-500 hover:bg-red-700 hover:bg font-bold justify-center">Delete Reply</label></li>
                 </ul>
              </div>
                 </>
@@ -121,7 +123,7 @@ export default function Replies({id}){
             </p>
         </div>
     {/* Modal for editing a Reply */}
-    <input type="checkbox" id={`${reply.id}`}  className="modal-toggle" />
+    <input type="checkbox" id={`${reply.id}`} className="modal-toggle" />
        <div className="modal" >
          <div className="modal-box w-11/12 max-w-3xl">
            <form onSubmit={ async(e) => {e.preventDefault(); await update( {id: `${replyId}`, data:{'answer':editedAnswer,'rating': 0, 'image': editedImage, 'forum_id': id}}) }}>
@@ -138,6 +140,7 @@ export default function Replies({id}){
                   <input type="text" defaultValue={reply.image} id="image" className="w-full ml-2 outline-none py-1 px-2 text-md border-2 rounded-md" onChange={(e) => setEditImage(e.target.value)} />
                  </div>
                 </div>
+                console.log(reply.id)
                 <div className="modal-action flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-3 dark:border-opacity-50">
                   <label htmlFor={`${reply.id}`} className="hover:bg-red-800 px-6 py-2  block rounded-md text-lg font-semibold text-gray-100 bg-red-600 ">Exit</label>
                   <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit">Update</button>
@@ -147,7 +150,26 @@ export default function Replies({id}){
          </div>
        </div>
     {/* Modal for deleting a reply */}
-
+    <input type="checkbox" id="delete" className="modal-toggle" />
+      <div className='modal'>
+        <div className='modal-box max-w-md '>
+          <div className='bg-white flex justify-center  rounded-md2'>
+            <div className='py-3'>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 -m-1  items-center text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 flex items-center mx-auto text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                      </svg>
+                     <h2 className="text-center pt-2 text-xl font-extrabold ">This will uproot the thread!</h2>
+                       <div className='modal-action  flex justify-center '>
+                         <label htmlFor="delete" className=" hover:bg-lime-800 px-6 py-2  block rounded-md text-lg font-semibold text-indigo-100 bg-lime-600 ">Keep</label>
+                         <button onClick={async(e) => {e.preventDefault();  await deleteReply(reply.id);}} className="hover:bg-amber-800  px-6 py-2 block rounded-md text-lg font-semibold text-indigo-100 bg-amber-600 ml-3" >Delete</button>
+                       </div>
+                    </div>
+                 </div>
+                </div>
+        </div>
     </article>
     </>
     )
