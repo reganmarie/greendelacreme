@@ -35,7 +35,7 @@ export default function CreateForm({ id, username, setLimit, comments }) {
     if (commentRef.current) {
       commentRef.current.scrollIntoView({
         behavior: 'smooth',
-        block: 'start'
+        block: 'center'
       });
     }
   }, [comments]);

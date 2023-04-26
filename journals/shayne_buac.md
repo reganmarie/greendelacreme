@@ -1,3 +1,18 @@
+## April 26, 2023
+Today, I:
+*
+
+## April 25, 2023
+Today, I:
+* Finally finished comments and got it all merged with main
+* Reviewed Regan's merge request for styling of the forum thread detail view and ended up having to fix some token stuff where the user slice wasn't updating properly
+* Helped Imron with debugging and with his edit replies form
+* Lots of miscellaneous stuff tbh, including styling
+* Finished the backend for blog likes and started a merge request for it!
+* Created an RTK API slice for likes and configured it in the store
+* Finished the like button and its functionality
+* Started on the unlike button
+
 ## April 24, 2023
 Today, I:
 * Started and finished most of the edit and delete comment frontend components

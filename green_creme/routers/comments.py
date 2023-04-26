@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 from typing import Union, List
 from authenticator import authenticator
 from queries.comments import (
@@ -17,15 +17,14 @@ router = APIRouter()
 @router.post("/comments", response_model=Union[CommentOut, Error])
 def create_comment(
     info: CommentInWithBlog,
+    response: Response,
     comment: CommentQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     try:
         if not info.response:
-            raise HTTPException(
-                status_code=400,
-                detail="Response is required",
-            )
+            response.status_code = 400
+            return {"message": "Response is required"}
         return comment.create(info, account_data["id"])
     except Exception:
         raise HTTPException(
@@ -45,23 +44,24 @@ def get_comments_for_one_blog(
 ):
     try:
         blog.get_one(blog_id)
-        try:
-            return comment.get_all_for_one_blog(blog_id)
-        except Exception:
-            raise HTTPException(
-                status_code=400,
-                detail="Could not retrieve comments",
-            )
     except Exception:
         raise HTTPException(
             status_code=404,
             detail="Blog does not exist",
+        )
+    try:
+        return comment.get_all_for_one_blog(blog_id)
+    except Exception:
+        raise HTTPException(
+            status_code=400,
+            detail="Could not retrieve comments",
         )
 
 
 @router.delete("/comments/{comment_id}", response_model=Union[bool, Error])
 def delete_comment(
     comment_id: int,
+    response: Response,
     comment: CommentQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
@@ -70,10 +70,8 @@ def delete_comment(
         if account_data["id"] == result.author_id:
             return comment.delete(comment_id)
         else:
-            raise HTTPException(
-                status_code=401,
-                detail="You are not authorized to delete this comment",
-            )
+            response.status_code = 401
+            return {"message": "You are not authorized to delete this comment"}
     except Exception:
         raise HTTPException(
             status_code=404,
@@ -84,6 +82,7 @@ def delete_comment(
 @router.put("/comments/{comment_id}", response_model=Union[CommentOut, Error])
 def update_comment(
     comment_id: int,
+    response: Response,
     comment: CommentIn,
     repo: CommentQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
@@ -96,15 +95,11 @@ def update_comment(
                     comment_id, comment, result.author_id, result.blog_id
                 )
             except Exception:
-                raise HTTPException(
-                    status_code=400,
-                    detail="Could not update this comment",
-                )
+                response.status_code = 400
+                return {"message": "Could not update this comment"}
         else:
-            raise HTTPException(
-                status_code=401,
-                detail="You are not authorized to update this comment",
-            )
+            response.status_code = 401
+            return {"message": "You are not authorized to update this comment"}
     except Exception:
         raise HTTPException(
             status_code=404,
