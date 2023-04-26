@@ -1,14 +1,16 @@
 
 import React, { useState } from 'react';
 import Dropdown from './Dropdown';
-import { useSelector } from 'react-redux';
-import Comment from './Comment';
+import Comment from '../../comments/Comment';
+import { useGetCommentsQuery } from '../../store/commentApi';
+import { useGetTokenQuery } from '../../store/authApi';
 
 export default function BlogPost({ username, name, avatar, createdOnDate, createOnTime, id, title, body, image }) {
   const [showLikeHover, setShowLikeHover] = useState(false);
   const [showChatHover, setShowChatHover] = useState(false);
   const [showComments, setShowComments] = useState(false);
-  const user = useSelector(state => state.auth.user.username);
+  const { data: comments } = useGetCommentsQuery(id);
+  const { data: user } = useGetTokenQuery();
 
   return (
     <div key={id} className="flex max-w-2xl 1080:max-w-3xl 1440:max-w-5xl items-center justify-center mx-auto">
@@ -28,7 +30,7 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                   <div className="text-xs">{createdOnDate}</div>
                   <div className="text-xs">{createOnTime}</div>
                 </div>
-                {username === user ? <Dropdown key={`${id} - dropdown`} id={id} /> : null}
+                {username === user.account.username ? <Dropdown key={`${id} - dropdown`} id={id} /> : null}
               </div>
             </div>
             <div className="flex flex-col flex-grow mt-4 mb-5">
@@ -43,39 +45,53 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                 alt="" />
             </div>
             <div>
-              <div className="flex items-center space-x-5 text-secondary-200">
-                <div
-                  className="flex cursor-pointer items-center transition hover:text-darkgreen"
-                  onMouseEnter={() => setShowLikeHover(true)}
-                  onMouseLeave={() => setShowLikeHover(false)}
-                >
-                  {
-                    !showLikeHover ?
-                      <img src={`${process.env.PUBLIC_URL}/images/hand-holding-up-a-flower.png`} className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
-                      :
-                      <img src={`${process.env.PUBLIC_URL}/images/hand-holding-up-a-flower-hover.png`} className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
-                  }
-                  <span className="font-semibold">Like</span>
-                </div>
-                <div className="flex space-x-4 md:space-x-8">
+              <div className="flex items-center space-x-5 text-secondary-200 justify-between">
+                <div className="flex space-x-4">
                   <div
                     className="flex cursor-pointer items-center transition hover:text-darkgreen"
-                    onMouseEnter={() => setShowChatHover(true)}
-                    onMouseLeave={() => setShowChatHover(false)}
-                    onClick={() => setShowComments(prev => !prev)}
+                    onMouseEnter={() => setShowLikeHover(true)}
+                    onMouseLeave={() => setShowLikeHover(false)}
                   >
                     {
-                      !showChatHover ?
-                        <img src="../images/plant-comment-icon.png" className="mr-1.5 h-6 w-6" alt="Comment" fill="none" />
+                      !showLikeHover ?
+                        <img src={`${process.env.PUBLIC_URL}/images/hand-holding-up-a-flower.png`} className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
                         :
-                        <img src="../images/chat-hover.png" className="mr-1.5 h-6 w-6" alt="Comment" fill="none" />
+                        <img src={`${process.env.PUBLIC_URL}/images/hand-holding-up-a-flower-hover.png`} className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
                     }
-                    <span className="font-semibold">Comment</span>
+                    <span className="font-semibold">Like</span>
                   </div>
+                  <div className="flex">
+                    <div
+                      className="flex cursor-pointer items-center transition hover:text-darkgreen"
+                      onMouseEnter={() => setShowChatHover(true)}
+                      onMouseLeave={() => setShowChatHover(false)}
+                      onClick={() => setShowComments(prev => !prev)}
+                    >
+                      {
+                        !showChatHover ?
+                          <img src={`${process.env.PUBLIC_URL}/images/plant-comment-icon.png`} className="mr-1.5 h-6 w-6" alt="Comment" fill="none" />
+                          :
+                          <img src={`${process.env.PUBLIC_URL}/images/chat-hover.png`} className="mr-1.5 h-6 w-6" alt="Comment" fill="none" />
+                      }
+                      <span className="font-semibold">Comment</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-1 text-xs">
+                  <span>4 Likes</span>
+                  <img src={`${process.env.PUBLIC_URL}/images/dot.png`} alt="dot" className="w-2 h-2 mr-1" />
+                  <span>
+                    {comments && (
+                      comments.length === 1 ?
+                        `${comments.length} Comment`
+                        :
+                        `${comments.length} Comments`
+                    )}
+                  </span>
                 </div>
               </div>
             </div>
-            {showComments && <Comment id={id} username={username} />}
+            {showComments && <Comment id={id} username={username} comments={comments} loggedInUser={user} />}
           </div>
         </div>
       </div>

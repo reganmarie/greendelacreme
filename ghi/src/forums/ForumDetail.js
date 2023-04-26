@@ -1,17 +1,18 @@
 import {React, useEffect, useState} from 'react';
 import { useGetThreadQuery } from '../store/forumApi';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector} from 'react-redux';
 import { useDeleteOwnerMutation, useUpdateThreadMutation } from '../store/forumApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Replies from './Replies';
+import { useGetTokenQuery } from '../store/authApi';
+
 
 export default function ForumDetail() {
     const { id } = useParams();
     const { data } = useGetThreadQuery(`${id}`);
     const [ update, edited ] = useUpdateThreadMutation();
-    const user = useSelector(state => state.auth.user.username);
+    const { data: user } = useGetTokenQuery();
     const [deleteForum ] = useDeleteOwnerMutation(id);
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
@@ -27,7 +28,7 @@ export default function ForumDetail() {
     }, [data]);
     const handleSubmit = async (e) => {
       e.preventDefault();
-      await update( {id: id, data:{title,body, image} });
+      await update( {id: id, data: {title, body, image} });
     }
 
     if (edited.isSuccess){
@@ -50,9 +51,9 @@ export default function ForumDetail() {
         }
 
     return(
-    <div className="bg-color3 bg-opacity-30 min-h-screen p-12" >
-    <section className="">
-      <div className="container px-6 py-10 mx-auto ">
+      <>
+    <section className="bg-white dark:bg-gray-900">
+      <div className="container px-72 py-10 mx-auto">
         {data &&
         <div>
           <h1 className="break-words text-5xl font-semibold text-gray-800 capitalize lg:text-9xl dark:text-white">{data.title}</h1>
@@ -63,15 +64,15 @@ export default function ForumDetail() {
               <p className="mt-3 text-4xl text-black-500 dark:text-gray-300 md:text-sm">
               {data.body}
               </p>
-              <div className="flex items-center mt-6">
                 <img className="object-cover object-center w-10 h-10 rounded-full" src={data.avatar} alt="" />
                 <div className="mx-4">
                   <h1 className="text-sm text-gray-700 dark:text-gray-200">{data.username}</h1>
                 </div>
-    {data.username === user ?
-     <>
-     <div key={data.id}>
-     <label htmlFor="my-modal-5" className="btn border-0 hover:bg-amber-800  bg-amber-600 mx-auto">Edit Thread</label>
+            </div>
+            </div>
+    {data.username === user.account.username ?
+    <>
+     <label htmlFor="my-modal-5" className="btn border-0 ml-auto hover:bg-amber-800 bg-amber-600">Edit Thread</label>
        <input type="checkbox" id="my-modal-5" className="modal-toggle" />
        <div className="modal">
          <div className="modal-box w-11/12 max-w-3xl">
@@ -101,7 +102,7 @@ export default function ForumDetail() {
            </form>
          </div>
        </div>
-    <label htmlFor='my-modal-1' className=' btn hover:bg-red-800 bg-red-600 border-0'>Delete</label>
+    <label htmlFor='my-modal-1' className='btn hover:bg-red-800 bg-red-600 border-0 ml-2'>Delete</label>
     <input type="checkbox" id="my-modal-1" className='modal-toggle'/>
       <div className='modal'>
         <div className='modal-box max-w-md '>
@@ -115,24 +116,20 @@ export default function ForumDetail() {
                       </svg>
                      <h2 className="text-center pt-2 text-xl font-extrabold ">This will uproot the thread!</h2>
                        <div className='modal-action  flex justify-center '>
-                         <label htmlFor="my-modal-1" className=" hover:bg-lime-800 px-6 py-2  block rounded-md text-lg font-semibold text-indigo-100 bg-lime-600 ">Keep</label>
+                         <label htmlFor="my-modal-1" className=" hover:bg-lime-800 px-6 py-2  block rounded-md text-lg font-semibold text-indigo-100 bg-lime-600 hover:cursor-pointer">Keep</label>
                          <button onClick={() => handleDelete(id)} className="hover:bg-amber-800  px-6 py-2 block rounded-md text-lg font-semibold text-indigo-100 bg-amber-600 ml-3" >Delete</button>
                        </div>
                     </div>
                  </div>
                 </div>
               </div>
-              </div>
-             </>
+              </>
             : null }
-             </div>
-         </div>
-       </div>
-    </div>
+            </div>
         }
         </div>
-    </section>
+        </section>
     <Replies id={id} />
-    </div >
+    </>
     )
 };
