@@ -17,7 +17,6 @@ export default function Replies({id}){
   const [editedImage, setEditImage] = useState('')
   const user = useSelector(state => state.auth.user.username);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await post({ 'answer': answer, 'forum_id': id, 'image': image, 'rating': 0});
@@ -54,7 +53,6 @@ export default function Replies({id}){
    }
 
     return(
-
   <section className=" dark:bg-gray-900 py-8 lg:py-16" >
     <form className=" bg-color5 bg-opacity-70 mb-6 max-w-5xl ml-12 p-5 rounded-2xl shadow-xl" onSubmit={(e) => handleSubmit(e)}>
         <h2 className="text-lg lg:text-2xl font-bold p-2 mb-5 text-gray-900 dark:text-white">Reply</h2>
@@ -94,8 +92,7 @@ export default function Replies({id}){
                         src={reply.avatar}
                         alt="Avatar" />User: {reply.username}</p>
             </div>
-
-
+        {/* Modal for editing reply */}
 
         {reply.username === user ?
             <>

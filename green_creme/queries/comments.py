@@ -106,16 +106,7 @@ class CommentQueries:
                     FROM comment AS c
                     LEFT JOIN accounts AS a
                     ON a.id = c.author_id
-<<<<<<< HEAD
-<<<<<<< HEAD
                     WHERE c.blog_id = (%s);
-=======
-                    WHERE c.blog_id = %s
-                    ORDER BY created_on;
->>>>>>> main
-=======
-                    WHERE c.blog_id = (%s);
->>>>>>> b9bebc055de41c966428e6db6b5c2e42ef6654d0
                     """,
                     [blog_id],
                 )

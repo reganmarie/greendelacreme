@@ -6,19 +6,17 @@ import { useDeleteOwnerMutation, useUpdateThreadMutation } from '../store/forumA
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Replies from './Replies';
-import { useGetTokenQuery } from '../store/authApi';
 
 export default function ForumDetail() {
     const { id } = useParams();
     const { data } = useGetThreadQuery(`${id}`);
     const [ update, edited ] = useUpdateThreadMutation();
-    const { data: user} = useGetTokenQuery();
+    const user = useSelector(state => state.auth.user.username);
     const [deleteForum ] = useDeleteOwnerMutation(id);
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [image, setImage] = useState("");
-
 
     useEffect(() => {
       if (data) {
@@ -52,27 +50,28 @@ export default function ForumDetail() {
         }
 
     return(
-      <>
-    <section className="bg-white dark:bg-gray-900">
-      <div className="container px-72 py-10 mx-auto">
+    <div className="bg-color3 bg-opacity-30 min-h-screen p-12" >
+    <section className="">
+      <div className="container px-6 py-10 mx-auto ">
         {data &&
         <div>
           <h1 className="break-words text-5xl font-semibold text-gray-800 capitalize lg:text-9xl dark:text-white">{data.title}</h1>
-            <div className="mt-8 lg:-mx-6 lg:flex lg:items-center">
-              <img className="object-cover w-full lg:mx-4 lg:w-1/2 rounded-xl h-72 lg:h-96" src={data.image} alt="" />
-              <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 ">
-                <p className="text-sm text-blue-500 uppercase">Body</p>
-                <p className="mt-3 text-4xl text-black-500 dark:text-gray-300 md:text-sm">
-                {data.body}
+          <div className="mt-8 lg:-mx-6 lg:flex lg:items-center">
+            <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6v ml-12 ">
+              <img className="object-cover "src={data.image} alt="" />
+              <p className="text-sm text-blue-500 uppercase">Body</p>
+              <p className="mt-3 text-4xl text-black-500 dark:text-gray-300 md:text-sm">
+              {data.body}
               </p>
+              <div className="flex items-center mt-6">
                 <img className="object-cover object-center w-10 h-10 rounded-full" src={data.avatar} alt="" />
                 <div className="mx-4">
                   <h1 className="text-sm text-gray-700 dark:text-gray-200">{data.username}</h1>
                 </div>
-            </div>
-    {data.username === user.account.username ?
-    <>
-     <label htmlFor="my-modal-5" className="btn border-0 ml-auto hover:bg-amber-800 bg-amber-600">Edit Thread</label>
+    {data.username === user ?
+     <>
+     <div key={data.id}>
+     <label htmlFor="my-modal-5" className="btn border-0 hover:bg-amber-800  bg-amber-600 mx-auto">Edit Thread</label>
        <input type="checkbox" id="my-modal-5" className="modal-toggle" />
        <div className="modal">
          <div className="modal-box w-11/12 max-w-3xl">
@@ -96,7 +95,7 @@ export default function ForumDetail() {
                 </div>
                 <div className="modal-action flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-3 dark:border-opacity-50">
                   <label htmlFor="my-modal-5" className="hover:bg-red-800 px-6 py-2  block rounded-md text-lg font-semibold text-gray-100 bg-red-600 ">Exit</label>
-                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit" >Update</button>
+                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit">Update</button>
                 </div>
             </div>
            </form>
@@ -123,14 +122,17 @@ export default function ForumDetail() {
                  </div>
                 </div>
               </div>
-              </>
+              </div>
+             </>
             : null }
-            </div>
-            </div>
+             </div>
+         </div>
+       </div>
+    </div>
         }
         </div>
-        </section>
+    </section>
     <Replies id={id} />
-    </>
+    </div >
     )
 };
