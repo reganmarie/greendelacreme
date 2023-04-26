@@ -9,9 +9,12 @@ class Error(BaseModel):
 
 
 class CommentIn(BaseModel):
-    blog_id: int
     response: str
     image: Optional[str]
+
+
+class CommentInWithBlog(CommentIn):
+    blog_id: int
 
 
 class CommentOut(BaseModel):
@@ -60,7 +63,7 @@ class CommentQueries:
 
     def create(
         self,
-        comment: CommentIn,
+        comment: CommentInWithBlog,
         account_id: int,
     ) -> Union[CommentOut, Error]:
         with pool.connection() as conn:
@@ -106,7 +109,8 @@ class CommentQueries:
                     FROM comment AS c
                     LEFT JOIN accounts AS a
                     ON a.id = c.author_id
-                    WHERE c.blog_id = (%s);
+                    WHERE c.blog_id = %s
+                    ORDER BY created_on;
                     """,
                     [blog_id],
                 )
@@ -125,3 +129,54 @@ class CommentQueries:
                     [comment_id],
                 )
                 return True
+
+    def get_one(self, comment_id: int) -> Union[CommentOutWithAccount, Error]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    SELECT c.id, c.author_id,
+                    c.blog_id, c.response,
+                    c.image,
+                    c.created_on AT TIME ZONE 'UTC' AT TIME ZONE 'US/Pacific',
+                    a.username, a.avatar,
+                    a.first, a.last
+                    FROM comment AS c
+                    LEFT JOIN accounts AS a
+                    ON a.id = c.author_id
+                    WHERE c.id = %s;
+                    """,
+                    [comment_id],
+                )
+                record = result.fetchone()
+                return self.record_to_comment_out(record)
+
+    def update(
+        self,
+        comment_id: int,
+        comment: CommentIn,
+        author_id: int,
+        blog_id: int,
+    ) -> Union[CommentOut, Error]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    UPDATE comment
+                    SET response = %s,
+                        image = %s
+                    WHERE id = %s;
+                    """,
+                    [
+                        comment.response,
+                        comment.image,
+                        comment_id,
+                    ],
+                )
+                old_data = comment.dict()
+                return CommentOut(
+                    id=comment_id,
+                    **old_data,
+                    author_id=author_id,
+                    blog_id=blog_id,
+                )
