@@ -51,9 +51,9 @@ export default function ForumDetail() {
         }
 
     return(
-    <div className="bg-color3 bg-opacity-30 min-h-screen p-12" >
+    <div className="bg-color3 bg-opacity-30 min-h-screen" >
     <section className="">
-      <div className="container px-6 py-10 mx-auto ">
+      <div className="container px-72 py-10 mx-auto ">
         {data &&
         <div>
           <h1 className="break-words text-5xl font-semibold text-gray-800 capitalize lg:text-9xl dark:text-white">{data.title}</h1>
