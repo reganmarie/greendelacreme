@@ -29,7 +29,7 @@ export default function EditForm({ blogId, blogTitle, blogBody, blogImage }) {
     setBody(blogBody);
     setImage(blogImage);
     setShowImageInput(false);
-  };
+  }
 
   return (
     <>
