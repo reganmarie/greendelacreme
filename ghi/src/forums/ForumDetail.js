@@ -1,18 +1,18 @@
 import {React, useEffect, useState} from 'react';
 import { useGetThreadQuery } from '../store/forumApi';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector} from 'react-redux';
 import { useDeleteOwnerMutation, useUpdateThreadMutation } from '../store/forumApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Replies from './Replies';
 import { useGetTokenQuery } from '../store/authApi';
 
-
 export default function ForumDetail() {
     const { id } = useParams();
     const { data } = useGetThreadQuery(`${id}`);
     const [ update, edited ] = useUpdateThreadMutation();
-    const { data: user } = useGetTokenQuery();
+    const { data: user} = useGetTokenQuery();
     const [deleteForum ] = useDeleteOwnerMutation(id);
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
@@ -28,7 +28,7 @@ export default function ForumDetail() {
     }, [data]);
     const handleSubmit = async (e) => {
       e.preventDefault();
-      await update( {id: id, data: {title, body, image} });
+      await update( {id: id, data:{title,body, image} });
     }
 
     if (edited.isSuccess){
@@ -96,13 +96,13 @@ export default function ForumDetail() {
                 </div>
                 <div className="modal-action flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-3 dark:border-opacity-50">
                   <label htmlFor="my-modal-5" className="hover:bg-red-800 px-6 py-2  block rounded-md text-lg font-semibold text-gray-100 bg-red-600 ">Exit</label>
-                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit">Update</button>
+                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit" >Update</button>
                 </div>
             </div>
            </form>
          </div>
        </div>
-    <label htmlFor='my-modal-1' className='btn hover:bg-red-800 bg-red-600 border-0 ml-2'>Delete</label>
+    <label htmlFor='my-modal-1' className=' btn hover:bg-red-800 bg-red-600 border-0'>Delete</label>
     <input type="checkbox" id="my-modal-1" className='modal-toggle'/>
       <div className='modal'>
         <div className='modal-box max-w-md '>
@@ -116,7 +116,7 @@ export default function ForumDetail() {
                       </svg>
                      <h2 className="text-center pt-2 text-xl font-extrabold ">This will uproot the thread!</h2>
                        <div className='modal-action  flex justify-center '>
-                         <label htmlFor="my-modal-1" className=" hover:bg-lime-800 px-6 py-2  block rounded-md text-lg font-semibold text-indigo-100 bg-lime-600 hover:cursor-pointer">Keep</label>
+                         <label htmlFor="my-modal-1" className=" hover:bg-lime-800 px-6 py-2  block rounded-md text-lg font-semibold text-indigo-100 bg-lime-600 ">Keep</label>
                          <button onClick={() => handleDelete(id)} className="hover:bg-amber-800  px-6 py-2 block rounded-md text-lg font-semibold text-indigo-100 bg-amber-600 ml-3" >Delete</button>
                        </div>
                     </div>
