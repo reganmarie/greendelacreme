@@ -3,7 +3,8 @@ import { useCreateThreadMutation, useGetThreadsQuery } from "../store/forumApi";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Lottie from "lottie-react";
+import tomato from '../assets/images/tomato.json';
 
 export default function ForumList() {
     const { data: threadData } = useGetThreadsQuery();
@@ -21,6 +22,8 @@ export default function ForumList() {
       e.target.reset()
 
     };
+
+
     if (submit.isSuccess){
         submit.reset()
         toast.success('🌱 Your thread has been seeded!', {
@@ -38,8 +41,8 @@ export default function ForumList() {
 
     return (
       <>
-      <div className="container align-items-center">
-        <label htmlFor="my-modal-5" className="btn">Create a Thread</label>
+      <div className="bg-color3 bg-opacity-30 min-h-screen" >
+        <label htmlFor="my-modal-5" className="font-semibold flex justify-center text-white hover:bg-color7 py-4 rounded-none bg-color5 ">Create a Thread</label>
           <input type="checkbox" id="my-modal-5" className="modal-toggle" />
           <div className="modal" id="defaultModal">
             <div className="modal-box w-11/12 max-w-3xl">
@@ -70,11 +73,9 @@ export default function ForumList() {
             </div>
           </div>
 
-
-
-      </div>
       <div className="godown" >
-        <div >
+        <div className="flex justify-between">
+        <div>
         {Array.isArray(threadData) && threadData.map(thread => {
         const options = {
           month: "long",
@@ -82,24 +83,26 @@ export default function ForumList() {
           year: "numeric",
         };
           return(
-            <>
+            <div key={thread.id}>
         <Link to={`${thread.id}`}>
-        <div className="m-2 p-4 short max-h-50 rounded-3xl shadow-lg ml-90 bg-red-300">
-        <div className="flex place-content-between">
+        <div className="m-2 p-4 short max-h-50 rounded-3xl ml-90 bg-color4 shadow-md hover:bg-color7 hover:bg-opacity-90" key={thread.id}>
+        <div className="flex place-content-between" >
         <div className="font-bold max-w-100 pt-3 ">{thread.title}</div>
-                  <div className=" space-x-2">
-                  <p className="text-xs">{new Date(thread.created_on).toLocaleDateString("en-US", options)} {new Date(thread.created_on).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
-                  <p className="flex justify-end  ">{thread.username}<img alt="" src={thread.avatar} className="w-8" />  </p>
+                  <div className="space-x-2" >
+                  <p className="flex justify-end text-sm font-semibold">{thread.username}<img alt="" src={thread.avatar} className="w-6 h-5 ml-1 rounded-full" /></p>
+                  <p className="text-xs pt-4 ">{new Date(thread.created_on).toLocaleDateString("en-US", options)} {new Date(thread.created_on).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
                   </div>
           </div>
           </div>
           </Link>
-          </>
+          </div>
           )
         })}
         </div>
+        <Lottie id='tomato'  animationData={tomato} />
         </div>
-
+        </div>
+        </div>
         </>
       )
 }

@@ -24,3 +24,45 @@ code {
 .short{
   width: 56rem;
 }
+#reply {
+  position: relative;
+  margin: auto;
+  margin-bottom: 1rem;
+  width: 50vw;
+}
+#tomato{
+  position: fixed;
+  right: -28rem;
+  bottom: -10rem;
+  width: 80vw;
+  height: 100%;
+  z-index: -1;
+}
+
+#water{
+  position: absolute;
+  top: 37rem;
+  height: 30rem;
+  width: 30rem;
+  margin-left: 60vw;
+  transform: scaleX(-1);
+}
+
+@media (max-width: 1300px) {
+    #tomato {
+        display: none;
+    }
+}
+
+@media (min-width: 2000px) {
+    #tomato {
+      right: -35rem;
+      bottom: -10rem;
+    }
+}
+
+@media (max-width: 800px) {
+    #water {
+        display: none;
+    }
+}

@@ -15,6 +15,13 @@ module.exports = {
         lemon: "#ffdfac",
         tertiary: "#e1e5e8",
         darkgreen: "#2f4034",
+        color1: "#CEE5D0",
+        color2: "#EF3F0D7",
+        color3: "#FFFFC5",
+        color4: "#D6E4AA",
+        color5: "#83B582",
+        color6: "#F4EAD5",
+        color7: "#CFB997"
       },
     },
   },

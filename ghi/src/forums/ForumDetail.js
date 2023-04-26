@@ -1,26 +1,36 @@
-import {React, useState} from 'react';
+import {React, useEffect, useState} from 'react';
 import { useGetThreadQuery } from '../store/forumApi';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDeleteOwnerMutation, useUpdateThreadMutation } from '../store/forumApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Replies from './Replies';
 import { useGetTokenQuery } from '../store/authApi';
+import Lottie from "lottie-react";
+import watering from '../assets/images/watering.json';
 
 
 export default function ForumDetail() {
     const { id } = useParams();
     const { data } = useGetThreadQuery(`${id}`);
     const [ update, edited ] = useUpdateThreadMutation();
-    const { data: user } = useGetTokenQuery();
+    const { data: user} = useGetTokenQuery();
     const [deleteForum ] = useDeleteOwnerMutation(id);
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [image, setImage] = useState("");
 
+    useEffect(() => {
+      if (data) {
+        setTitle(data.title);
+        setBody(data.body);
+        setImage(data.image);
+      }
+    }, [data]);
     const handleSubmit = async (e) => {
       e.preventDefault();
-      await update( {id: id, data: {title, body, image} });
+      await update( {id: id, data:{title,body, image} });
     }
 
     if (edited.isSuccess){
@@ -43,16 +53,17 @@ export default function ForumDetail() {
         }
 
     return(
-    <section className="bg-white dark:bg-gray-900">
-      <div className="container px-72 py-10 mx-auto">
+    <div className="bg-color3 bg-opacity-30 min-h-screen p-12" >
+    <section className="">
+      <div className="container px-6 py-10 mx-auto ">
         {data &&
         <div>
           <h1 className="break-words text-5xl font-semibold text-gray-800 capitalize lg:text-9xl dark:text-white">{data.title}</h1>
           <div className="mt-8 lg:-mx-6 lg:flex lg:items-center">
-            <img className="object-cover w-full lg:mx-4 lg:w-1/2 rounded-xl h-72 lg:h-96" src={data.image} alt="" />
-            <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 ">
-              <p className="text-sm text-blue-500 uppercase">Question</p>
-              <p className="mt-3 text-4xl text-gray-500 dark:text-gray-300 md:text-sm">
+            <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6v ml-12 ">
+              <img className="object-cover "src={data.image} alt="" />
+              <p className="text-sm text-blue-500 uppercase">Body</p>
+              <p className="mt-3 text-4xl text-black-500 dark:text-gray-300 md:text-sm">
               {data.body}
               </p>
               <div className="flex items-center mt-6">
@@ -62,9 +73,10 @@ export default function ForumDetail() {
                 </div>
     {data.username === user.account.username ?
      <>
-     <label htmlFor="my-modal-5" className="btn border-0 ml-auto hover:bg-amber-800 bg-amber-600">Edit Thread</label>
+     <div key={data.id}>
+     <label htmlFor="my-modal-5" className="btn border-0 hover:bg-amber-800  bg-amber-600 mx-auto">Edit Thread</label>
        <input type="checkbox" id="my-modal-5" className="modal-toggle" />
-       <div className="modal" >
+       <div className="modal">
          <div className="modal-box w-11/12 max-w-3xl">
            <form onSubmit={(e) => handleSubmit(e)}>
              <div className=" bg-white rounded-md px-6 py-10 max-w-2xl mx-auto">
@@ -86,13 +98,13 @@ export default function ForumDetail() {
                 </div>
                 <div className="modal-action flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-3 dark:border-opacity-50">
                   <label htmlFor="my-modal-5" className="hover:bg-red-800 px-6 py-2  block rounded-md text-lg font-semibold text-gray-100 bg-red-600 ">Exit</label>
-                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit">Update</button>
+                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit" >Update</button>
                 </div>
             </div>
            </form>
          </div>
        </div>
-    <label htmlFor='my-modal-1' className='btn hover:bg-red-800 bg-red-600 border-0 ml-2'>Delete</label>
+    <label htmlFor='my-modal-1' className=' btn hover:bg-red-800 bg-red-600 border-0'>Delete</label>
     <input type="checkbox" id="my-modal-1" className='modal-toggle'/>
       <div className='modal'>
         <div className='modal-box max-w-md '>
@@ -113,6 +125,7 @@ export default function ForumDetail() {
                  </div>
                 </div>
               </div>
+              </div>
              </>
             : null }
              </div>
@@ -122,5 +135,8 @@ export default function ForumDetail() {
         }
         </div>
     </section>
+    <Lottie id='water' animationData={watering} />
+    <Replies id={id} />
+    </div >
     )
 };

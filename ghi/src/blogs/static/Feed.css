@@ -4,15 +4,31 @@
 }
 
 @-webkit-keyframes swinging {
-    0%{-webkit-transform: rotate(5deg);}
-    50%{-webkit-transform: rotate(-5deg)}
-    100%{-webkit-transform: rotate(5deg);}
+    0% {
+        -webkit-transform: rotate(5deg);
+    }
+
+    50% {
+        -webkit-transform: rotate(-5deg)
+    }
+
+    100% {
+        -webkit-transform: rotate(5deg);
+    }
 }
 
 @keyframes swinging {
-    0%{transform: rotate(5deg);}
-    50%{transform: rotate(-5deg)}
-    100%{transform: rotate(5deg);}
+    0% {
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: rotate(-5deg)
+    }
+
+    100% {
+        transform: rotate(5deg);
+    }
 }
 
 .swinging-image {
@@ -44,6 +60,6 @@
     border-color: hsl(var(--p) / var(--tw-border-opacity));
 }
 
-.submit-modal-form > :not([hidden]) ~ :not([hidden]) {
+.submit-modal-form> :not([hidden])~ :not([hidden]) {
     --tw-space-x-reverse: 0;
 }

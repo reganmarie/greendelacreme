@@ -31,7 +31,7 @@
 }
 
 @media (max-width: 1049px) {
-    .HeaderOption__title {
-        display: none;
-    }
+  .HeaderOption__title {
+    display: none;
+  }
 }
