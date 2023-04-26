@@ -6,12 +6,13 @@ import { useDeleteOwnerMutation, useUpdateThreadMutation } from '../store/forumA
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Replies from './Replies';
+import { useGetTokenQuery } from '../store/authApi';
 
 export default function ForumDetail() {
     const { id } = useParams();
     const { data } = useGetThreadQuery(`${id}`);
     const [ update, edited ] = useUpdateThreadMutation();
-    const user = useSelector(state => state.auth.user.username);
+    const { data: user} = useGetTokenQuery();
     const [deleteForum ] = useDeleteOwnerMutation(id);
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
@@ -68,7 +69,7 @@ export default function ForumDetail() {
                 <div className="mx-4">
                   <h1 className="text-sm text-gray-700 dark:text-gray-200">{data.username}</h1>
                 </div>
-    {data.username === user ?
+    {data.username === user.account.username ?
      <>
      <div key={data.id}>
      <label htmlFor="my-modal-5" className="btn border-0 hover:bg-amber-800  bg-amber-600 mx-auto">Edit Thread</label>
@@ -95,7 +96,7 @@ export default function ForumDetail() {
                 </div>
                 <div className="modal-action flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-3 dark:border-opacity-50">
                   <label htmlFor="my-modal-5" className="hover:bg-red-800 px-6 py-2  block rounded-md text-lg font-semibold text-gray-100 bg-red-600 ">Exit</label>
-                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit">Update</button>
+                  <button className="hover:bg-lime-800 px-6 py-2 mx-auto block rounded-md text-lg font-semibold bg-lime-600 text-gray-100" type="submit" >Update</button>
                 </div>
             </div>
            </form>
