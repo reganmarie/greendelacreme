@@ -1,3 +1,28 @@
+## April 27, 2023
+
+Today, I worked on:
+
+* Forum Detail Styling
+* Final Merge Requests
+* Demo Prep
+
+Today, I did re-did styling for the forum detail and replies page since there was a merge request with a significant amount of additions to this page.
+
+I created my final merge requests and prepped for demos.
+
+## April 26, 2023
+
+Today, I worked on:
+
+* Forum Detail Styling
+* Psychopg issue research
+
+Today, I did re-did styling for the forum detail and replies page since there was a merge request with a significant amount of additions to this page.
+
+I also did max width instead of padding and it sized a lot better. I also did research with Shayne about the psychopg issue that keeps us from logging in the first few times we try to on our deployed site. It seems like a client (psychopg) issue so we weren't quite sure what to do.
+
+We posted on HMU, but it's not the biggest issue in the world so we're okay with it now!
+
 ## April 25, 2023
 
 Today, I worked on:
@@ -8,6 +33,31 @@ Today, I did styling for the forum detail page so the image was not so much larg
 
 I also moved the edit and delete buttons to the left and added margins between them! My aha moment was figuring out how to move and adjust these buttons since they're grouped together.
 
+
+## April 24, 2023
+
+Today, I worked on:
+
+* README
+* Forum Detail Styling
+
+Today, we didn't have as much time for our project since we took the practice test, but I was still able to drill down and get the README completed which was nice.
+
+Since we have our MVP completed, we're working on stretch goals, and I'm making the forum detail page look even better.
+
+My aha moment was getting the wireframe image to show up on the README!
+
+## April 20, 2023
+
+Today, I worked on:
+
+* Deployment
+
+Today, we worked in a group to debug our CI/CD pipeline and get to deployment. WE DID IT!! So that was my aha moment. There were a lot of times I was confused about what URL went where, but we got it figured out, and got rid of CORS errors.
+
+It was SO cool to see our app up and live with persitent data we can all see and interact with.
+
+Now we have CORB errors, but we'll debug that.
 
 ## April 19, 2023
 
