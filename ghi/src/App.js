@@ -30,7 +30,7 @@ function App() {
         <Route element={<Protected token={data} />}>
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/forum" element={<ForumList />} />
-          <Route path="/forum/:id" element={<ForumDetail />}  />
+          <Route path="/forum/:id" element={<ForumDetail />} />
         </Route>
         <Route path="/" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />

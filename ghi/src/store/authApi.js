@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { setUser } from './user';
 
 
 export const authApi = createApi({
@@ -50,14 +49,6 @@ export const authApi = createApi({
         url: '/token',
       }),
       providesTags: ["Token"],
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setUser(data));
-        } catch (e) {
-          return
-        }
-      },
     }),
     signup: builder.mutation({
       query: (data) => ({

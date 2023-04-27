@@ -58,7 +58,7 @@ function Signup({token}) {
           to="#"
           className="flex items-center mb-6 text-2xl text-gradient-to-r from-emerald-500 to-emerald-900 font-semibold text-black dark:text-white"
         >
-          <img className="w-14 h-14 mr-2" src="/images/planticon.png" alt="Plant icon" />
+          <img className="w-14 h-14 mr-2" src={`${process.env.PUBLIC_URL}/images/planticon.png`} alt="Plant icon" />
           Green de la Creme
         </Link>
         <div className="w-full text-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-white dark:border-gray-700 dark:bg-gray-800">

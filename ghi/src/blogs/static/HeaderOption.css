@@ -10,6 +10,7 @@
 
 .HeaderOption__icon {
   object-fit: contain;
+  margin-top: 7px;
   height: 25px !important;
   width: 25px !important;
 }
@@ -30,7 +31,7 @@
 }
 
 @media (max-width: 1049px) {
-    .HeaderOption__title {
-        display: none;
-    }
+  .HeaderOption__title {
+    display: none;
+  }
 }

@@ -1,3 +1,89 @@
+## April 26, 2023:
+Today, I worked on:
+
+* Debugging
+
+Today I worked on debugging my replies as it will be a gigantic merge into main and needs to ensure that it passes the pipeline and is ready for deployment.
+
+An aha moment was changing my reply migrations table due to shayne's review that my constraints for replies was wrong.
+
+## April 25, 2023:
+Today, I worked on:
+
+* Lottie Animations
+* Debugging
+* Styling
+
+Today I mainly focused on cleaning up the forum and replies components so that they are ready for presentation. Initially I was going to use animations similar to shayne's hanging plants but I figured out how to use lottie animations at the end of the night and implemented a few animations in the forum list and replies list.
+
+An aha moment was setting the tomato animation to z:index -1 as I had an issue where the bounding box of the animation was gigantic and immutable. Thus i realized I could just place it in a layer behind the threads solving the issue of being unable to actually click on the thread.
+
+## April 24, 2023:
+Today, I worked on:
+
+* Replies front end functionality
+* Replies styling
+
+Today I added the api endpoints as features on the forum detail pages and got my redux queries to work on the site. I continued styling the replies components and forum components to match the aesthetic that my other teammates designed. Users can now create a reply using a form underneath the thread and edit/delete the reply, if they made it, in a modal. Also debugged a few issues with replies and forum updates turning blank if the user does not change anything in the form.
+
+An aha moment was when shayne helped me debug edit a reply by setting the htmlFor of the modal to ${reply.id}. That ended up solving the issue I had when editing a reply and only getting a single reply's data for the answer and image instead of the specific replies' data.\
+
+## April 22-23, 2023:
+Over the weekend, I worked on:
+
+* Reply Migration Table
+* Reply Queries and Routers
+* Reply Redux
+
+Today I started working on a stretch goal of adding replies to a thread. I made the migration for the new table, reply. Created the backend endpoints for get all, post, put, get and delete a reply as well as the queries for it. Included error handling for all endpoints as well. After all the endpoints were made I set up redux for the new endpoints and ended the day without testing whether my redux queries worked.
+
+An aha moment was realizing that I needed to include hard-coded data, 0, and not a variable for ratings as I have no ideas how to implement the voting system yet.
+
+## April 20, 2023:
+Today, I worked on:
+
+* Create a Thread Modal function
+* Edit a Thread modal function
+
+Today I worked on adding the features of a user being able to create a thread once clicking on a button create a thread. That button will then pop up a modal with a form allowing users to create a thread. Once the thread is submitted it is instantly added to the page behind the modal, thanks redux invalidating the forum list. A toast notification will appear if the post is successful and a user can exit out of the modal by clicking on the x button in the upper right corner or the exit button. I also added the feature of editing the forum detail page by using a modal again. Once a user, who made that thread, clicks on update thread, they are shown the same form they used to create it to allow them to edit their thread.
+
+An aha moment today was learning how to stop the duplicate toast messages when posting a thread by giving the toast its own unique Id.
+
+
+## April 19, 2023:
+Today, I worked on:
+
+* Forum Editing
+* Delete Forum Modal
+* Deployment
+
+Today I worked on finishing the functionalities of forum, mainly the feature of users being able to update their forum and delete it as well. I ended up making a modal for both update and delete as well as including a confirmation for deleting a thread. Fixed issue of toast alerts appearing twice and fixing error when updating the thread with no changes does not make the original thread blank.
+
+An aha moment today was realizing that my OnChange = target.value would not pick up the original values of a forum when editing thus the states of the hooks were blank if a user decided to update their post. This would lead to an empty thread as the title, body and image would turn blank. I fixed the issue by setting a value inside each of the inputs and using useEffect to ensure that the values actually exist and are not undefined before inserting them into the input boxes for editing a thread.
+
+
+## April 18, 2023
+Today, I worked on:
+
+* Unit Tests
+
+Today we focused on writing our unit tests in order to get full points in that category. I wrote two unit tests, one for testing a empty list and the other for creating a mock thread. It took awhile to figure it out but we ended up passing our tests at the end of the day.
+
+An aha moment was figuring out that we had to override our own authentication for these unit tests as we have no account associated with these unit tests.
+
+
+## April 17, 2023
+
+Today, I worked on:
+
+* Creating a Thread FrontEnd
+* Error page for invalid routes
+
+After the long break I was able to get into the groove of coding quite fast and had a productive day. Initially started the day with debugging with Regan for the dropdown feature of editing a thread, a return statement was needed to actually show the dropdown items. Brandon brought up a good issue with inputting an nonexisting id in the url path for a specific form only shows a blank page. From that statement I decided to add a 404 page to any url that does not exist in our routing. I was able to make a modal instead of a new page to allow logged in users to create a post that instantly adds the new thread without refreshing the page, bless redux. Spent the rest of the day styling the modal to look clean and add closing buttons to exit the modal.
+
+An aha moment was fixing the syntax error in the dropdown component as I noticed there was no return statement for the function.
+
+
 ## April 6, 2023
 
 Today, I worked on:
@@ -8,12 +94,6 @@ Today, I worked on:
 We were able to solve the issue with route redirection if user is authorized to view a page or not. A single if conditional statement was needed before our return to actually return null for token if it was null. I paired with regan for the day and we collaborated on styling and formatting the forum page of our project. We ended up making the threads look very similar to our wireframe, and only requires minimal work beyond it. There needs to be a bit more content on the fourm page as it looks bad with all the empty white space currently.
 
 An aha moment today was learning about tailwind stling in detail and how simple statements as space between sets our tags exactly in the way we want it. As well as learning about accordions with tailwind.
-
-
-
-
-
-
 
 
 ## April 4, 2023
@@ -28,7 +108,6 @@ Today's goal was to finish front end authorization by adding the credentials inc
 An aha moment was learning about navigate and useNavigate as well as learning a bit about Typescript through the time I spent reading the Redux documentation.
 
 
-
 ## April 3, 2023
 
 Today, I worked on:
@@ -39,12 +118,9 @@ Today, I worked on:
 * Issue creation
 * Sign Up Page
 
-
 Today I worked alongside Brandon to install tailwind css and react-toastify, a message alert library, to have the ability to style our js pages. We also managed GitLab throughout the day to see what new issues and merge requests that Shayne and Regan needed to finish the backend authentication. I realized that we needed a Browser Router and Routes in our App.js to view different js pages on different urls and thus merged that feature into main. I started working on the Sign Up page but forgo my progress as we needed to focus on completing the pending merge requests. As a group we finished backend authentication, protecting endpoints, installing tailwind, and starting implement rtk for frontend authentication at the end of the day.
 
 An aha moment today was learning how amazing redux is from curtis's videos and further explaining from shayne and regan. Its functionality is amazing in how the states refresh once any data is changed throughout the site and how we do not need to fetch the urls multiple times in our js pages. And no need for useEffect in our js pages as well.
-
-
 
 
 ## March 30, 2023

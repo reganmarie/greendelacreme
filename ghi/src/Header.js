@@ -10,8 +10,8 @@ import plant from "./assets/images/plant.json";
 import { useLogoutUserMutation } from './store/authApi';
 import { useNavigate, Link} from 'react-router-dom';
 
-function Header({token}) {
 
+function Header({token}) {
   const navigate = useNavigate();
   const [logout] = useLogoutUserMutation();
 

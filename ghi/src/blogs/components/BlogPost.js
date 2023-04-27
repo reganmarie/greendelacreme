@@ -1,12 +1,26 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dropdown from './Dropdown';
-import { useSelector } from 'react-redux';
+import Comment from '../../comments/Comment';
+import { useGetCommentsQuery } from '../../store/commentApi';
+import { useGetTokenQuery } from '../../store/authApi';
+import { useGetLikesQuery } from '../../store/likeApi';
+import LikeButton from '../../likes/LikeButton';
+import UnlikeButton from '../../likes/UnlikeButton';
 
 export default function BlogPost({ username, name, avatar, createdOnDate, createOnTime, id, title, body, image }) {
-  const [showLikeHover, setShowLikeHover] = useState(false);
   const [showChatHover, setShowChatHover] = useState(false);
-  const user = useSelector(state => state.auth.user.username);
+  const [showComments, setShowComments] = useState(false);
+  const [likeAccounts, setLikeAccounts] = useState([]);
+  const { data: comments } = useGetCommentsQuery(id);
+  const { data: user } = useGetTokenQuery();
+  const { data: likes } = useGetLikesQuery(id);
+
+  useEffect(() => {
+    if (likes !== undefined && likes !== null) {
+      const accounts = likes.map(like => like.username);
+      setLikeAccounts(accounts);
+    }
+  }, [likes]);
 
   return (
     <div key={id} className="flex max-w-2xl 1080:max-w-3xl 1440:max-w-5xl items-center justify-center mx-auto">
@@ -26,12 +40,12 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                   <div className="text-xs">{createdOnDate}</div>
                   <div className="text-xs">{createOnTime}</div>
                 </div>
-                {username === user ? <Dropdown key={`${id} - dropdown`} id={id} /> : null}
+                {username === user.account.username ? <Dropdown key={`${id} - dropdown`} id={id} /> : null}
               </div>
             </div>
-            <div className="flex flex-col flex-grow mt-4 mb-6">
+            <div className="flex flex-col flex-grow mt-4 mb-5">
               <div className="mb-3 text-xl font-bold">{title}</div>
-              <div className="text-sm text-neutral-600 whitespace-pre-wrap">
+              <div className="text-base text-neutral-600 whitespace-pre-wrap">
                 <p className="break-words">
                   {body}
                 </p>
@@ -41,41 +55,56 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                 alt="" />
             </div>
             <div>
-              <div className="flex items-center space-x-5 text-secondary-200">
-                <div
-                className="flex cursor-pointer items-center transition hover:text-darkgreen"
-                onMouseEnter={() => setShowLikeHover(true)}
-                onMouseLeave={() => setShowLikeHover(false)}
-                >
-                  {
-                  !showLikeHover  ?
-                    <img src="../images/hand-holding-up-a-flower.png" className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
-                  :
-                    <img src="../images/hand-holding-up-a-flower-hover.png" className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
-                  }
-                  <span className="font-semibold">Like</span>
-                </div>
-                <div className="flex space-x-4 md:space-x-8">
-                  <div
-                  className="flex cursor-pointer items-center transition hover:text-darkgreen"
-                  onMouseEnter={() => setShowChatHover(true)}
-                  onMouseLeave={() => setShowChatHover(false)}
-                  >
-                    {
-                    !showChatHover ?
-                      <img src="../images/plant-comment-icon.png" className="mr-1.5 h-6 w-6" alt="Comment" fill="none" />
+              <div className="flex items-center space-x-5 text-secondary-200 justify-between">
+                <div className="flex space-x-4">
+                  {likes && user && likeAccounts.includes(user.account.username)
+                    ?
+                    <UnlikeButton likes={likes} user={user} />
                     :
-                      <img src="../images/chat-hover.png" className="mr-1.5 h-6 w-6" alt="Comment" fill="none" />
-                    }
-                    <span className="font-semibold">Comment</span>
+                    <LikeButton id={id} />
+                  }
+                  <div className="flex">
+                    <div
+                      className="flex cursor-pointer items-center hover:text-darkgreen"
+                      onMouseEnter={() => setShowChatHover(true)}
+                      onMouseLeave={() => setShowChatHover(false)}
+                      onClick={() => setShowComments(prev => !prev)}
+                    >
+                      {
+                        !showChatHover ?
+                          <img src={`${process.env.PUBLIC_URL}/images/plant-comment-icon.png`} className="mr-1.5 h-6 w-6" alt="Comment" fill="none" />
+                          :
+                          <img src={`${process.env.PUBLIC_URL}/images/chat-hover.png`} className="mr-1.5 h-6 w-6" alt="Comment" fill="none" />
+                      }
+                      <span className="font-semibold">Comment</span>
+                    </div>
                   </div>
+                </div>
+                <div className="flex items-center space-x-1 text-xs">
+                  <span>
+                    {likes && (
+                      likes.length === 1 ?
+                        `${likes.length} Like`
+                        :
+                        `${likes.length} Likes`
+                    )}
+                  </span>
+                  <img src={`${process.env.PUBLIC_URL}/images/dot.png`} alt="dot" className="w-2 h-2 mr-1" />
+                  <span>
+                    {comments && (
+                      comments.length === 1 ?
+                        `${comments.length} Comment`
+                        :
+                        `${comments.length} Comments`
+                    )}
+                  </span>
                 </div>
               </div>
             </div>
+            {showComments && <Comment id={id} username={username} comments={comments} loggedInUser={user} />}
           </div>
         </div>
       </div>
     </div>
-
   );
 }

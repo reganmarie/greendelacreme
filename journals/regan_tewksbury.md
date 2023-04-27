@@ -1,3 +1,14 @@
+## April 25, 2023
+
+Today, I worked on:
+
+* Forum Detail Styling
+
+Today, I did styling for the forum detail page so the image was not so much larger than the the text and responsive to the window size. I also added padding to the whole page so the image, text, and, once its merged, replies, have a padding of 72.
+
+I also moved the edit and delete buttons to the left and added margins between them! My aha moment was figuring out how to move and adjust these buttons since they're grouped together.
+
+
 ## April 19, 2023
 
 Today, I worked on:
