@@ -12,18 +12,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.godown{
+.godown {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.short{
+
+.short {
   width: 56rem;
 }
+
 #reply {
   position: relative;
   margin: auto;
@@ -32,7 +35,8 @@ code {
   width: auto;
   align-items: center;
 }
-#tomato{
+
+#tomato {
   position: fixed;
   right: -28rem;
   bottom: -10rem;
@@ -52,26 +56,88 @@ code {
 }
 
 @media (max-width: 1300px) {
-    #tomato {
-        display: none;
-    }
+  #tomato {
+    display: none;
+  }
 }
 
 @media (min-width: 2000px) {
-    #tomato {
-      right: -35rem;
-      bottom: -10rem;
-    }
+  #tomato {
+    right: -35rem;
+    bottom: -10rem;
+  }
 }
 
 @media (max-width: 800px) {
-    #water {
-        display: none;
-    }
+  #water {
+    display: none;
+  }
+}
+
+.indie {
+  font-family: 'Questrial', sans-serif;
+}
+
+.glass {
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(5px);
+}
+
+#glass {
+  max-width: fit-content;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .glass {
+    max-width: 100%;
+    max-height: 100%;
+    /* other styles */
+  }
+}
+
+#slide {
+  width: 100%;
+  height: 100vh;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  animation: slide 30s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  background-image: url('./assets/images/House.jpg'), url('./assets/images/GreenHouse.jpg'), url('./assets/images/Fire.jpg'), url('./assets/images/Sill.jpg'), url('./assets/images/Flower.jpg');
+}
+
+@keyframes slide {
+  0% {
+    background-image: url('./assets/images/House.jpg');
+
+  }
+
+  25% {
+    background-image: url('./assets/images/GreenHouse.jpg');
+
+  }
+
+  50% {
+    background-image: url('./assets/images/Fire.jpg');
+  }
+
+  75% {
+    background-image: url('./assets/images/Sill.jpg');
+  }
+
+  100% {
+    background-image: url('./assets/images/Flower.jpg');
+  }
+}
+
+#h1 {
+  text-shadow: 5px 5px #76B947;
 }
 .buttons{
   margin-left: 66%;
-}
-.replies {
-  margin-left: 43.5rem;
 }

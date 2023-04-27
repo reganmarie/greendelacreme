@@ -12,6 +12,7 @@ import { useGetTokenQuery } from './store/authApi';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageNotFound from './PageNotFound.js';
+import PlantResources from './PlantResources.js';
 
 function App() {
   const { data } = useGetTokenQuery();
@@ -32,6 +33,7 @@ function App() {
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/forum" element={<ForumList />} />
           <Route path="/forum/:id" element={<ForumDetail />} />
+          <Route path="/resources" element={<PlantResources/>} />
         </Route>
         <Route path="/login" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />

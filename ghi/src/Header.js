@@ -38,7 +38,9 @@ function Header({token}) {
             <Link to="/blogs">
             <HeaderOption Icon={HomeIcon} title="Home" />
             </Link>
+            <Link to="/resources">
             <HeaderOption Icon={YardIcon} title="Plant Info" />
+            </Link>
             <Link to="/forum">
             <HeaderOption Icon={MapTwoToneIcon} title="Forum" />
             </Link>

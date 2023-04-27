@@ -1,9 +1,24 @@
+## April 27, 2023:
+Today, I worked on:
+
+* Pipeline Editing
+* Styling
+* Plant Resources Page
+* Perenual Api
+
+Started off the day trying to format the data incoming from the perenual Api and changing it to a redux query but it was no avail and I decided to spend my time on finalizing our project for demonstrating it to the instructors. I ended up adding an animation to the background of the Plant resources that fades between pretty plants and environments. Fixed the issue with the positioning of the watering can animation in forum detail and just focusing on putting the final touches on the project.
+
+An aha moment today was finding out all the different ways I could tackle the background image animation whether it be a javascript script, css ruling, or even using a package called slider to make a inactive carousel that autoplays. Decided to run with the css ruling due to being unfamiliar with making a custom script tag for jsx and the slider library was mainly for interactivity which I deemed unnecessary.
+
+
 ## April 26, 2023:
 Today, I worked on:
 
 * Debugging
+* Plant Resources Page
+* Perenual Api
 
-Today I worked on debugging my replies as it will be a gigantic merge into main and needs to ensure that it passes the pipeline and is ready for deployment.
+Today I worked on debugging my replies as it will be a gigantic merge into main and needs to ensure that it passes the pipeline and is ready for deployment. I also made a new static page to display simple plant resources for users so that they can learn more about plant care and plant designing. Worked last at night on the perenual api, got it to console.log(data) but ran into multiple issues of actually formatting the data to return the information in a card.
 
 An aha moment was changing my reply migrations table due to shayne's review that my constraints for replies was wrong.
 
@@ -84,6 +99,17 @@ After the long break I was able to get into the groove of coding quite fast and 
 An aha moment was fixing the syntax error in the dropdown component as I noticed there was no return statement for the function.
 
 
+## April 7, 2023
+
+Today, I worked on:
+
+* Pair programming with Regan
+* Forum Detail
+
+I pair programmed with Regan. I was the watcher and mainly just advised Regan on syntax or console errors that would appear.
+
+An aha moment was using backticks for our variables to pass in the id we needed.
+
 ## April 6, 2023
 
 Today, I worked on:
@@ -91,10 +117,20 @@ Today, I worked on:
 * Styling the Forum page
 * Debugging protected Routes
 
-We were able to solve the issue with route redirection if user is authorized to view a page or not. A single if conditional statement was needed before our return to actually return null for token if it was null. I paired with regan for the day and we collaborated on styling and formatting the forum page of our project. We ended up making the threads look very similar to our wireframe, and only requires minimal work beyond it. There needs to be a bit more content on the fourm page as it looks bad with all the empty white space currently.
+We were able to solve the issue with route redirection if user is authorized to view a page or not. A single if conditional statement was needed before our return to actually return null for token if it was null. I paired with regan for the day and we collaborated on styling and formatting the forum page of our project. We ended up making the threads look very similar to our wireframe, and only requires minimal work beyond it. There needs to be a bit more content on the forum page as it looks bad with all the empty white space currently.
 
-An aha moment today was learning about tailwind stling in detail and how simple statements as space between sets our tags exactly in the way we want it. As well as learning about accordions with tailwind.
+An aha moment today was learning about tailwind styling in detail and how simple statements as space between sets our tags exactly in the way we want it. As well as learning about accordions with tailwind.
 
+## April 5, 2023
+
+Today, I worked on:
+
+* Pair programmed with Regan on viewing forums
+* RTK Query
+
+Worked alongside regan to display our threads in a list on our front end. Debugged our RTK Query and our Redux queries.
+
+An aha moment was figuring out how to properly use RTK Query for our endpoints and displaying the data within the query.
 
 ## April 4, 2023
 
@@ -155,9 +191,6 @@ Today, I worked on:
 Today we had our first standup as a group. I ended up as scrum master for the day and simply explained what we did yesterday and what our goals for today was. I would like to say that we reached the goals we set our group up for. Each of us ended up getting experience in creating a migration and learning how to approve/set up merge requests in GitLab.
 
 Today I found that we can alter our migrated tables to include the foreign keys at a later date so we do not need to stress over potential stretch goal migrations in the future. The alter SQL statement allows us to alter the migration table down the line.
-
-
-
 
 - As a developer I want users who create a thread/blog to have their author_id automatically attached to the
   post upon sending the 'POST' requests by using the auth token
