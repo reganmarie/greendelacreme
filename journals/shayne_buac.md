@@ -1,3 +1,11 @@
+## April 27, 2023
+Today, I:
+* Finished the sidebar nav on the feed page
+* Added an animation that shows first before showing the feed page
+* Added a loading animation that shows if the blog data is still loading in the feed
+* Approved Brandon's merge request for the landing page and his unit test
+* Made a merge request for the sidebar nav
+
 ## April 26, 2023
 Today, I:
 * Reviewed Imron's merge request for the forum replies and debugging

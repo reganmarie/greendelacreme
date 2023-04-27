@@ -409,7 +409,7 @@ export default function MainPage() {
                 </div>
               </div>
               <div>
-                <p>Copyright © 2023 - All right reserved by Green de la Industries Ltd</p>
+                <p>Copyright © 2023 - All right reserved by Green de la Creme Industries Ltd</p>
               </div>
             </footer>
           </section>

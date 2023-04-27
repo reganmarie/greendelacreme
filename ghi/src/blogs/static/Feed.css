@@ -63,3 +63,13 @@
 .submit-modal-form> :not([hidden])~ :not([hidden]) {
     --tw-space-x-reverse: 0;
 }
+
+@media (max-width: 650px) {
+    .sidebar {
+        visibility: hidden;
+    }
+}
+
+a.active svg.sidebar {
+    color: #83B582;
+}

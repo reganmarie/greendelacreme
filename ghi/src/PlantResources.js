@@ -5,11 +5,6 @@ import React from 'react'
 export default function PlantResources() {
   return (
     <>
-      <link rel="preload" href="./assets/images/House.jpg" as="image" />
-      <link rel="preload" href="./assets/images/GreenHouse.jpg" as="image" />
-      <link rel="preload" href="./assets/images/Fire.jpg" as="image" />
-      <link rel="preload" href="./assets/images/Sill.jpg" as="image" />
-      <link rel="preload" href="./assets/images/Flower.jpg" as="image" />
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
       </style>
