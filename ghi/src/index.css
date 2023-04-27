@@ -28,7 +28,9 @@ code {
   position: relative;
   margin: auto;
   margin-bottom: 1rem;
-  width: 50vw;
+  align-items: center;
+  width: auto;
+  align-items: center;
 }
 #tomato{
   position: fixed;
@@ -40,11 +42,12 @@ code {
 }
 
 #water{
-  position: absolute;
+  position: static;
   top: 37rem;
   height: 30rem;
   width: 30rem;
-  margin-left: 60vw;
+  margin-left: 20vw;
+  margin-bottom: -15rem;
   transform: scaleX(-1);
 }
 
@@ -65,4 +68,10 @@ code {
     #water {
         display: none;
     }
+}
+.buttons{
+  margin-left: 66%;
+}
+.replies {
+  margin-left: 43.5rem;
 }

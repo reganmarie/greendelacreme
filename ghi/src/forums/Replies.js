@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useGetTokenQuery } from '../store/authApi';
 import EditReply from './EditReply';
+import Lottie from "lottie-react";
+import watering from '../assets/images/watering.json';
 
 
 export default function Replies({id}){
@@ -37,7 +39,8 @@ export default function Replies({id}){
 
     return(
       <>
-  <section className=" dark:bg-gray-900 py-8 lg:py-16" >
+
+  <section className=" dark:bg-gray-900 py-8 replies lg:py-16 max-w-3xl 1080:max-w-4xl 1440:max-w-6xl items-center justify-center mx-auto" >
     <form className=" bg-color5 bg-opacity-70 mb-6 max-w-5xl ml-12 p-5 rounded-2xl shadow-xl" onSubmit={(e) => handleSubmit(e)}>
         <h2 className="text-lg lg:text-2xl font-bold p-2 mb-5 text-gray-900 dark:text-white">Reply</h2>
         <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -58,6 +61,7 @@ export default function Replies({id}){
             Post Reply
         </button>
     </form>
+    <Lottie id='water' animationData={watering} />
         <h2 id='reply' className="text-lg lg:text-2xl p-4  font-bold text-gray-900 dark:text-white">Replies</h2>
       {Array.isArray(replyData) && replyData.map(reply =>{
             const options = {
@@ -68,7 +72,7 @@ export default function Replies({id}){
         const replyId = reply.id
             return(
                 <>
-    <article key={reply.id} id="reply" className="shadow-lg overflow-visible selection:max-w-6xl min-w-5xl p-6 mb-6 static break-words text-base bg-color6 rounded-lg dark:bg-gray-900">
+    <article key={reply.id} id="reply" className="shadow-lg overflow-visible selection:max-w-3xl p-6 mb-6 static break-words text-base bg-color6 rounded-lg dark:bg-gray-900 max-w-3xl 1080:max-w-4xl 1440:max-w-6xl mx-auto">
         <footer className="flex justify-between items-center mb-2">
             <div className="flex items-center">
                 <p  className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img

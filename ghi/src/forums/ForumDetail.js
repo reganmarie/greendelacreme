@@ -6,9 +6,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Replies from './Replies';
 import { useGetTokenQuery } from '../store/authApi';
-import Lottie from "lottie-react";
-import watering from '../assets/images/watering.json';
-
 
 export default function ForumDetail() {
     const { id } = useParams();
@@ -53,17 +50,17 @@ export default function ForumDetail() {
         }
 
     return(
-    <div className="bg-color3 bg-opacity-30 min-h-screen p-12" >
-    <section className="">
-      <div className="container px-6 py-10 mx-auto ">
+    <div className="bg-color3 min-h-screen bg-opacity-30 p-12">
+    <section className="flex max-w-3xl 1080:max-w-4xl 1440:max-w-5xl justify-center items-center mx-auto">
+      <div className="container">
         {data &&
         <div>
-          <h1 className="break-words text-5xl font-semibold text-gray-800 capitalize lg:text-9xl dark:text-white">{data.title}</h1>
+          <h1 className="flex break-words justify-center mx-auto ml-6 text-4xl font-semibold text-gray-800 capitalize lg:text-5xl dark:text-white">{data.title}</h1>
           <div className="mt-8 lg:-mx-6 lg:flex lg:items-center">
             <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6v ml-12 ">
-              <img className="object-cover "src={data.image} alt="" />
+              <img className="flex justify-center max-w-3xl 1080:max-w-4xl 1440:max-w-5xl"src={data.image} alt="" />
               <p className="text-sm text-blue-500 uppercase">Body</p>
-              <p className="mt-3 text-4xl text-black-500 dark:text-gray-300 md:text-sm">
+              <p className="mt-3 text-2xl text-black-500 dark:text-gray-300 md:text-sm">
               {data.body}
               </p>
               <div className="flex items-center mt-6">
@@ -73,14 +70,14 @@ export default function ForumDetail() {
                 </div>
     {data.username === user.account.username ?
      <>
-     <div key={data.id}>
-     <label htmlFor="my-modal-5" className="btn border-0 hover:bg-amber-800  bg-amber-600 mx-auto">Edit Thread</label>
+     <div className='buttons' key={data.id}>
+     <label htmlFor="my-modal-5" className="btn border-0 hover:bg-lime-800  bg-lime-600 ">Edit Thread</label>
        <input type="checkbox" id="my-modal-5" className="modal-toggle" />
        <div className="modal">
          <div className="modal-box w-11/12 max-w-3xl">
            <form onSubmit={(e) => handleSubmit(e)}>
              <div className=" bg-white rounded-md px-6 py-10 max-w-2xl mx-auto">
-               <h1 className="text-center text-2xl font-bold text-black-500 mb-10">Edit Post</h1>
+               <h1 className="text-center text-2xl font-bold text-black-500 mb-10 ml-auto">Edit Post</h1>
                <div className="space-y-4">
                  <label htmlFor="my-modal-5" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                  <div>
@@ -104,7 +101,7 @@ export default function ForumDetail() {
            </form>
          </div>
        </div>
-    <label htmlFor='my-modal-1' className=' btn hover:bg-red-800 bg-red-600 border-0'>Delete</label>
+    <label htmlFor='my-modal-1' className=' btn hover:bg-red-800 bg-red-600 border-0 ml-2'>Delete</label>
     <input type="checkbox" id="my-modal-1" className='modal-toggle'/>
       <div className='modal'>
         <div className='modal-box max-w-md '>
@@ -135,7 +132,6 @@ export default function ForumDetail() {
         }
         </div>
     </section>
-    <Lottie id='water' animationData={watering} />
     <Replies id={id} />
     </div >
     )
