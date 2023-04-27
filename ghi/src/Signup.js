@@ -180,7 +180,7 @@ function Signup({token}) {
                     I accept the{" "}
                     <Link
                       className="font-medium text-gradient-to-r from-slate-300 to-slate-500 hover:underline"
-                      to="#"
+                      to="/faq"
                     >
                       Terms and Conditions
                     </Link>
@@ -196,7 +196,7 @@ function Signup({token}) {
               <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
                 <Link
-                  to="/"
+                  to="/login"
                   className="font-medium text-primary-600 hover:underline
                     dark:text-primary-500"
                 >

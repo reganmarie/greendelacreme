@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useCreateCommentMutation } from '../store/commentApi';
-import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+import { useGetTokenQuery } from '../store/authApi';
 
 
 export default function CreateForm({ id, username, setLimit, comments }) {
   const [response, setResponse] = useState("");
   const [showPicker, setShowPicker] = useState(false);
   const [createComment, result] = useCreateCommentMutation();
-  const user = useSelector(state => state.auth.user.username);
+  const { data: user } = useGetTokenQuery();
   const commentRef = useRef(null);
 
   const onEmojiClick = (e) => {
@@ -27,7 +27,7 @@ export default function CreateForm({ id, username, setLimit, comments }) {
   };
 
   if (result.isSuccess) {
-    toast(`${user} commented on ${username}'s blog!`, { toastId: `commentSuccess - ${response}` });
+    toast(`${user.account.username} commented on ${username}'s blog!`, { toastId: `commentSuccess - ${response}` });
     result.reset();
   }
 

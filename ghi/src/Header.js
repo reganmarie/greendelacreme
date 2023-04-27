@@ -22,12 +22,12 @@ function Header({token}) {
 
   useEffect(() => {
     if (token === null) {
-      navigate('/');
+      navigate('/login');
     }
   }, [token, navigate])
 
   return (
-    <div className="bg-[#f8f8f6] border-b-[0.1px] border-b-[lightgray] sticky">
+    <div className="bg-[#f8f8f6] border-b-[0.1px] border-b-[lightgray] sticky ">
       <div className="flex justify-center items-center max-w-7xl mx-auto space-x-32">
         <div className="mr-[82px] mr__small">
           <Link to="/blogs">
