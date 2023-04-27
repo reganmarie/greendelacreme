@@ -1,6 +1,10 @@
 ## April 26, 2023
 Today, I:
-*
+* Reviewed Imron's merge request for the forum replies and debugging
+* Made a merge request for the likes frontend
+* More styling of the feed page, including starting to make a sidebar nav when the navbar is out of sight when scrolling down
+* Looking into more stretch goals to tackle
+* Helping other teams :)
 
 ## April 25, 2023
 Today, I:

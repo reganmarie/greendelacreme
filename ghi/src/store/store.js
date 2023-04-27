@@ -3,6 +3,7 @@ import { authApi } from "./authApi";
 import { blogApi } from "./blogApi";
 import { forumApi } from "./forumApi";
 import { commentApi } from "./commentApi";
+import { likeApi } from "./likeApi";
 import { replyApi } from "./replyApi";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { userSlice } from "./user";
@@ -15,6 +16,7 @@ export const store = configureStore({
         [forumApi.reducerPath]: forumApi.reducer,
         [blogApi.reducerPath]: blogApi.reducer,
         [commentApi.reducerPath]: commentApi.reducer,
+        [likeApi.reducerPath]: likeApi.reducer,
         [replyApi.reducerPath]: replyApi.reducer,
     },
     middleware: getDefaultMiddleware =>
@@ -23,6 +25,7 @@ export const store = configureStore({
             .concat(blogApi.middleware)
             .concat(authApi.middleware)
             .concat(commentApi.middleware)
+            .concat(likeApi.middleware)
             .concat(replyApi.middleware),
 });
 

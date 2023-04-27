@@ -1,16 +1,26 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dropdown from './Dropdown';
 import Comment from '../../comments/Comment';
 import { useGetCommentsQuery } from '../../store/commentApi';
 import { useGetTokenQuery } from '../../store/authApi';
+import { useGetLikesQuery } from '../../store/likeApi';
+import LikeButton from '../../likes/LikeButton';
+import UnlikeButton from '../../likes/UnlikeButton';
 
 export default function BlogPost({ username, name, avatar, createdOnDate, createOnTime, id, title, body, image }) {
-  const [showLikeHover, setShowLikeHover] = useState(false);
   const [showChatHover, setShowChatHover] = useState(false);
   const [showComments, setShowComments] = useState(false);
+  const [likeAccounts, setLikeAccounts] = useState([]);
   const { data: comments } = useGetCommentsQuery(id);
   const { data: user } = useGetTokenQuery();
+  const { data: likes } = useGetLikesQuery(id);
+
+  useEffect(() => {
+    if (likes !== undefined && likes !== null) {
+      const accounts = likes.map(like => like.username);
+      setLikeAccounts(accounts);
+    }
+  }, [likes]);
 
   return (
     <div key={id} className="flex max-w-2xl 1080:max-w-3xl 1440:max-w-5xl items-center justify-center mx-auto">
@@ -47,22 +57,15 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
             <div>
               <div className="flex items-center space-x-5 text-secondary-200 justify-between">
                 <div className="flex space-x-4">
-                  <div
-                    className="flex cursor-pointer items-center transition hover:text-darkgreen"
-                    onMouseEnter={() => setShowLikeHover(true)}
-                    onMouseLeave={() => setShowLikeHover(false)}
-                  >
-                    {
-                      !showLikeHover ?
-                        <img src={`${process.env.PUBLIC_URL}/images/hand-holding-up-a-flower.png`} className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
-                        :
-                        <img src={`${process.env.PUBLIC_URL}/images/hand-holding-up-a-flower-hover.png`} className="mr-1.5 h-6 w-6" alt="Like" fill="none" />
-                    }
-                    <span className="font-semibold">Like</span>
-                  </div>
+                  {likes && user && likeAccounts.includes(user.account.username)
+                    ?
+                    <UnlikeButton likes={likes} user={user} />
+                    :
+                    <LikeButton id={id} />
+                  }
                   <div className="flex">
                     <div
-                      className="flex cursor-pointer items-center transition hover:text-darkgreen"
+                      className="flex cursor-pointer items-center hover:text-darkgreen"
                       onMouseEnter={() => setShowChatHover(true)}
                       onMouseLeave={() => setShowChatHover(false)}
                       onClick={() => setShowComments(prev => !prev)}
@@ -78,7 +81,14 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
                   </div>
                 </div>
                 <div className="flex items-center space-x-1 text-xs">
-                  <span>4 Likes</span>
+                  <span>
+                    {likes && (
+                      likes.length === 1 ?
+                        `${likes.length} Like`
+                        :
+                        `${likes.length} Likes`
+                    )}
+                  </span>
                   <img src={`${process.env.PUBLIC_URL}/images/dot.png`} alt="dot" className="w-2 h-2 mr-1" />
                   <span>
                     {comments && (
