@@ -37,7 +37,7 @@ export default function MainPage({ token }) {
       <>
         {upButton &&
           <a href="#top">
-            <img src="/images/arrow-up.png" className="fixed bottom-10 right-10 z-50 arrow-up p-2 border-2 border-black rounded-full" alt="up" />
+            <img src={`${process.env.PUBLIC_URL}/images/arrow-up.png`} className="fixed bottom-10 right-10 z-50 arrow-up p-2 border-2 border-black rounded-full" alt="up" />
           </a>}
         <div className="relative">
           <section id="#top" className="sticky z-6 top-0 min-h-screen dark:bg-darkgreen">
