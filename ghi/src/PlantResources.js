@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from 'react';
 
 
 export default function PlantResources() {
@@ -109,5 +108,5 @@ export default function PlantResources() {
         </div>
       </div>
     </>
-  )
+  );
 }

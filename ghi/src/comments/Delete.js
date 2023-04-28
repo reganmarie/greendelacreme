@@ -3,6 +3,7 @@ import { useDeleteCommentMutation } from '../store/commentApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 export default function Delete({ id, comment }) {
   const [deleteComment, result] = useDeleteCommentMutation();
 

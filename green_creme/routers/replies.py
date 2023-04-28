@@ -10,7 +10,6 @@ from queries.replies import (
     Error,
 )
 
-
 router = APIRouter()
 
 

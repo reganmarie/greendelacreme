@@ -24,7 +24,7 @@ The platform is designed to provide an interactive and engaging experience for p
 
 ## Wireframe Diagram
 
-![Green de la Creme Application Diagram](https://i.imgur.com/0lUDJhL.png)
+<img src="/docs/wireframe.png" />
 
 ## How to Run the App
 
@@ -72,6 +72,10 @@ Built within each page of our front-end is a navigation bar to provide easy acce
   - The detail view of one forum thread to view the answers other users have posted
   - Buttons for editing and deleting the thread if your account is the creator
   - Option to reply to forum questions with your answers and edit or delete your reply
+- **Resources Page** `http://localhost:3000/resources`
+  - Resources with external links for education on plant ownership and garden upkeep
+- **About** `http://localhost:3000/about`
+  - Under construction: coming soon!
 
 #### Green_Creme Directory
 
@@ -94,6 +98,7 @@ Together, all these components work seamlessly to create the ultimate social med
 ### FastAPI Endpoints
 
 ##### Blogs
+
 <details>
 <summary markdown="span">GET /blogs - List of All Blog Posts</summary>
 
@@ -163,6 +168,8 @@ Together, all these components work seamlessly to create the ultimate social med
 <details>
   <summary markdown="span">POST /blogs - Create a Blog Post</summary>
 
+  ##### Input:
+
   ```
   {
   "title": "Best Plants for Office Spaces?",
@@ -171,17 +178,64 @@ Together, all these components work seamlessly to create the ultimate social med
   }
   ```
 
+  ##### Output:
+
+  ```
+{
+  "id": 2,
+  "title": "Best Plants for Office Spaces?",
+  "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "image": "https://images.pexels.com/photos/3049121/pexels-photo-3049121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "created_on": "2023-04-28T16:52:45.609069",
+  "author_id": 1
+}
+```
+
 </details>
 
 <details>
   <summary markdown="span">PUT /blogs/{blog_id} - Edit a Blog Post </summary>
 
+  ##### Input:
+
   ```
   {
-  "title": "Best Plants for Home Office Spaces?",
+  "title": "3 Best Plants for Home Office Spaces?",
   "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   "image": "https://images.pexels.com/photos/3049121/pexels-photo-3049121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
   }
+  ```
+
+  ##### Output:
+
+  ```
+{
+  "id": 2,
+  "title": "3 Best Plants for Office Spaces?",
+  "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "image": "https://images.pexels.com/photos/3049121/pexels-photo-3049121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "created_on": "2023-04-28T16:52:45.609069",
+  "author_id": 1
+}
+```
+
+</details>
+
+<details>
+  <summary markdown="span">DELETE /blogs/{blog_id} - Delete a Blog Post </summary>
+
+  ##### Input:
+
+  ```
+  {
+  "id": 2
+  }
+  ```
+
+  ##### Output:
+
+  ```
+  True
   ```
 
 </details>
@@ -227,27 +281,30 @@ Together, all these components work seamlessly to create the ultimate social med
 ]
 ```
 
+</details>
+
 <details>
 <summary markdown="span">GET /forum/{forum_id} - Get One Forum Thread</summary>
 
-```
-{
-  "id": 9,
-  "title": "Fun Watering Schedules for Plants?",
-  "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  "image": "https://images.pexels.com/photos/5137558/pexels-photo-5137558.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  "author_id": 1,
-  "created_on": "2023-04-20T11:48:32.085243",
-  "username": "regan",
-  "avatar": "https://cdn-icons-png.flaticon.com/512/1010/1010298.png?w=1480&t=st=1679989297~exp=1679989[…]e5f06a0c262d324e9c9cf24ba94b5d9a0bd9b9ffed7ff117cebef17"
-}
-```
+  ```
+  {
+    "id": 9,
+    "title": "Fun Watering Schedules for Plants?",
+    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "image": "https://images.pexels.com/photos/5137558/pexels-photo-5137558.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "author_id": 1,
+    "created_on": "2023-04-20T11:48:32.085243",
+    "username": "regan",
+    "avatar": "https://cdn-icons-png.flaticon.com/512/1010/1010298.png?w=1480&t=st=1679989297~exp=1679989[…]e5f06a0c262d324e9c9cf24ba94b5d9a0bd9b9ffed7ff117cebef17"
+  }
+  ```
 
-</details>
 </details>
 
 <details>
   <summary markdown="span">POST /forum - Create a Forum Thread</summary>
+
+   ##### Input:
 
   ```
   {
@@ -257,10 +314,26 @@ Together, all these components work seamlessly to create the ultimate social med
   }
   ```
 
+  ##### Output:
+
+  ```
+  {
+  "title": "Best Plants for Shaded House Corners?",
+  "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "image": "https://images.pexels.com/photos/3049121/pexels-photo-3049121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  "author_id": 1,
+  "created_on": "2023-04-20T11:48:32.085243",
+  "username": "regan",
+  "avatar": "https://cdn-icons-png.flaticon.com/512/1010/1010298.png?w=1480&t=st=1679989297~exp=1679989[…]e5f06a0c262d324e9c9cf24ba94b5d9a0bd9b9ffed7ff117cebef17"
+  }
+  ```
+
 </details>
 
 <details>
   <summary markdown="span">PUT /forum/{forum_id} - Edit a Forum Thread</summary>
+
+  ##### Input:
 
   ```
   {
@@ -268,6 +341,39 @@ Together, all these components work seamlessly to create the ultimate social med
   "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   "image": "https://images.pexels.com/photos/3049121/pexels-photo-3049121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
   }
+  ```
+
+  ##### Output:
+
+  ```
+  {
+  "title": "Best Plants for Shaded Apartment Corners?",
+  "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "image": "https://images.pexels.com/photos/3049121/pexels-photo-3049121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  "author_id": 1,
+  "created_on": "2023-04-20T11:48:32.085243",
+  "username": "regan",
+  "avatar": "https://cdn-icons-png.flaticon.com/512/1010/1010298.png?w=1480&t=st=1679989297~exp=1679989[…]e5f06a0c262d324e9c9cf24ba94b5d9a0bd9b9ffed7ff117cebef17"
+  }
+  ```
+
+</details>
+
+<details>
+  <summary markdown="span">DELETE /Forum/{forum_id} - Delete a Forum Thread </summary>
+
+  ##### Input:
+
+  ```
+  {
+  "id": 9
+  }
+  ```
+
+  ##### Output:
+
+  ```
+  True
   ```
 
 </details>
@@ -278,7 +384,6 @@ Together, all these components work seamlessly to create the ultimate social med
 <summary markdown="span">GET /comments - List of All Comments for One Blog </summary>
 <br>
 
-Sample response body:
 
 ```
 [
@@ -315,7 +420,8 @@ Sample response body:
 <summary markdown="span">POST /comments - Create a Blog Comment </summary>
 <br>
 
-Sample request body:
+##### Input:
+
 ```
 {
   "response": "Wow, so cool!",
@@ -324,7 +430,7 @@ Sample request body:
 }
 ```
 
-Sample response body:
+##### Output:
 
 ```
 {
@@ -343,7 +449,8 @@ Sample response body:
 <summary markdown="span">PUT /comments/{comment_id} - Update a Blog Comment </summary>
 <br>
 
-Sample request body:
+##### Input:
+
 ```
 {
   "response": "Wow, so cool! I love that!",
@@ -351,7 +458,7 @@ Sample request body:
 }
 ```
 
-Sample response body:
+##### Output:
 
 ```
 {
@@ -370,11 +477,19 @@ Sample response body:
 <summary markdown="span">DELETE /comments/{comment_id} - Delete a Blog Comment </summary>
 <br>
 
-Response body:
+ ##### Input:
 
-```
-true
-```
+  ```
+  {
+  "id": 2
+  }
+  ```
+
+  ##### Output:
+
+  ```
+  True
+  ```
 
 </details>
 
@@ -453,6 +568,8 @@ true
 <details>
   <summary markdown="span">POST /replies - Create a Forum Reply </summary>
 
+  ##### Input:
+
   ```
   {
     "forum_id": 1,
@@ -462,18 +579,68 @@ true
   }
   ```
 
+  ##### Output:
+
+  ```
+  {
+  "id": 9,
+  "author_id": 1,
+  "forum_id": 2,
+  "answer": "Try a ZZ plant! They're pretty cute, too!",
+  "image": "zzplant.png",
+  "created_on": "2023-04-28T16:52:46.160412",
+  "rating": 0
+  }
+  ```
+
 </details>
 
 <details>
   <summary markdown="span">PUT /replies/{reply_id} - Edit a Forum Reply </summary>
 
+  ##### Input:
+
   ```
   {
-  "forum_id": 1,
-  "answer": "Have you tried bamboo?",
-  "image": "cutebamboo.png",
+    "forum_id": 1,
+    "answer": "Try a ZZ plant! They're really cute, too!",
+    "image": "zzplant.png",
+    "rating": 0
+  }
+  ```
+
+  ##### Output:
+
+  ```
+  {
+  "id": 9,
+  "author_id": 1,
+  "forum_id": 2,
+  "answer": "Try a ZZ plant! They're really cute, too!",
+  "image": "zzplant.png",
+  "created_on": "2023-04-28T16:52:46.160412",
   "rating": 0
   }
+  ```
+
+</details>
+
+<details>
+<summary markdown="span">DELETE /replies/{reply_id} - Delete a Forum Reply </summary>
+<br>
+
+ ##### Input:
+
+  ```
+  {
+  "id": 2
+  }
+  ```
+
+  ##### Output:
+
+  ```
+  True
   ```
 
 </details>
@@ -485,7 +652,7 @@ true
 
 <br>
 
-Sample response body:
+
 ```
 [
   {
@@ -512,7 +679,7 @@ Sample response body:
 
 Parameter: `blog_id` (integer)
 
-Sample response body:
+##### Input:
 
 ```
 {
@@ -521,6 +688,16 @@ Sample response body:
   "blog_id": 4
 }
 ```
+##### Output:
+
+  ```
+  {
+    "id": 15,
+    "account_id": 1,
+    "blog_id": 4,
+    "username": "sbshayne"
+  }
+  ```
 
 </details>
 
@@ -529,11 +706,19 @@ Sample response body:
 
 <br>
 
-Response body:
+##### Input:
 
-```
-true
-```
+  ```
+  {
+  "id": 15
+  }
+  ```
+
+  ##### Output:
+
+  ```
+  True
+  ```
 
 </details>
 

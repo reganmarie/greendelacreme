@@ -3,6 +3,7 @@ import { useUpdateBlogMutation } from '../../store/blogApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 export default function EditForm({ blogId, blogTitle, blogBody, blogImage }) {
   const [title, setTitle] = useState(blogTitle);
   const [body, setBody] = useState(blogBody);

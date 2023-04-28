@@ -9,6 +9,7 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import KeyboardDoubleArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftOutlined';
 import { SvgIcon } from '@mui/material';
 
+
 export default function SideBar() {
   const [showResourcesHover, setShowResourcesHover] = useState(false);
   const [logout] = useLogoutUserMutation();
@@ -20,7 +21,7 @@ export default function SideBar() {
 
   return (
     <div class="ml-6 flex flex-col items-center fixed top-4 z-10">
-      <div class="space-y-48 rounded-xl bg-white drop-shadow py-3">
+      <div class="space-y-32 rounded-xl bg-white drop-shadow py-3">
         <ul>
           <li class="p-5">
             <NavLink to="/blogs">

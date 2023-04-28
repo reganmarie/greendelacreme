@@ -1,3 +1,13 @@
+## April 28, 2023
+Today, I:
+* Checked code cleanliness throughout the whole app
+* Reformatted code throughout the whole app, including fixing indentation and removing unused code
+* Fixed issues with spacing and sticky not working for some sections in the landing page
+* Added functionality to the down arrow in the first section of the landing page
+* Added an up arrow in the main page that scrolls to the top of the page when clicked on
+* Added a redirect to the blog feed in the MainPage component if the user is logged in and attemps to access the landing page
+* Fixed spacing for the side nav bar in the feed page
+
 ## April 27, 2023
 Today, I:
 * Finished the sidebar nav on the feed page

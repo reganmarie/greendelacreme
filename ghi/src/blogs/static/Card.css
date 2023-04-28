@@ -14,7 +14,6 @@
   backface-visibility: hidden;
 }
 
-
 .card__face--back {
   background: white;
   transform: rotateY(180deg);

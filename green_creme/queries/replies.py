@@ -58,12 +58,12 @@ class ReplyRepository:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                  insert into reply
-                  (forum_id, answer, image, author_id, rating)
-                  values
-                      (%s,%s,%s,%s, 0)
-                  returning id, created_on;
-                  """,
+                insert into reply
+                (forum_id, answer, image, author_id, rating)
+                values
+                    (%s,%s,%s,%s, 0)
+                returning id, created_on;
+                """,
                     [
                         reply.forum_id,
                         reply.answer,
@@ -98,17 +98,17 @@ class ReplyRepository:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                      select z.id, z.author_id,
-                      z.forum_id, z.answer,
-                      z.image, z.created_on AT TIME ZONE 'UTC'
-                      AT TIME ZONE 'US/Pacific',
-                      z.rating, a.username,
-                      a.avatar, a.first, a.last
-                      from reply as z
-                      left join accounts as a
-                      on a.id= z.author_id
-                      where z.id = %s
-                      order by created_on desc;
+                    select z.id, z.author_id,
+                    z.forum_id, z.answer,
+                    z.image, z.created_on AT TIME ZONE 'UTC'
+                    AT TIME ZONE 'US/Pacific',
+                    z.rating, a.username,
+                    a.avatar, a.first, a.last
+                    from reply as z
+                    left join accounts as a
+                    on a.id= z.author_id
+                    where z.id = %s
+                    order by created_on desc;
                     """,
                     [reply_id],
                 )
@@ -120,45 +120,48 @@ class ReplyRepository:
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                      select z.id, z.author_id,
-                      z.forum_id, z.answer,
-                      z.image, z.created_on AT TIME ZONE 'UTC'
-                      AT TIME ZONE 'US/Pacific',
-                      z.rating, a.username,
-                      a.avatar, a.first, a.last
-                      from reply as z
-                      left join accounts as a
-                      on a.id= z.author_id
-                      where z.forum_id = %s
-                      order by created_on desc;
+                    select z.id, z.author_id,
+                    z.forum_id, z.answer,
+                    z.image, z.created_on AT TIME ZONE 'UTC'
+                    AT TIME ZONE 'US/Pacific',
+                    z.rating, a.username,
+                    a.avatar, a.first, a.last
+                    from reply as z
+                    left join accounts as a
+                    on a.id= z.author_id
+                    where z.forum_id = %s
+                    order by created_on desc;
                     """,
                     [forum_id],
                 )
                 return [self.record_to_reply_out(record) for record in result]
 
     def update(
-        self, reply_id: int, reply: ReplyIn, author_id: int
+        self,
+        reply_id: int,
+        reply: ReplyIn,
+        author_id: int,
     ) -> ReplyOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
                     """
-                      update reply
-                      set answer = %s
-                        , image = %s
-                      where id = %s;
+                    update reply
+                    set answer = %s
+                    , image = %s
+                    where id = %s;
                     """,
                     [reply.answer, reply.image, reply_id],
                 )
-        return self.reply_in_to_out(reply_id, reply, author_id)
+                return self.reply_in_to_out(reply_id, reply, author_id)
 
     def delete(self, reply_id: int) -> bool:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
                     """
-                      delete from reply
-                      where id = %s;
+                    delete from reply
+                    where id = %s;
                     """,
                     [reply_id],
                 )

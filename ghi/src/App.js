@@ -14,7 +14,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import PageNotFound from './PageNotFound.js';
 import PlantResources from './PlantResources.js';
 
-function App() {
+
+export default function App() {
   const { data } = useGetTokenQuery();
 
   const domain = /https:\/\/[^/]+/;
@@ -28,21 +29,19 @@ function App() {
     <BrowserRouter basename={basename}>
       <Nav isLoggedIn={data} />
       <Routes>
-        <Route path='*' element={<PageNotFound/>} />
+        <Route path='*' element={<PageNotFound />} />
         <Route element={<Protected token={data} />}>
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/forum" element={<ForumList />} />
           <Route path="/forum/:id" element={<ForumDetail />} />
-          <Route path="/resources" element={<PlantResources/>} />
+          <Route path="/resources" element={<PlantResources />} />
         </Route>
         <Route path="/login" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<MainPage token={data} />} />
         <Route path="/about" element={<About />} />
       </Routes>
       <ToastContainer position="bottom-right" />
     </BrowserRouter>
   );
 }
-
-export default App;

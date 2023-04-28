@@ -4,6 +4,7 @@ import { useLoginMutation } from './store/authApi';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const LoginForm = ({ token }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,9 +18,9 @@ const LoginForm = ({ token }) => {
   };
 
   if (result.isSuccess) {
-    toast(`Welcome back, ${username}!`, {toastId: 'loginSuccess'});
+    toast(`Welcome back, ${username}!`, { toastId: 'loginSuccess' });
   } else if (result.isError) {
-    toast.error(`${result.error.data.detail}`, {toastId: 'loginError'});
+    toast.error(`${result.error.data.detail}`, { toastId: 'loginError' });
     result.reset();
   }
 
@@ -27,7 +28,7 @@ const LoginForm = ({ token }) => {
     if (token) {
       navigate('/blogs');
     }
-  }, [token, navigate])
+  }, [token, navigate]);
 
   return (
     <div className="bg-gradient-to-br from-emerald-100 via-lime-100 to-yellow-100 dark:bg-darkgreen">

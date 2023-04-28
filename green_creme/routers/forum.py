@@ -9,7 +9,6 @@ from queries.forums import (
 )
 from typing import Union, List
 
-
 router = APIRouter()
 
 

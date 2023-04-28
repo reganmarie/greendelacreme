@@ -70,3 +70,6 @@
 - No ah-ha moment today either considering the cards were giving me a hard time, perhaps tomorrow.
 
 ## 4/27/23
+- Today the team was planning on getting reviewed for our mvp so I just worked on any finishing touches I could and wrote in some missing journal entries.
+- Successfully did our presentation for Rosheen and everything went smoothly! The team got praise on the work and felt satisfied with how everything turned out
+- No ah ha moment today but definitely a relief moment after everything was finished weeks of work got put into this project and I know I’m very proud of how the website came out

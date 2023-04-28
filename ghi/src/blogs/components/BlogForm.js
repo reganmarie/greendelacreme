@@ -33,7 +33,6 @@ const BlogForm = () => {
     setShowImage(true);
   };
 
-
   return (
     <div className="flex max-w-2xl 1080:max-w-3xl 1440:max-w-5xl items-center justify-center mx-auto pt-1 pb-2">
       <section className="bg-[#ffffff] shadow-md rounded-lg p-5 w-full border">

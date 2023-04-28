@@ -1,5 +1,12 @@
 from fastapi import FastAPI
-from routers import forum, blogs, accounts, comments, replies, likes
+from routers import (
+    forum,
+    blogs,
+    accounts,
+    comments,
+    replies,
+    likes,
+)
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from authenticator import authenticator

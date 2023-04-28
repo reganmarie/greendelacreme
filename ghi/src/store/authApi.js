@@ -7,15 +7,6 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
     credentials: 'include',
-    prepareHeaders: async (headers, { getState }) => {
-      const token = await getState().auth.token;
-
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-
-      return headers;
-    },
   }),
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -40,7 +31,7 @@ export const authApi = createApi({
           await queryFulfilled;
           await dispatch(authApi.endpoints.getToken.initiate());
         } catch (e) {
-          return
+          return;
         }
       },
     }),
@@ -68,6 +59,7 @@ export const authApi = createApi({
     }),
   }),
 });
+
 
 export const {
   useLoginMutation,

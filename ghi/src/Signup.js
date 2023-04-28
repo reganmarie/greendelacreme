@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function Signup({token}) {
+export default function Signup({ token }) {
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [username, setUsername] = useState("");
@@ -13,18 +13,18 @@ function Signup({token}) {
   const [password, setPassword] = useState("");
   const [signup, result] = useSignupMutation();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState("light")
+  const [theme, setTheme] = useState("light");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup({first, last, username, email, password});
+    await signup({ first, last, username, email, password });
     e.target.reset();
   };
 
   if (result.isSuccess) {
-    toast(`Welcome to Green de la Creme, ${username}!`, {toastId: 'signupSuccess'});
+    toast(`Welcome to Green de la Creme, ${username}!`, { toastId: 'signupSuccess' });
   } else if (result.isError) {
-    toast(`${result.error.error}`, {toastId: 'signupError'});
+    toast(`${result.error.error}`, { toastId: 'signupError' });
     result.reset();
   }
 
@@ -32,7 +32,7 @@ function Signup({token}) {
     if (token) {
       navigate('/blogs');
     }
-  }, [token, navigate])
+  }, [token, navigate]);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -50,7 +50,7 @@ function Signup({token}) {
     <section className="bg-gradient-to-tr from-primary-100 dark:bg-gray-900 h-screen overflow-hidden">
       <div className="justify-center">
         <button className="bg-green-200 rounded-3xl font-bold" onClick={handleThemeSwitch}>
-        {theme === "dark" ? "Light Mode" : "Dark Mode"}
+          {theme === "dark" ? "Light Mode" : "Dark Mode"}
         </button>
       </div>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  h-screen max-w-xl lg:py-0">
@@ -211,5 +211,3 @@ function Signup({token}) {
     </section>
   );
 }
-
-export default Signup;
