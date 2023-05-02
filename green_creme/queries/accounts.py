@@ -58,7 +58,9 @@ class AccountRepository:
             return
 
     def create(
-        self, info: AccountIn, hashed_password: str
+        self,
+        info: AccountIn,
+        hashed_password: str,
     ) -> AccountOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:

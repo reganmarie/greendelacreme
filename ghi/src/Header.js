@@ -8,10 +8,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Lottie from "lottie-react";
 import plant from "./assets/images/plant.json";
 import { useLogoutUserMutation } from './store/authApi';
-import { useNavigate, Link} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
-function Header({token}) {
+export default function Header({ token }) {
   const navigate = useNavigate();
   const [logout] = useLogoutUserMutation();
 
@@ -24,27 +24,27 @@ function Header({token}) {
     if (token === null) {
       navigate('/login');
     }
-  }, [token, navigate])
+  }, [token, navigate]);
 
   return (
     <div className="bg-[#f8f8f6] border-b-[0.1px] border-b-[lightgray] sticky ">
       <div className="flex justify-center items-center max-w-7xl mx-auto space-x-32">
         <div className="mr-[82px] mr__small">
           <Link to="/blogs">
-          <Lottie animationData={plant} className="w-20" />
+            <Lottie animationData={plant} className="w-20" />
           </Link>
         </div>
         <div className="header__icons justify-center space-x-20">
-            <Link to="/blogs">
+          <Link to="/blogs">
             <HeaderOption Icon={HomeIcon} title="Home" />
-            </Link>
-            <Link to="/resources">
+          </Link>
+          <Link to="/resources">
             <HeaderOption Icon={YardIcon} title="Plant Info" />
-            </Link>
-            <Link to="/forum">
+          </Link>
+          <Link to="/forum">
             <HeaderOption Icon={MapTwoToneIcon} title="Forum" />
-            </Link>
-            <HeaderOption Icon={NotificationsIcon} title="Notifications" />
+          </Link>
+          <HeaderOption Icon={NotificationsIcon} title="Notifications" />
         </div>
         <div className="flex">
           <HeaderOption
@@ -59,5 +59,3 @@ function Header({token}) {
     </div>
   );
 }
-
-export default Header;

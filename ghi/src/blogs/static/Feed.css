@@ -1,53 +1,57 @@
 .feed {
-    flex: 0.6;
-    padding: 12px 20px;
+  flex: 0.6;
+  padding: 12px 20px;
 }
 
 @-webkit-keyframes swinging {
-    0% {
-        -webkit-transform: rotate(5deg);
-    }
+  0% {
+    -webkit-transform: rotate(5deg);
+  }
 
-    50% {
-        -webkit-transform: rotate(-5deg)
-    }
+  50% {
+    -webkit-transform: rotate(-5deg)
+  }
 
-    100% {
-        -webkit-transform: rotate(5deg);
-    }
+  100% {
+    -webkit-transform: rotate(5deg);
+  }
 }
 
 @keyframes swinging {
-    0% {
-        transform: rotate(5deg);
-    }
+  0% {
+    transform: rotate(5deg);
+  }
 
-    50% {
-        transform: rotate(-5deg)
-    }
+  50% {
+    transform: rotate(-5deg)
+  }
 
-    100% {
-        transform: rotate(5deg);
-    }
+  100% {
+    transform: rotate(5deg);
+  }
 }
 
 .swinging-image {
-    -webkit-transform-origin: 50% 0;
-    transform-origin: 50% 0;
-    -webkit-animation: swinging 4s ease-in-out forwards infinite;
-    animation: swinging 4s ease-in-out forwards infinite;
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  -webkit-animation: swinging 4s ease-in-out forwards infinite;
+  animation: swinging 4s ease-in-out forwards infinite;
 }
 
 @media (max-width: 900px) {
-    .swinging-image-outside {
-        display: none;
-    }
+  .swinging-image-outside {
+    display: none;
+  }
+
+  .sidebar {
+    visibility: hidden;
+  }
 }
 
 @media (max-width: 1200px) {
-    .swinging-image-inside {
-        display: none;
-    }
+  .swinging-image-inside {
+    display: none;
+  }
 }
 
 @media (max-width: 1300px) {
@@ -57,15 +61,19 @@
 }
 
 .menu li.hover-bordered label {
-    border-left-width: 4px;
-    border-color: transparent;
+  border-left-width: 4px;
+  border-color: transparent;
 }
 
 .menu li.hover-bordered label:hover {
-    --tw-border-opacity: 1;
-    border-color: hsl(var(--p) / var(--tw-border-opacity));
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--p) / var(--tw-border-opacity));
 }
 
 .submit-modal-form> :not([hidden])~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
+  --tw-space-x-reverse: 0;
+}
+
+a.active svg.sidebar {
+  color: #83B582;
 }

@@ -2,7 +2,8 @@ import React from "react";
 import { Avatar } from "@mui/material";
 import "./blogs/static/HeaderOption.css";
 
-function HeaderOption({ avatar, Icon, title }) {
+
+export default function HeaderOption({ avatar, Icon, title }) {
   return (
     <div className="HeaderOption">
       {avatar && <Avatar className="HeaderOption__icon" src={avatar} />}
@@ -13,5 +14,3 @@ function HeaderOption({ avatar, Icon, title }) {
     </div>
   );
 }
-
-export default HeaderOption;

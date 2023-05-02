@@ -6,27 +6,25 @@ import { commentApi } from "./commentApi";
 import { likeApi } from "./likeApi";
 import { replyApi } from "./replyApi";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { userSlice } from "./user";
 
 
 export const store = configureStore({
-    reducer: {
-        auth: userSlice.reducer,
-        [authApi.reducerPath]: authApi.reducer,
-        [forumApi.reducerPath]: forumApi.reducer,
-        [blogApi.reducerPath]: blogApi.reducer,
-        [commentApi.reducerPath]: commentApi.reducer,
-        [likeApi.reducerPath]: likeApi.reducer,
-        [replyApi.reducerPath]: replyApi.reducer,
-    },
-    middleware: getDefaultMiddleware =>
-        getDefaultMiddleware()
-            .concat(forumApi.middleware)
-            .concat(blogApi.middleware)
-            .concat(authApi.middleware)
-            .concat(commentApi.middleware)
-            .concat(likeApi.middleware)
-            .concat(replyApi.middleware),
+  reducer: {
+    [authApi.reducerPath]: authApi.reducer,
+    [forumApi.reducerPath]: forumApi.reducer,
+    [blogApi.reducerPath]: blogApi.reducer,
+    [commentApi.reducerPath]: commentApi.reducer,
+    [likeApi.reducerPath]: likeApi.reducer,
+    [replyApi.reducerPath]: replyApi.reducer,
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware()
+      .concat(forumApi.middleware)
+      .concat(blogApi.middleware)
+      .concat(authApi.middleware)
+      .concat(commentApi.middleware)
+      .concat(likeApi.middleware)
+      .concat(replyApi.middleware),
 });
 
 setupListeners(store.dispatch);

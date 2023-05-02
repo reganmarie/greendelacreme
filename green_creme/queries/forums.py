@@ -121,11 +121,11 @@ class ThreadRepository:
                         forum_id,
                     ],
                 )
-        return self.forum_in_to_out(
-            forum_id,
-            forum,
-            author_id,
-        )
+                return self.forum_in_to_out(
+                    forum_id,
+                    forum,
+                    author_id,
+                )
 
     def get_one(self, forum_id: int) -> Optional[ThreadAccountOut]:
         with pool.connection() as conn:
