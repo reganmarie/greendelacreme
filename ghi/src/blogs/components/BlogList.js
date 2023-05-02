@@ -3,6 +3,7 @@ import { useGetBlogsQuery } from '../../store/blogApi';
 import BlogPost from './BlogPost';
 import EditForm from './EditForm';
 import BlogForm from './BlogForm';
+import PunList from './Puns';
 import '../static/Feed.css';
 
 
@@ -47,6 +48,7 @@ export default function BlogList() {
           </div>
         );
       })}
+            <PunList />
     </div>
   );
 }
