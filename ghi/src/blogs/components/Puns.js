@@ -73,7 +73,7 @@ export default function PunList() {
   return (
 <>
 
-    <div className="opacity-90 w-2/6 fixed bottom-0 left-5 mb-10 max-w-[300px] pun ">
+    <div className="opacity-90 w-2/6 absolute top-20 mt-60 mr-3 right-0 max-w-[300px] pun ">
         <div className="flex inline-start">
             <div className=" shadow-2xl p-4 rounded-2xl border-1 border-gray-50">
                 <div className="flex flex-col">
