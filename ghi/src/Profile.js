@@ -22,7 +22,7 @@ export default function Profile() {
 
 
 <div className="absolute flex flex-row inset-x-0 object-top mt-[106px] min-w-0 max-w-sm max-h-72 mx-auto md:max-w-2xl w-full break-words bg-gray-200 shadow-lg rounded-xl"
-boxShadow='dark-lg' p='6' rounded='md' bg='white'>
+boxshadow='dark-lg' p='6' rounded='md' bg='white'>
     <div className="px-6">
         <div className="flex flex-col justify-center">
             <div className="w-full flex justify-center">
@@ -61,9 +61,9 @@ boxShadow='dark-lg' p='6' rounded='md' bg='white'>
             <div className="flex flex-wrap justify-center">
                 <div className="w-full px-4 flex flex-wrap">
                     <p className="font-light leading-relaxed flex flex-row text-slate-600 mb-2">An artist of considerable range, lover of plants </p>
-                    <a href="javascript:;" className="font-normal flex text-slate-700 hover:text-slate-400 justify-center mb-2 w-full">
+                    <Link to="" className="font-normal flex text-slate-700 hover:text-slate-400 justify-center mb-2 w-full">
                       Follow Account &nbsp; <span className="flex pb-1"> <PersonAddIcon /> </span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -15,8 +15,6 @@ import { useNavigate, Link } from 'react-router-dom';
 export default function Header({ token }) {
   const navigate = useNavigate();
   const [logout] = useLogoutUserMutation();
-  const [toggle, setToggle] = useState(false);
-  const [active, setActive] = useState('');
 
 async function handleClick(e) {
   e.preventDefault();
@@ -37,7 +35,7 @@ async function handleClick(e) {
   }, [token, navigate]);
 
   return (
-    <div className="navbar min-h-[32px] bg-[#f8f8f6]">
+    <div className="navbar sticky z-0 min-h-[32px] bg-[#f8f8f6]">
   <div className="flex-1">
     <a className="mx-auto lottie normal-case text-xl">
       <Link to="/blogs">
@@ -76,7 +74,7 @@ async function handleClick(e) {
             <span className="badge">New</span>
           </Link>
         </li>
-        <li><a>Settings</a></li>
+        <li><Link to="" >Settings</Link></li>
         <li><button className="button__input" id="logout" type="submit" onClick={handleClick}> Logout </button></li>
       </ul>
     </div>

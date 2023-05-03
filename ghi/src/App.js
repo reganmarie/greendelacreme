@@ -12,7 +12,7 @@ import { useGetTokenQuery } from './store/authApi';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageNotFound from './PageNotFound.js';
-import PlantResources from './PlantResources.js';
+import PlantResources from './resources/PlantResources.js'
 import Profile from './Profile.js';
 import ScrollToTop from './utils/ScrollToTop.js';
 import EditForm from './accounts/EditForm.js';
