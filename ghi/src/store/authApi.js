@@ -57,6 +57,13 @@ export const authApi = createApi({
       }),
       invalidatesTags: ['Token'],
     }),
+    updateUser: builder.mutation({
+      query: ({ id, data }) => ({
+        url: '/api/accounts/' + id,
+        body: data,
+        method: 'put',
+      }),
+    }),
   }),
 });
 
@@ -66,5 +73,6 @@ export const {
   useGetTokenQuery,
   useSignupMutation,
   useLogoutUserMutation,
+  useUpdateUserMutation,
 } =
   authApi;

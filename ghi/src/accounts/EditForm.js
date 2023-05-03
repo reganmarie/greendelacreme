@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSignupMutation } from "../store/authApi";
+import { useUpdateUserMutation } from "../store/authApi";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,7 +25,7 @@ export default function EditForm({ user }) {
   // const [showColorPicker, setShowColorPicker] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [hideLeaf, setHideLeaf] = useState(false);
-  const [signup, result] = useSignupMutation();
+  const [update, result] = useUpdateUserMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
