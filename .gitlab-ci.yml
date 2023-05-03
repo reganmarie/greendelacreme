@@ -19,6 +19,7 @@ api-unit-test-job:
     - lint-test-job
   variables:
     SIGNING_KEY: "${SIGNING_KEY}"
+    YELP_API_KEY: ${YELP_API_KEY}
     DATABASE_URL: "postgres://postgres:1d6e2b64e4cb216c@srv-captain--green-data/postgres"
   script:
     - cd green_creme
@@ -64,6 +65,8 @@ pages:
 build-green-creme-service:
   image: docker:19.03.1
   stage: build
+  variables:
+    YELP_API_KEY: ${YELP_API_KEY}
   services:
     - docker:19.03.1-dind
   before_script:

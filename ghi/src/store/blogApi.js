@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { commentApi } from './commentApi';
+import { likeApi } from './likeApi';
 
 
 export const blogApi = createApi({
@@ -7,11 +9,21 @@ export const blogApi = createApi({
     baseUrl: process.env.REACT_APP_GREEN_CREME_API_HOST,
     credentials: 'include',
   }),
-  tagTypes: ['BlogList'],
+  tagTypes: ['BlogList', 'MostLiked'],
   endpoints: builder => ({
     getBlogs: builder.query({
       query: () => '/blogs',
       providesTags: ['BlogList'],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(commentApi.util.invalidateTags(['CommentList']));
+          dispatch(likeApi.util.invalidateTags(['LikesList']));
+          dispatch(blogApi.util.invalidateTags(['MostLiked']));
+        } catch (e) {
+          return;
+        }
+      },
     }),
     getBlog: builder.query({
       query: id => `/blogs/${id}`,
@@ -42,6 +54,10 @@ export const blogApi = createApi({
       }),
       invalidatesTags: ['BlogList'],
     }),
+    getMostLiked: builder.query({
+      query: () => '/most_liked_blog',
+      providesTags: ['MostLiked'],
+    }),
   })
 });
 
@@ -52,4 +68,5 @@ export const {
   useCreateBlogMutation,
   useDeleteOwnerMutation,
   useUpdateBlogMutation,
+  useGetMostLikedQuery,
 } = blogApi;

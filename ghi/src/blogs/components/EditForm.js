@@ -102,7 +102,7 @@ export default function EditForm({ blogId, blogTitle, blogBody, blogImage }) {
               )}
               <div className="submit-modal-form">
                 <label htmlFor={`${blogId}-modal`}>
-                  <button type="submit" className="flex items-center h-9 py-2 px-4 rounded-lg text-sm bg-secondary-200 text-white hover:bg-darkgreen font-semibold cursor-pointer submit-modal-form">
+                  <button type="submit" className="flex items-center h-9 py-2 px-4 rounded-full text-sm bg-secondary-200 text-white hover:bg-darkgreen font-semibold cursor-pointer submit-modal-form">
                     Edit
                     <svg className="ml-1" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                   </button>

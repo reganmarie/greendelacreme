@@ -12,7 +12,9 @@ import { useGetTokenQuery } from './store/authApi';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageNotFound from './PageNotFound.js';
-import PlantResources from './PlantResources.js';
+import PlantResources from './resources/PlantResources.js';
+import ScrollToTop from './utils/ScrollToTop.js';
+import EditForm from './accounts/EditForm.js';
 
 
 export default function App() {
@@ -27,6 +29,7 @@ export default function App() {
 
   return (
     <BrowserRouter basename={basename}>
+      <ScrollToTop />
       <Nav isLoggedIn={data} />
       <Routes>
         <Route path='*' element={<PageNotFound />} />
@@ -35,6 +38,9 @@ export default function App() {
           <Route path="/forum" element={<ForumList />} />
           <Route path="/forum/:id" element={<ForumDetail />} />
           <Route path="/resources" element={<PlantResources />} />
+          <Route path="/accounts">
+            <Route path="edit" element={<EditForm user={data} />} />
+          </Route>
         </Route>
         <Route path="/login" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />

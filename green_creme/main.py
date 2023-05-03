@@ -6,6 +6,9 @@ from routers import (
     comments,
     replies,
     likes,
+    puns,
+    friends,
+    yelp,
 )
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -19,6 +22,9 @@ app.include_router(accounts.router)
 app.include_router(comments.router)
 app.include_router(replies.router)
 app.include_router(likes.router)
+app.include_router(puns.router)
+app.include_router(friends.router)
+app.include_router(yelp.router)
 
 app.add_middleware(
     CORSMiddleware,

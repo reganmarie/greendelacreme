@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
 html {
   scroll-behavior: smooth;
 }
@@ -137,7 +139,7 @@ code {
 }
 
 #h1 {
-  text-shadow: 5px 5px #76B947;
+  text-shadow: 4px 4px #76B947;
 }
 
 .buttons {
@@ -147,4 +149,26 @@ code {
 .arrow-up {
   height: 40px !important;
   width: 40px !important;
+}
+
+div.swiper-slide.swiper-slide-visible.swiper-slide-active {
+  width: 300px !important;
+}
+
+.swiper-wrapper {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active {
+  background: #fb7185;
+}
+
+.slider-controller .slider-arrow {
+  color: #fb7185;
+}
+
+.swiper-slide-shadow-left,
+.swiper-slide-shadow-right {
+  display: none;
 }

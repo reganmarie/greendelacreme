@@ -10,6 +10,7 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       SIGNING_KEY: green_key
+      YELP_API_KEY: ${YELP_API_KEY}
       DATABASE_URL: postgresql://example_user:secret@db/db
       WAIT_HOSTS: db:5432
       PORT: 8000

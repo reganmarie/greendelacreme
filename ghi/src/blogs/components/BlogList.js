@@ -8,10 +8,11 @@ import Loading from '../../Loading';
 import Lottie from "lottie-react";
 import throwingLeaves from '../../assets/images/throwingLeaves.json';
 import SideBar from './SideBar';
+import MostLiked from './MostLiked';
 
 
 export default function BlogList() {
-  const { data: blogData, isLoading } = useGetBlogsQuery();
+  const { data: blogData, isLoading } = useGetBlogsQuery(undefined, { pollingInterval: 20000 });
   const [loading, setLoading] = useState(true);
   const [sideNav, setSideNav] = useState(false);
 
@@ -33,21 +34,21 @@ export default function BlogList() {
     <>
       {loading ?
         <div className="bg-gradient-to-br from-[#F9FEFD] via-[#FBFEF3] to-[#FEFDF3] min-h-screen">
-          <Lottie animationData={throwingLeaves} />
+          <Lottie animationData={throwingLeaves} className="absolute bottom-0 w-screen" />
         </div>
         :
         <>
           <div className="flex bg-gradient-to-br from-[#F9FEFD] via-[#FBFEF3] to-[#FEFDF3] dark:bg-darkgreen min-h-screen">
-            <div className="sidebar flex flex-auto sm:w-0 min-[900px]:w-1/4 1080:w-1/3 justify-end">
+            <div className="sidebar flex flex-auto max-[775px]:w-0 min-[775px]:w-1/4 1080:w-1/3 justify-end">
               {sideNav && <SideBar />}
             </div>
-            <div className="flex-auto sm:w-full min-[900px]:w-1/2 1080:w-1/3">
+            <div className="flex-auto max-[775px]:w-full min-[775px]:w-1/2 1080:w-1/3">
               <div className="feed align-start">
                 <BlogForm />
                 <img key="hanging-plant-1" className="h-48 absolute top-20 left-4 swinging-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-1.png`} alt="Hanging plant" />
                 <img key="hanging-plant-2" className="h-48 absolute top-20 left-36 swinging-image swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-2.png`} alt="Hanging plant" />
                 <img key="hanging-plant-3" className="h-48 absolute top-20 right-0 swinging-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-3.png`} alt="Hanging plant" />
-                <img key="hanging-plant-4" className="h-48 absolute top-20 right-36 swinging-image swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-4.png`} alt="Hanging plant" />
+                <img key="hanging-plant-4" className="h-48 absolute max-[1740px]:hidden top-20 right-36 swinging-image swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-4.png`} alt="Hanging plant" />
                 <img key="snake-plant" className="h-48 fixed bottom-0 right-5 swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/snake-plant.png`} alt="Snake plant" />
                 {isLoading ?
                   <Loading />
@@ -84,7 +85,9 @@ export default function BlogList() {
                   }))}
               </div>
             </div>
-            <div className="flex-auto sm:w-0 min-[900px]:w-1/4 1080:w-1/3"></div>
+            <div className="flex-auto max-[775px]:w-0 min-[775px]:w-1/4 1080:w-1/3">
+              <MostLiked />
+            </div>
           </div>
         </>
       }
