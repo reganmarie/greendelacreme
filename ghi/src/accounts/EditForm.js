@@ -29,7 +29,7 @@ export default function EditForm({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup({ first, last, username, email, password, city, state });
+    await editUser({ first, last, username, email, password, city, state });
     e.target.reset();
   };
 
