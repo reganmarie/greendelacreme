@@ -4,7 +4,7 @@ import HeaderOption from "./HeaderOption";
 import HomeIcon from "@mui/icons-material/Home";
 import YardIcon from "@mui/icons-material/Yard";
 import MapTwoToneIcon from "@mui/icons-material/MapTwoTone";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import SearchIcon from '@mui/icons-material/Search';
 import Lottie from "lottie-react";
 import plant from "./assets/images/plant.json";
 import { useLogoutUserMutation } from './store/authApi';
@@ -55,8 +55,10 @@ async function handleClick(e) {
           </Link>
           <Link to="/forum">
             <HeaderOption Icon={MapTwoToneIcon} title="Forum" />
-          </Link>
-          <HeaderOption Icon={NotificationsIcon} title="Notifications" />
+            </Link>
+            <Link to="/data">
+            <HeaderOption Icon={SearchIcon} title="Plant Data" />
+            </Link>
         </div>
         </div>
         </div>

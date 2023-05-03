@@ -51,14 +51,15 @@ export default function ForumDetail() {
   };
 
   return (
-    <div className="bg-color3 min-h-screen bg-opacity-30 p-12">
-      <section className="flex max-w-3xl 1080:max-w-4xl 1440:max-w-5xl justify-center items-center mx-auto">
+    <div className="flex justify-center bg-color3 min-h-screen bg-opacity-80 ">
+    <div className="p-12">
+      <section className="max-w-3xl 1080:max-w-4xl 1440:max-w-5xl   mx-auto">
         <div className="container">
           {data &&
             <div>
-              <h1 className="flex break-words justify-center mx-auto ml-6 text-4xl font-semibold text-gray-800 capitalize lg:text-5xl dark:text-white">{data.title}</h1>
-              <div className="mt-8 lg:-mx-6 lg:flex lg:items-center">
-                <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6v ml-12 ">
+              <h1 className="flex break-words justify-center mx-auto text-4xl font-semibold text-gray-800 capitalize lg:text-5xl dark:text-white">{data.title}</h1>
+              <div className="mt-8  lg:flex lg:items-center">
+                <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6v  ">
                   <img className="flex justify-center max-w-3xl 1080:max-w-4xl 1440:max-w-5xl" src={data.image} alt="" />
                   <p className="text-sm text-blue-500 uppercase">Body</p>
                   <p className="mt-3 text-2xl text-black-500 dark:text-gray-300 md:text-sm">
@@ -135,5 +136,6 @@ export default function ForumDetail() {
       </section>
       <Replies id={id} />
     </div >
+    </div>
   );
 }

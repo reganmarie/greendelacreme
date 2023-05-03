@@ -40,7 +40,7 @@ export default function Replies({ id }) {
   return (
     <>
       <section className=" dark:bg-gray-900 py-8 replies lg:py-16 max-w-3xl 1080:max-w-4xl 1440:max-w-6xl items-center justify-center mx-auto" >
-        <form className=" bg-color5 bg-opacity-70 mb-6 max-w-5xl ml-12 p-5 rounded-2xl shadow-xl" onSubmit={(e) => handleSubmit(e)}>
+        <form className=" bg-color5 bg-opacity-70 mb-6 max-w-5xl p-5 rounded-2xl shadow-xl" onSubmit={(e) => handleSubmit(e)}>
           <h2 className="text-lg lg:text-2xl font-bold p-2 mb-5 text-gray-900 dark:text-white">Reply</h2>
           <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <label htmlFor="comment" className="sr-only">Your comment</label>
