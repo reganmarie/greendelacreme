@@ -45,10 +45,10 @@ export default function BlogList() {
             <div className="flex-auto sm:w-full min-[900px]:w-1/2 1080:w-1/3">
               <div className="feed align-start">
                 <BlogForm />
-                <img key="hanging-plant-1" className="h-48 absolute top-20 left-4 swinging-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-1.png`} alt="Hanging plant" />
-                <img key="hanging-plant-2" className="h-48 absolute top-20 left-36 swinging-image swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-2.png`} alt="Hanging plant" />
-                <img key="hanging-plant-3" className="h-48 absolute top-20 right-0 swinging-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-3.png`} alt="Hanging plant" />
-                <img key="hanging-plant-4" className="h-48 absolute top-20 right-36 swinging-image swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-4.png`} alt="Hanging plant" />
+                <img key="hanging-plant-1" className="h-48 absolute top-24 left-4 swinging-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-1.png`} alt="Hanging plant" />
+                <img key="hanging-plant-2" className="h-48 absolute top-24 left-36 swinging-image swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-2.png`} alt="Hanging plant" />
+                <img key="hanging-plant-3" className="h-48 absolute top-24 right-0 swinging-image swinging-image-outside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-3.png`} alt="Hanging plant" />
+                <img key="hanging-plant-4" className="h-48 absolute top-24 right-36 swinging-image swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/hanging-plant-4.png`} alt="Hanging plant" />
                 <img key="snake-plant" className="h-48 fixed bottom-0 right-5 swinging-image-inside" src={`${process.env.PUBLIC_URL}/images/snake-plant.png`} alt="Snake plant" />
                 {isLoading ?
                   <Loading />
@@ -87,15 +87,8 @@ export default function BlogList() {
             </div>
             <div className="flex-auto sm:w-0 min-[900px]:w-1/4 1080:w-1/3"></div>
           </div>
-<<<<<<< HEAD
-        );
-      })}
-            <PunList />
-    </div>
-=======
         </>
       }
     </>
->>>>>>> main
   );
 }

@@ -60,6 +60,16 @@
     }
 }
 
+@media (max-width: 600px) {
+    .lottie {
+        display: none;
+    }
+}
+
+.backd {
+  height: 415px;
+}
+
 .menu li.hover-bordered label {
   border-left-width: 4px;
   border-color: transparent;

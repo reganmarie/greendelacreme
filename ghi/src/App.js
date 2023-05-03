@@ -13,6 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageNotFound from './PageNotFound.js';
 import PlantResources from './PlantResources.js';
+import Profile from './Profile.js';
 
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/forum" element={<ForumList />} />
           <Route path="/forum/:id" element={<ForumDetail />} />
           <Route path="/resources" element={<PlantResources />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/login" element={<LoginForm token={data} />} />
         <Route path="/signup" element={<Signup token={data} />} />
