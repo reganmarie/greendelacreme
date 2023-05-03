@@ -12,6 +12,7 @@ import { useGetTokenQuery } from './store/authApi';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageNotFound from './PageNotFound.js';
+import Perenual from './PerenualApi/Perenual.js';
 import PlantResources from './resources/PlantResources.js';
 import ScrollToTop from './utils/ScrollToTop.js';
 import EditForm from './accounts/EditForm.js';
@@ -37,7 +38,8 @@ export default function App() {
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/forum" element={<ForumList />} />
           <Route path="/forum/:id" element={<ForumDetail />} />
-          <Route path="/resources" element={<PlantResources />} />
+          <Route path="/resources" element={<PlantResources/>} />
+          <Route path="/data" element={<Perenual/>} />
           <Route path="/accounts">
             <Route path="edit" element={<EditForm user={data} />} />
           </Route>

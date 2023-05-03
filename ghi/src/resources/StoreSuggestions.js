@@ -5,7 +5,6 @@ import { EffectCoverflow, Pagination, Navigation } from 'swiper';
 import { Link } from 'react-router-dom';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import ReviewsOutlinedIcon from '@mui/icons-material/ReviewsOutlined';
-
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
