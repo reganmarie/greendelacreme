@@ -30,6 +30,11 @@ class BlogOutWithAccount(BlogOut):
     last: str
 
 
+class MostLiked(BlogOutWithAccount):
+    like_count: int
+    comment_count: int
+
+
 class BlogQueries:
     def get_all(self) -> Union[List[BlogOutWithAccount], Error]:
         with pool.connection() as conn:
@@ -165,3 +170,45 @@ class BlogQueries:
                     [blog_id],
                 )
                 return True
+
+    def get_most_liked(self) -> MostLiked:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT COUNT(DISTINCT l.id) AS like_count,
+                    COUNT(DISTINCT c.id) AS comment_count,
+                    b.id, b.title, b.body, b.image,
+                    b.created_on AT TIME ZONE 'UTC' AT TIME ZONE 'US/Pacific',
+                    a.id, a.username, a.avatar,
+                    a.first, a.last
+                    FROM blog AS b
+                    INNER JOIN accounts AS a
+                    ON b.author_id = a.id
+                    LEFT JOIN likes AS l
+                    ON l.blog_id = b.id
+                    LEFT JOIN comment AS c
+                    ON c.blog_id = b.id
+                    GROUP BY b.id, b.title, b.body, b.image,
+                    b.created_on AT TIME ZONE 'UTC' AT TIME ZONE 'US/Pacific',
+                    a.username, a.avatar,
+                    a.id, a.first, a.last
+                    ORDER BY like_count DESC, comment_count DESC
+                    LIMIT 1;
+                    """
+                )
+                record = db.fetchone()
+                return MostLiked(
+                    like_count=record[0],
+                    comment_count=record[1],
+                    id=record[2],
+                    title=record[3],
+                    body=record[4],
+                    image=record[5],
+                    created_on=record[6],
+                    author_id=record[7],
+                    username=record[8],
+                    avatar=record[9],
+                    first=record[10],
+                    last=record[11],
+                )

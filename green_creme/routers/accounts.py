@@ -14,6 +14,7 @@ from pydantic import BaseModel
 from queries.accounts import (
     AccountIn,
     AccountOut,
+    AccountOutWithPassword,
     AccountRepository,
     DuplicateAccountError,
 )
@@ -66,3 +67,88 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+
+
+@router.put(
+    "/api/accounts/{account_id}",
+    response_model=AccountOutWithPassword | HttpError,
+)
+def update_account(
+    account_id: int,
+    account: AccountIn,
+    response: Response,
+    repo: AccountRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> AccountOutWithPassword:
+    try:
+        if account_id == account_data["id"]:
+            hashed_password = authenticator.hash_password(account.password)
+            return repo.update(account_id, account, hashed_password)
+        else:
+            response.status_code = 401
+            return {"detail": "You are not authorized to update this account"}
+    except Exception as e:
+        if DuplicateAccountError:
+            if "email" in str(e):
+                msg = "That email has already been used by another account"
+            if "username" in str(e):
+                msg = "That username already exists"
+            raise HTTPException(
+                status_code=400,
+                detail=msg,
+            )
+        else:
+            raise HTTPException(
+                status_code=400,
+                detail="Could not update this account",
+            )
+
+
+@router.patch(
+    "/api/accounts/{account_id}",
+    response_model=bool | HttpError,
+)
+def make_admin(
+    account_id: int,
+    response: Response,
+    repo: AccountRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> bool:
+    try:
+        account = repo.get_one(account_id)
+        if account.role == "admin":
+            response.status_code = 400
+            return {"detail": "This account is already an admin"}
+        if account_data["role"] == "admin":
+            try:
+                return repo.make_admin(account_id)
+            except Exception:
+                response.status_code = 400
+                return {"detail": "Could not make this account an admin"}
+        else:
+            response.status_code = 401
+            return {
+                "detail": "You are not authorized to make accounts an admin"
+            }
+    except Exception:
+        raise HTTPException(
+            status_code=404,
+            detail="Account does not exist",
+        )
+
+
+@router.get(
+    "/api/accounts/{account_id}",
+    response_model=AccountOut | HttpError,
+)
+def get_one_account(
+    account_id: int,
+    response: Response,
+    repo: AccountRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> AccountOut:
+    try:
+        return repo.get_one(account_id)
+    except Exception:
+        response.status_code = 404
+        return {"message": "Account with that ID does not exist"}

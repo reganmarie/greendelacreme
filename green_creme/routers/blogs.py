@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException
 from typing import Union, List
 from authenticator import authenticator
 from queries.blogs import (
@@ -7,6 +7,7 @@ from queries.blogs import (
     BlogQueries,
     Error,
     BlogOutWithAccount,
+    MostLiked,
 )
 
 router = APIRouter()
@@ -101,3 +102,15 @@ def delete_blog(
     except Exception:
         response.status_code = 404
         return {"message": "Could not delete a blog by that ID."}
+
+
+@router.get("/most_liked_blog", response_model=Union[MostLiked, Error])
+def get_most_liked_blog(
+    repo: BlogQueries = Depends(),
+):
+    try:
+        return repo.get_most_liked()
+    except Exception:
+        raise HTTPException(
+            status_code=400, detail="Could not get the most liked blog"
+        )

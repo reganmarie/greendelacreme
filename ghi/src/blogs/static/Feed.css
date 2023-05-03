@@ -42,10 +42,6 @@
   .swinging-image-outside {
     display: none;
   }
-
-  .sidebar {
-    visibility: hidden;
-  }
 }
 
 @media (max-width: 1200px) {
@@ -84,6 +80,7 @@
   --tw-space-x-reverse: 0;
 }
 
-a.active svg.sidebar {
+a.active svg,
+a.active div {
   color: #83B582;
 }
