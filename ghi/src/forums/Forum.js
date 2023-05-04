@@ -13,6 +13,7 @@ export default function ForumList() {
   const [body, setBody] = useState("");
   const [image, setImage] = useState("");
   const [post, submit] = useCreateThreadMutation();
+  const [search, setSearch] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,10 +73,23 @@ export default function ForumList() {
           </div>
         </div>
 
+        <form className="flex justify-center">
+          <div className="pt-2 max-w-3xl text-gray-600">
+            <input className="border-2 search border-gray-300 bg-white h-10 px-5  rounded-lg text-sm focus:outline-none"
+              type="search" name="search" placeholder="Search Threads by Title..." onChange={(e) => setSearch(e.target.value)} />
+          </div>
+        </form>
+
+
+
+
+
         <div className="godown" >
           <div className="flex justify-between">
             <div>
-              {Array.isArray(threadData) && threadData.map(thread => {
+              {Array.isArray(threadData) && threadData.filter((thread) => {
+                return search.toLowerCase() === '' ? thread : thread.title.toLowerCase().includes(search.toLowerCase());
+              }).map(thread => {
                 const options = {
                   month: "long",
                   day: "numeric",

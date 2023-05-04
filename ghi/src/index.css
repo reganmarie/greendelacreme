@@ -188,3 +188,7 @@ div.swiper-slide.swiper-slide-visible.swiper-slide-active {
 .swiper-slide-shadow-right {
   display: none;
 }
+
+.search{
+  width: 20rem;
+}

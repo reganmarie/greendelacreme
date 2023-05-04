@@ -60,7 +60,7 @@ export default function ForumDetail() {
               <h1 className="flex break-words justify-center mx-auto text-4xl font-semibold text-gray-800 capitalize lg:text-5xl dark:text-white">{data.title}</h1>
               <div className="mt-8  lg:flex lg:items-center">
                 <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6v  ">
-                  <img className="flex justify-center max-w-3xl 1080:max-w-4xl 1440:max-w-5xl" src={data.image} alt="" />
+                  <img className="flex mx-auto justify-center max-w-3xl 1080:max-w-4xl 1440:max-w-5xl" src={data.image} alt="" />
                   <p className="text-sm text-blue-500 uppercase">Body</p>
                   <p className="mt-3 text-2xl text-black-500 dark:text-gray-300 md:text-sm">
                     {data.body}
@@ -72,8 +72,8 @@ export default function ForumDetail() {
                     </div>
                     {data.username === user.account.username ?
                       <>
-                        <div className='buttons' key={data.id}>
-                          <label htmlFor="my-modal-5" className="btn border-0 hover:bg-lime-800  bg-lime-600 ">Edit Thread</label>
+                        <div className='mx-auto' key={data.id}>
+                            <label htmlFor="my-modal-5" className="btn border-0 hover:bg-amber-700  bg-[#FF9D37] ">Edit Thread</label>
                           <input type="checkbox" id="my-modal-5" className="modal-toggle" />
                           <div className="modal">
                             <div className="modal-box w-11/12 max-w-3xl">
