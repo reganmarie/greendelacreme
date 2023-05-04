@@ -16,6 +16,10 @@ export default function StoreSuggestions({ user }) {
   const [slides, setSlides] = useState(3);
   const { data: stores } = useGetStoreSuggestionsQuery();
 
+  console.log(stores);
+
+  console.log(stores?.businesses);
+
   const handleResize = () => {
     if (window.innerWidth > 2300) {
       setSlides(8);
@@ -41,7 +45,7 @@ export default function StoreSuggestions({ user }) {
         <p className="text-xl">Don't know where to buy plants and gardening supplies? We got you covered!</p>
       </div>
       <div className="pt-20 px-8 flex !items-center !justify-center !m-0">
-        {user.user.account.city ?
+        {user?.user.account.city && stores?.businesses !== undefined ?
           <Swiper
             effect={'coverflow'}
             grabCursor={true}
@@ -125,14 +129,25 @@ export default function StoreSuggestions({ user }) {
             </div>
           </Swiper>
           :
-          <div className="text-xl px-20 text-center space-y-3">
-            <p>
-              Uh oh. Looks like you have not given us your location yet.
-            </p>
-            <p>
-              Please <Link to="/accounts/edit" className="font-semibold bg-gradient-to-r bg-clip-text text-transparent from-pink-500 to-yellow-500 hover:from-lime-400 hover:to-teal-400">edit your profile</Link> and add it for suggestions!
-            </p>
-          </div>
+          (stores?.businesses === undefined ?
+            <div className="text-xl px-20 text-center space-y-3">
+              <p>
+                Uh oh. Looks like we couldn't find any stores near you. Perhaps try another location?
+              </p>
+              <p>
+                Please <Link to="/accounts/edit" className="font-semibold bg-gradient-to-r bg-clip-text text-transparent from-pink-500 to-yellow-500 hover:from-lime-400 hover:to-teal-400">edit your profile</Link> and add it for suggestions!
+              </p>
+            </div>
+            :
+            <div className="text-xl px-20 text-center space-y-3">
+              <p>
+                Uh oh. Looks like you have not given us your location yet.
+              </p>
+              <p>
+                Please <Link to="/accounts/edit" className="font-semibold bg-gradient-to-r bg-clip-text text-transparent from-pink-500 to-yellow-500 hover:from-lime-400 hover:to-teal-400">edit your profile</Link> and add it for suggestions!
+              </p>
+            </div>
+          )
         }
       </div>
     </>

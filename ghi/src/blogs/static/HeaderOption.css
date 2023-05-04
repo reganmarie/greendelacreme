@@ -6,11 +6,11 @@
   margin-left: 10px;
   color: grey;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .HeaderOption__icon {
   object-fit: contain;
-  margin-top: 7px;
   height: 25px !important;
   width: 25px !important;
 }

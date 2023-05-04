@@ -6,6 +6,7 @@ import { commentApi } from "./commentApi";
 import { likeApi } from "./likeApi";
 import { replyApi } from "./replyApi";
 import { yelpApi } from "./yelpApi";
+import { friendApi } from "./friendApi";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
 
@@ -18,6 +19,7 @@ export const store = configureStore({
     [likeApi.reducerPath]: likeApi.reducer,
     [replyApi.reducerPath]: replyApi.reducer,
     [yelpApi.reducerPath]: yelpApi.reducer,
+    [friendApi.reducerPath]: friendApi.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware()
@@ -27,7 +29,8 @@ export const store = configureStore({
       .concat(commentApi.middleware)
       .concat(likeApi.middleware)
       .concat(replyApi.middleware)
-      .concat(yelpApi.middleware),
+      .concat(yelpApi.middleware)
+      .concat(friendApi.middleware),
 });
 
 setupListeners(store.dispatch);

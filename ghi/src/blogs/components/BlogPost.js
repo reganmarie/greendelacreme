@@ -6,15 +6,30 @@ import { useGetTokenQuery } from '../../store/authApi';
 import { useGetLikesQuery } from '../../store/likeApi';
 import LikeButton from '../../likes/LikeButton';
 import UnlikeButton from '../../likes/UnlikeButton';
+import AddFriend from '../../friends/AddFriend';
+import { useGetFriendRequestsQuery, useGetFriendsQuery } from '../../store/friendApi';
 
 
-export default function BlogPost({ username, name, avatar, createdOnDate, createOnTime, id, title, body, image }) {
+export default function BlogPost({ username, name, avatar, createdOnDate, createOnTime, id, title, body, image, authorId }) {
   const [showChatHover, setShowChatHover] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [likeAccounts, setLikeAccounts] = useState([]);
+  const [showAddFriend, setShowAddFriend] = useState(true);
   const { data: comments } = useGetCommentsQuery(id);
   const { data: user } = useGetTokenQuery();
   const { data: likes } = useGetLikesQuery(id);
+  const { data: friends } = useGetFriendsQuery(user?.account.id);
+  const { data: friendRequests } = useGetFriendRequestsQuery(user?.account.id);
+
+  useEffect(() => {
+    const friendList = friends?.map(friend => friend.username);
+    const requestList = friendRequests?.map(request => request.username);
+    if (friendList?.includes(username) || requestList?.includes(username) || user?.account.username === username) {
+      setShowAddFriend(false);
+    } else {
+      setShowAddFriend(true);
+    }
+  }, [friends, friendRequests, username, user]);
 
   useEffect(() => {
     if (likes !== undefined && likes !== null) {
@@ -32,7 +47,10 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
               <div className="flex items-center space-x-3">
                 <img src={avatar} alt="avatar" className="h-10 w-10 rounded-full bg-lime-400" />
                 <div className="flex flex-col">
-                  <div className="text-md font-bold text-slate-700"> {name}</div>
+                  <div className="flex items-center">
+                    <div className="text-md font-bold text-slate-700 mr-1.5">{name}</div>
+                    {showAddFriend && <AddFriend friendId={authorId && authorId} username={username} user={user?.account.username} />}
+                  </div>
                   <div className="text-xs font-semibold text-secondary-200">@{username}</div>
                 </div>
               </div>
@@ -45,7 +63,7 @@ export default function BlogPost({ username, name, avatar, createdOnDate, create
               </div>
             </div>
             <div className="flex flex-col flex-grow mt-4 mb-5">
-              <div className="mb-3 text-xl font-bold">{title}</div>
+              <div className="mb-3 text-xl font-bold break-words">{title}</div>
               <div className="text-base text-neutral-600 whitespace-pre-wrap">
                 <p className="break-words">
                   {body}

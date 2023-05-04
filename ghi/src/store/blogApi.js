@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { commentApi } from './commentApi';
 import { likeApi } from './likeApi';
+import { friendApi } from './friendApi';
 
 
 export const blogApi = createApi({
@@ -20,6 +21,8 @@ export const blogApi = createApi({
           dispatch(commentApi.util.invalidateTags(['CommentList']));
           dispatch(likeApi.util.invalidateTags(['LikesList']));
           dispatch(blogApi.util.invalidateTags(['MostLiked']));
+          dispatch(friendApi.util.invalidateTags(['FriendRequests']));
+          dispatch(friendApi.util.invalidateTags(['FriendList']));
         } catch (e) {
           return;
         }

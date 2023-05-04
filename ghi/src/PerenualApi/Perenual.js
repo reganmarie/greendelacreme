@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 
 
@@ -18,15 +18,15 @@ export default function Perenual() {
   const [other, setOther] = useState([]);
 
   const handleSearch = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const response = await fetch(`https://perenual.com/api/species-list?key=${process.env.REACT_APP_PERENUAL_KEY}&q=${look}`)
+      const response = await fetch(`https://perenual.com/api/species-list?key=${process.env.REACT_APP_PERENUAL_KEY}&q=${look}`);
       if (response.ok) {
-        const plant = await response.json()
-        setData(plant.data)
+        const plant = await response.json();
+        setData(plant.data);
       }
     } catch (e) {
-      console.error(e)
+      console.error(e);
       toast.error('Error in retrieving Data', {
         position: "top-center",
         autoClose: 5000,
@@ -38,7 +38,7 @@ export default function Perenual() {
         theme: "colored", toastId: 'error'
       });
     }
-  }
+  };
   return (
     <>
 
@@ -59,7 +59,7 @@ export default function Perenual() {
         <section className="py-10 ">
           <div id="data" className="mx-auto relative grid max-w-7xl z-0  grid-cols-3 gap-24 p-6 indie sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {Array.isArray(info) && info.slice(0, 9).map(database => {
-              const { id } = database.id
+              const { id } = database.id;
               return (
                 <>
                   <motion.div animate={{ rotate: 360, scale: 1, }} transition={{
@@ -75,7 +75,7 @@ export default function Perenual() {
                       <div className="mt-1 p-2  relative">
                         <h2 className="text-black text-center text-xl font-semibold ">{database.common_name}</h2>
                         <div className="flex justify-center">
-                          <label htmlFor="my-modal" className="px-5 popup py-2 mt-4 font-extrabold text-md rounded-full text-stone-700">
+                          <label htmlFor="my-modal" className="px-5 popup py-2 mt-4 font-extrabold text-md rounded-full text-stone-700 hover:cursor-pointer">
                             More info
                           </label>
                         </div>
@@ -83,7 +83,7 @@ export default function Perenual() {
                     </div>
                   </motion.div>
                 </>
-              )
+              );
             })}
           </div>
         </section>
@@ -93,7 +93,7 @@ export default function Perenual() {
             <label htmlFor="my-modal" className="btn btn-sm btn-circle btn-accent absolute right-2 top-2">✕</label>
             <div className='grid grid-cols-5'>
               <div className='col-span-3'>
-                <img src={image} alt="Album" className='object-fill' />
+                <img src={image} alt="Album" className='object-fill rounded-tl-2xl rounded-bl-2xl' />
               </div>
               <div className='col-span-2'>
                 <div className="card-body indie  text-2xl">
@@ -112,5 +112,5 @@ export default function Perenual() {
         </motion.div>
       </div>
     </>
-  )
+  );
 }

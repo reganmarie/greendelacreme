@@ -6,8 +6,6 @@ import YardOutlinedIcon from '@mui/icons-material/YardOutlined';
 import MapTwoToneIcon from "@mui/icons-material/MapTwoTone";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import KeyboardDoubleArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftOutlined';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import SearchIcon from '@mui/icons-material/Search';
 import { SvgIcon } from '@mui/material';
 import { Tooltip } from 'react-tooltip';
@@ -52,9 +50,9 @@ export default function SideBar() {
           <li className="p-5" id="data" key="data-link">
             <Link to="/data" className="flex items-center text-secondary-100 transition-all hover:text-color5 ease-in duration-300">
               <SvgIcon component={SearchIcon} />
-              {expand && <div className="font-semibold ml-2 text-[15px]">Search</div>}
+              {expand && <div className="font-semibold ml-2 text-[15px]">Plant Data</div>}
             </Link>
-            {!expand && <Tooltip anchorSelect="#data" content="Search plants" place="left" className="!bg-secondary-200 font-semibold" />}
+            {!expand && <Tooltip anchorSelect="#data" content="Plant Data" place="left" className="!bg-secondary-200 font-semibold" />}
           </li>
           <li className="p-5" id="profile-link" key="profile-link">
             <Link to={`/accounts/${user?.account.id}`} className="flex items-center text-secondary-100 transition-all hover:text-color5 ease-in duration-300">
@@ -76,13 +74,19 @@ export default function SideBar() {
             <li
               id="expand"
               className="p-5 flex items-center text-secondary-100 transition-all hover:text-color5 ease-in duration-300 hover:cursor-pointer" key="expand-sidebar"
-              onClick={() => {setExpand(prev => !prev)}}
+              onClick={() => { setExpand(prev => !prev); }}
             >
-              <SvgIcon component={expand ? KeyboardDoubleArrowLeftOutlinedIcon : KeyboardDoubleArrowRightIcon} />
               {expand ?
-                <div className="font-semibold ml-2 text-[15px]">Collapse</div>
+                <>
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M19.95 5.64 13.59 12l6.36 6.36 1.41-1.41L16.41 12l4.95-4.95-1.41-1.41zM2.64 7.05 7.59 12l-4.95 4.95 1.41 1.41L10.41 12 4.05 5.64 2.64 7.05z"></path></svg>
+                  <div className="font-semibold ml-2 text-[15px]">Collapse</div>
+                </>
                 :
-                <Tooltip anchorSelect="#expand" content="Expand" place="left" className="!bg-secondary-200 font-semibold" />}
+                <>
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M8.29 5.64 1.93 12l6.36 6.36 1.42-1.41L4.76 12l4.95-4.95-1.42-1.41zm6 1.41L19.24 12l-4.95 4.95 1.42 1.41L22.07 12l-6.36-6.36-1.42 1.41z"></path></svg>
+                  <Tooltip anchorSelect="#expand" content="Expand" place="left" className="!bg-secondary-200 font-semibold" />
+                </>
+              }
             </li>
           </ul>
         </div>

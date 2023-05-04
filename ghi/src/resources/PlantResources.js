@@ -4,9 +4,9 @@ import EndingLinks from './EndingLinks';
 import { useGetTokenQuery } from '../store/authApi';
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ReactComponent as HousePlant } from '../assets/images/House.svg'
-import { ReactComponent as RedFlower } from '../assets/images/Flower.svg'
-import { ReactComponent as Window } from '../assets/images/Window.svg'
+import { ReactComponent as HousePlant } from '../assets/images/House.svg';
+import { ReactComponent as RedFlower } from '../assets/images/Flower.svg';
+import { ReactComponent as Window } from '../assets/images/Window.svg';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -50,9 +50,9 @@ export default function PlantResources() {
             modules={[Autoplay, Navigation]}
             className="!h-screen !w-screen brightness-75 -mt-[80px]"
           >
-            <SwiperSlide className="flex justify-center items-center overflow-hidden"><HousePlant className=' !h-screen object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
-            <SwiperSlide className="flex justify-center items-center overflow-hidden"><RedFlower className='  !h-screen object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
-            <SwiperSlide className="flex justify-center items-center overflow-hidden"><Window className='   !h-screen object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
+            <SwiperSlide className="flex justify-center items-center overflow-hidden"><HousePlant className='!h-screen object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
+            <SwiperSlide className="flex justify-center items-center overflow-hidden"><RedFlower className='!h-screen object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
+            <SwiperSlide className="flex justify-center items-center overflow-hidden"><Window className='!h-screen object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
           </Swiper>
 
           <div className=' container mx-auto'>
