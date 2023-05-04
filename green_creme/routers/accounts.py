@@ -6,6 +6,9 @@ from fastapi import (
     APIRouter,
     Request,
 )
+
+from typing import Union, List
+
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 
@@ -152,3 +155,16 @@ def get_one_account(
     except Exception:
         response.status_code = 404
         return {"message": "Account with that ID does not exist"}
+
+
+@router.get("/api/accounts", response_model=Union[List[AccountOut], HttpError])
+def get_all_accounts(
+    response: Response,
+    repo: AccountRepository = Depends(),
+):
+    try:
+        accounts = repo.get_all_accounts()
+        return accounts
+    except Exception:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return HttpError(detail="Could not retrieve accounts")

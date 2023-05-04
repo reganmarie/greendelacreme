@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from .pool import pool
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 
 class Error(BaseModel):
@@ -72,6 +72,39 @@ class AccountRepository:
                     )
         except Exception:
             return
+
+    def get_all_accounts(self) -> List[AccountOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT id, username, email,
+                        first, last, avatar, role,
+                        city, state, profile_bg
+                        FROM accounts;
+                        """
+                    )
+                    accounts = db.fetchall()
+                    account_list = []
+                    for account in accounts:
+                        account_list.append(
+                            AccountOut(
+                                id=account[0],
+                                username=account[1],
+                                email=account[2],
+                                first=account[3],
+                                last=account[4],
+                                avatar=account[5],
+                                role=account[6],
+                                city=account[7],
+                                state=account[8],
+                                profile_bg=account[9],
+                            )
+                        )
+                    return account_list
+        except Exception:
+            return []
 
     def create(
         self,

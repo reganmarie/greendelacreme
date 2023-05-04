@@ -30,30 +30,32 @@ export default function PlantResources() {
         </div>
         :
         <>
-          <div className='text-center absolute z-10 top-1/2 pt-3 left-1/2 -translate-x-1/2 -translate-y-1/2 space-y-3'>
-            <h1 id="h1" className="font-bold text-7xl text-white">Plant Resources</h1>
-            <p className="font-bold bg-gradient-to-r from-lime-300 to-teal-300 bg-clip-text text-transparent hover:from-pink-500 hover:to-yellow-500 text-3xl">
-              Looking to grow your knowledge?
-            </p>
-            <p className="font-semibold  text-white text-3xl">
-              Our knowledge hub features articles, videos, and guides on gardening techniques, plant care, and <span className="bg-gradient-to-r from-lime-300 to-teal-300 bg-clip-text text-transparent hover:from-pink-500 hover:to-yellow-500">more </span>.
-            </p>
+          <div className='relative z-10'>
+            <div className='text-center z-20 absolute top-1/2 pt-3 left-1/2 -translate-x-1/2 -translate-y-1/2 space-y-3'>
+              <h1 id="h1" className="font-bold text-7xl text-white">Plant Resources</h1>
+              <p className="font-bold bg-gradient-to-r from-lime-300 to-teal-300 bg-clip-text text-transparent hover:from-pink-500 hover:to-yellow-500 text-3xl">
+                Looking to grow your knowledge?
+              </p>
+              <p className="font-semibold  text-white text-3xl">
+                Our knowledge hub features articles, videos, and guides on gardening techniques, plant care, and <span className="bg-gradient-to-r from-lime-300 to-teal-300 bg-clip-text text-transparent hover:from-pink-500 hover:to-yellow-500">more </span>.
+              </p>
+            </div>
+            <Swiper id="swiper"
+              spaceBetween={30}
+              centeredSlides={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              navigation={true}
+              modules={[Autoplay, Navigation]}
+              className="!h-screen !w-screen z-0 brightness-75 "
+            >
+              <SwiperSlide className="flex z-0 justify-center items-center overflow-hidden"><HousePlant className=' !h-screen z-0 object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
+              <SwiperSlide className="flex justify-center z-0 items-center overflow-hidden"><RedFlower className='  !h-screen z-0 object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
+              <SwiperSlide className="flex justify-center z-0 items-center overflow-hidden"><Window className='   !h-screen z-0 object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
+            </Swiper>
           </div>
-          <Swiper id="swiper"
-            spaceBetween={30}
-            centeredSlides={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            navigation={true}
-            modules={[Autoplay, Navigation]}
-            className="!h-screen !w-screen brightness-75 -mt-[80px]"
-          >
-            <SwiperSlide className="flex justify-center items-center overflow-hidden"><HousePlant className=' !h-screen object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
-            <SwiperSlide className="flex justify-center items-center overflow-hidden"><RedFlower className='  !h-screen object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
-            <SwiperSlide className="flex justify-center items-center overflow-hidden"><Window className='   !h-screen object-cover mx-auto overflow-hidden bg-cover bg-no-repeat' /></SwiperSlide>
-          </Swiper>
 
           <div className=' container mx-auto'>
             <div className="grid grid-cols-1 max-w-9xl px-12 min-[1000px]:px-20 min-[600px]:grid-cols-2 gap-8 py-20 1440:px-64 min-[1000px]:grid-cols-3 min-[1750px]:grid-cols-4" >
