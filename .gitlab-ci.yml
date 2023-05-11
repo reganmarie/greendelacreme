@@ -20,7 +20,7 @@ api-unit-test-job:
   variables:
     SIGNING_KEY: "${SIGNING_KEY}"
     YELP_API_KEY: ${YELP_API_KEY}
-    DATABASE_URL: "postgres://postgres:1d6e2b64e4cb216c@srv-captain--green-data/postgres"
+    DATABASE_URL: "postgres://postgres:368263519aa01781@srv-captain--green-data/postgres"
   script:
     - cd green_creme
     - pip install -r requirements.txt
