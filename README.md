@@ -1,7 +1,4 @@
 # Green de la Creme
-This link leads to deployed site hosted by caprover and gitlab.
-
-Website Link: https://green-de-la-creme.gitlab.io/green-de-la-creme
 
 **Team:**
 
@@ -12,15 +9,11 @@ Website Link: https://green-de-la-creme.gitlab.io/green-de-la-creme
 
 ## Design
 
-Green de la Creme is a social media platform designed specifically for plant enthusiasts. The platform enables users to create accounts, connect with other plant owners, ask questions, share knowledge, and write blog posts.
+Green de la Creme is a social media platform designed especially for plant enthusiasts. The platform enables users to create accounts, connect with other plant owners, ask questions, share knowledge, and write blog posts.
 
-The application is built on a microservice architecture, with the front and back end separated. The back end is built using FastAPI and includes a directory for the application. This directory includes a migrations directory, queries directory, routers directory, and a tests directory. The application also includes automatic table migrations written in the migrations folder.
+The application has a microservice architecture, with the front and back end separated. The back end uses FastAPI and includes a directory for the application. This directory includes the migrations directory, queries directory, routers directory, and tests directory. The application also includes automatic table migrations written in the migrations folder. The front end uses React and Redux and has directories for blog components, forum components, and the Redux store.
 
-The front end is built using React and Redux and has directories for blog components, forum components, and the Redux store.
-
-The platform includes a forum where users can ask and answer questions, and a blog feature where users can write posts and comment on other's posts.
-
-The platform is designed to provide an interactive and engaging experience for plant enthusiasts, enabling them to share knowledge and connect with others who share their passion for plants. The goal of Green de la Creme is to create a vibrant community of plant owners who can learn from each other and share their experiences, creating a more connected and informed plant community.
+The platform provides an interactive and engaging experience for plant enthusiasts and enables them to share knowledge and connect with others who share their passion for plants. Green de la Creme's goal is to create a vibrant community of plant owners who learn from each other and share their experiences, which creates a more connected and informed plant community.
 
 ## Wireframe Diagram
 
@@ -29,35 +22,35 @@ The platform is designed to provide an interactive and engaging experience for p
 ## How to Run the App
 
 ### Clone the Repository
-
-1. In your terminal, ensure that you're in the directory you want to clone the project into.
-2. In your terminal, type ``` git clone https://gitlab.com/green-de-la-creme/green-de-la-creme.git ```
+ 
+1. On the command line, navigate to the directory where you want to clone the project. Use `cd [directory-name-here]` to move into your desired directory.
+2. To clone the repository, type ``` git clone https://gitlab.com/green-de-la-creme/green-de-la-creme.git ```
 3. Switch into the project directory by typing cd green-de-la-creme
 
 
 ### Running Project Locally
 
-1. Type into your terminal ``` docker compose build ```
-2. Type into your terminal ``` docker compose up ```
+1. Type ``` docker compose build ``` on the command line
+2. Type ``` docker compose up ``` on the command line
 
-Once you have typed these commands into your terminal, you should see 4 containers up and running in your Docker Desktop. No volumes are necessary to create as the docker commands will automatically make these volumes for the containers,
+These commands run four containers on your Docker Desktop. You do not need to create volumes since the Docker commands automatically generate them for you.
 
 ### Viewing FastAPI Docs and React Front End
 
-1. To view the FastAPI docs, please navigate to http://localhost:8000/docs in your internet browser.
-2. To view the React-based front end, please navigate to http://localhost:3000 in your internet browser.
-3. The front-end utilizes React and Redux, so the store and state can be viewed using React and Redux Google Chrome extensions in the JavaScript console.
+1. You can view the FastAPI docs at http://localhost:8000/docs in your internet browser.
+2. The React-based front end is available at http://localhost:3000 in your internet browser.
+3. The front end utilizes React and Redux, which means the store and state can be viewed with the React and Redux Google Chrome extensions in the JavaScript console.
 
 ## Routing and API Outline
 
-Built with FastAPI, Green de la Creme allows you to view a list of blog posts, write and edit your own posts, and even leave comments and likes on posts that inspire you. You can also explore our forum section, where you can find a range of questions on all things plants. And if you're feeling knowledgeable, share your own question or reply to someone else's. Plus, you have the ability to edit and delete your own forum questions.
+On Green de la Creme, you can view a list of blog posts, write and edit your own posts, and leave comments and likes on posts that inspire you. You can also explore our forum section, where you will find various questions on all things plants. If you're feeling especially knowledgeable, share your own question or reply to someone else's. You always have the ability to edit and delete your own forum questions.
 
-Built within each page of our front-end is a navigation bar to provide easy access for all features within our application. A complete breakdown of each front-end url is provided below.
+Each page of our front end has a navigation bar to provide easy access to all features within the application. Below is a complete breakdown of each front-end URL.
 
 #### React Routes
 
 - **Home Page** `http://localhost:3000`
-  - Landing page with information about the site, example blog posts, FAQ, and team information
+  - Landing page with information about the site, example blog posts, the FAQ, and team information
 - **Signup** `http://localhost:3000/signup`
   - Sign up for the Green de la Creme
 - **Login** `http://localhost:3000/login`
@@ -79,21 +72,21 @@ Built within each page of our front-end is a navigation bar to provide easy acce
 
 #### Green_Creme Directory
 
-Green de la Creme's backend microservice, located in the "green_creme" directory. We'll break it down step-by-step.
+This is a walkthrough of Green de la Creme's backend, located in the "green_creme" directory. We'll break it down step-by-step:
 
-First  we have a "migrations" file which contains all the migration files for our SQL database. This includes a forum table, blog table, users table, forum replies table, and blog comments table.
+First, you see a "migrations" file containing all the migration files for the SQL database. This includes the forum table, blog table, users table, forum replies table, and blog comments table.
 
-In the "queries" directory, we have several repositories to handle all the CRUD functions for each of our tables. This includes an accounts repository for getting and creating accounts, a blogs repository for handling all of the CRUD functions for blogs, a blog comments repository for getting all blog comments and deleting blog comments, a forums repository for handling all CRUD functions for forums, and a forum replies repository for getting all forum replies and deleting forum replies. We also have a "pool.py" file to connect to our database.
+Next, in the "queries" directory, several repositories handle all the CRUD functions for each table. This includes an accounts repository for accounts, blogs, blog comments, forums, and forum replies. There is also a `pool.py` file that connects to the database.
 
-Each repository has Pydantic models to define the structure of our data. For example, the Pydantic models for accounts include an `Error` class, a `DuplicateAccountError` class, an `AccountIn` class for creating an account, an `AccountOut` class for returning an account, and an `AccountOutWithPassword` class for returning an account with its hashed password.
+Each repository has Pydantic models to define the structure of the data. For example, the Pydantic models for accounts include an `Error` class, a `DuplicateAccountError` class, an `AccountIn` class, and an `AccountOutWithPassword` class for returning an account with its hashed password.
 
-Similarly, we have Pydantic models for blogs, blog comments, and forums that define the structure of our data. Each model has an `Error` class for handling errors, as well as an `In` class for creating data and an `Out` class for returning data.
+Similarly, there are Pydantic models for blogs, blog comments, and forums. Each Pydantic model has an `Error` class to handle errors, an `In` class for creating data, and an `Out` class to return data.
 
-Our "routers" file contains all the FastAPI endpoints for blogs, accounts, forums, blog comments, forum replies, as well as account functions such as login, logout, and signup.
+The "routers" file contains the FastAPI endpoints for blogs, accounts, forums, blog comments, forum replies, and account functions such as login, logout, and signup.
 
-And lastly, we have a "tests" directory containing unit tests for our blog and forum endpoints to ensure the accuracy of our code.
+Last, there is a "tests" directory, which has unit tests for blog and forum endpoints to ensure the accuracy of the code.
 
-Together, all these components work seamlessly to create the ultimate social media site for plant owners.
+Together, all these components work seamlessly to create the ultimate social media experience for plant owners.
 
 ### FastAPI Endpoints
 
